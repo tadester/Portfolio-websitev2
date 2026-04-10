@@ -44,6 +44,14 @@
               <a class="button button-secondary" href="#resume">View Resume</a>
             </div>
 
+            <div class="hero-marquee" aria-hidden="true">
+              <span>Full-stack systems</span>
+              <span>Applied AI</span>
+              <span>Product design thinking</span>
+              <span>Mobile + backend</span>
+              <span>Shippable demos</span>
+            </div>
+
             <dl class="hero-stats">
               <div>
                 <dt>Focus</dt>
@@ -64,6 +72,16 @@
             <div class="panel-header">
               <span class="status-dot"></span>
               <span>Live build snapshot</span>
+            </div>
+            <div class="hero-radar">
+              <div class="radar-ring ring-1"></div>
+              <div class="radar-ring ring-2"></div>
+              <div class="radar-ring ring-3"></div>
+              <div class="radar-node node-core">Build</div>
+              <div class="radar-node node-web">Web</div>
+              <div class="radar-node node-mobile">Mobile</div>
+              <div class="radar-node node-ai">AI</div>
+              <div class="radar-node node-data">Data</div>
             </div>
             <div class="code-window">
               <pre><code><span class="token-comment">// current obsessions</span>
@@ -98,6 +116,21 @@
           </aside>
         </section>
 
+        <section class="section proof-strip" id="proof">
+          <div class="proof-card">
+            <span>What this portfolio tries to prove</span>
+            <strong>I can build serious systems, explain them clearly, and package the work like a product.</strong>
+          </div>
+          <div class="proof-card">
+            <span>What makes the work interesting</span>
+            <strong>Crossing product, engineering, design, data, and AI without the end result feeling stitched together.</strong>
+          </div>
+          <div class="proof-card">
+            <span>How this site is structured</span>
+            <strong>Real projects, code interaction, media-led storytelling, resume access, and reusable content blocks.</strong>
+          </div>
+        </section>
+
         <section class="section" id="projects">
           <div class="section-heading">
             <p class="eyebrow">Selected Work</p>
@@ -121,6 +154,20 @@
                   <li>YOLOv8</li>
                   <li>Parquet</li>
                 </ul>
+                <div class="project-detail-grid">
+                  <div class="detail-box">
+                    <span>Hard Part</span>
+                    <strong>Turning raw video into structured shot-stage diagnostics</strong>
+                  </div>
+                  <div class="detail-box">
+                    <span>System Shape</span>
+                    <strong>Python ingestion pipeline plus Rust analysis and desktop review</strong>
+                  </div>
+                  <div class="detail-box">
+                    <span>Why It Matters</span>
+                    <strong>It bridges messy real-world input and a productized feedback loop</strong>
+                  </div>
+                </div>
               </div>
               <div class="project-media">
                 <div class="analysis-board">
@@ -177,6 +224,20 @@
                   Toggle System Snapshot
                 </button>
               </div>
+              <div class="system-pillars">
+                <div class="pillar">
+                  <span>Frontend</span>
+                  <strong>Next.js marketing and auth flows</strong>
+                </div>
+                <div class="pillar">
+                  <span>Backend</span>
+                  <strong>Typed API routes, routing, geofence, worker logic</strong>
+                </div>
+                <div class="pillar">
+                  <span>Mobile</span>
+                  <strong>Role-aware Flutter workspace for admins and field crews</strong>
+                </div>
+              </div>
               <div class="image-stack">
                 <img src="./assets/tadester-hero-field-operations.jpg" alt="Tadester field operations hero visual" />
                 <img src="./assets/tadester-routing-map.png" alt="Tadester routing map interface" />
@@ -196,6 +257,10 @@
                   A live snippet viewer that mirrors the kinds of systems I actually write:
                   backend orchestration, UI composition, and analysis logic.
                 </p>
+              </div>
+              <div class="snippet-caption" id="snippet-caption">
+                <span>API</span>
+                <strong>Typed route result modeling for field operations routing.</strong>
               </div>
               <div class="snippet-tabs">
                 <div class="tab-row" role="tablist" aria-label="Code snippets">
@@ -255,6 +320,42 @@
           </div>
         </section>
 
+        <section class="section architecture-section" id="architecture">
+          <div class="section-heading">
+            <p class="eyebrow">Why These Builds Are Hard</p>
+            <h2>The interesting part is usually the systems glue, not just the screens.</h2>
+          </div>
+          <div class="architecture-grid">
+            <article class="architecture-card">
+              <p class="project-type">Jumpshot Trainer</p>
+              <h3>From raw footage to usable diagnostics</h3>
+              <ul class="architecture-list">
+                <li>Raw video intake, metadata extraction, and session manifests</li>
+                <li>Teacher-model processing with fallback paths for weaker environments</li>
+                <li>Shot-stage detection, metric scoring, and training-readiness outputs</li>
+              </ul>
+            </article>
+            <article class="architecture-card">
+              <p class="project-type">Tadester Ops</p>
+              <h3>From operations complexity to usable workflows</h3>
+              <ul class="architecture-list">
+                <li>Role-aware product architecture across landing page, API, and mobile app</li>
+                <li>Routing, job assignment, worker tracking, and geofence event handling</li>
+                <li>A product experience that still works like an internal operations system</li>
+              </ul>
+            </article>
+            <article class="architecture-card accent-card">
+              <p class="project-type">Portfolio Itself</p>
+              <h3>This site is also a frontend systems project</h3>
+              <ul class="architecture-list">
+                <li>Interactive project demos instead of static one-line portfolio cards</li>
+                <li>Reusable storytelling sections for code, visuals, resume, and media</li>
+                <li>A visual language tuned to feel technical, modern, and professional</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
         <section class="section resume-section" id="resume">
           <div class="section-heading">
             <p class="eyebrow">Resume & Experience</p>
@@ -265,8 +366,7 @@
             <article class="resume-card">
               <h3>Professional Resume</h3>
               <p>
-                Place your polished recruiter-facing PDF at
-                <code>/assets/resume-professional.pdf</code> to activate the download link.
+                Your recruiter-facing resume is already wired into the site for quick access.
               </p>
               <a
                 class="button button-primary resume-link"
@@ -280,7 +380,7 @@
               <h3>Technical Resume</h3>
               <p>
                 Keep a more engineering-heavy version at
-                <code>/assets/resume-technical.pdf</code> for technical screens.
+                <code>/assets/resume-technical.pdf</code> if you want a second tailored version.
               </p>
               <a
                 class="button button-secondary resume-link"

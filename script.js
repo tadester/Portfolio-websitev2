@@ -1,11 +1,18 @@
 const snippets = {
-  api: `type DailyRouteResult = {
+  api: {
+    label: "API",
+    description: "Typed route result modeling for field operations routing and ETA calculation.",
+    code: `type DailyRouteResult = {
   ordered_jobs: OrderedRouteJob[];
   legs: RouteLeg[];
   total_distance: number;
   total_time: number;
 };`,
-  ui: `function ProjectCard({ title, stack, summary }) {
+  },
+  ui: {
+    label: "UI",
+    description: "Component structure that keeps presentation clean while still feeling productized.",
+    code: `function ProjectCard({ title, stack, summary }) {
   return (
     <article className="card">
       <h3>{title}</h3>
@@ -14,10 +21,15 @@ const snippets = {
     </article>
   );
 }`,
-  data: `if (matches!(current_stage, ShotStage::Load)
+  },
+  data: {
+    label: "Data",
+    description: "Rust-side state transitions for turning frame-by-frame movement into useful stages.",
+    code: `if (matches!(current_stage, ShotStage::Load)
   && wrist_velocity <= thresholds.set_point_velocity_threshold) {
   current_stage = ShotStage::SetPoint;
 }`,
+  },
 };
 
 const terminalMessages = [
@@ -36,10 +48,17 @@ const glowRange = document.querySelector("#glow-range");
 const gridRange = document.querySelector("#grid-range");
 const revealTargets = document.querySelectorAll(".project-card, .resume-card, .lab-card, .contact-card");
 const resumeLinks = document.querySelectorAll(".resume-link");
+const snippetCaption = document.querySelector("#snippet-caption");
+const topbar = document.querySelector(".topbar");
 
 function setSnippet(key) {
   if (!snippetContent) return;
-  snippetContent.textContent = snippets[key];
+  const snippet = snippets[key];
+  snippetContent.textContent = snippet.code;
+
+  if (snippetCaption) {
+    snippetCaption.innerHTML = `<span>${snippet.label}</span><strong>${snippet.description}</strong>`;
+  }
 
   snippetTabs.forEach((tab) => {
     tab.classList.toggle("active", tab.dataset.snippet === key);
@@ -56,6 +75,7 @@ projectToggles.forEach((button) => {
     if (!target) return;
 
     target.hidden = !target.hidden;
+    button.textContent = target.hidden ? "Reveal System Snapshot" : "Hide System Snapshot";
   });
 });
 
@@ -79,6 +99,13 @@ function bindRangeControl(input, variable, divisor = 100) {
 
   input.addEventListener("input", applyValue);
   applyValue();
+}
+
+function syncScrollState() {
+  if (!topbar) return;
+
+  const isScrolled = window.scrollY > 24;
+  document.body.classList.toggle("scrolled", isScrolled);
 }
 
 function setupReveals() {
@@ -127,6 +154,7 @@ async function validateResumeLinks() {
 setSnippet("api");
 setupReveals();
 validateResumeLinks();
+syncScrollState();
 
 terminalMessages.forEach((message, index) => {
   appendTerminalLine(message, 350 * index);
@@ -134,3 +162,4 @@ terminalMessages.forEach((message, index) => {
 
 bindRangeControl(glowRange, "--glow-strength");
 bindRangeControl(gridRange, "--grid-strength");
+window.addEventListener("scroll", syncScrollState, { passive: true });
