@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olatade Obasan | Software Engineer Portfolio</title>
+    <meta
+      name="description"
+      content="A modern software engineering portfolio featuring Jumpshot Trainer, Tadester Ops, interactive demos, and resume access."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#top">Olatade Obasan</a>
+        <nav class="nav">
+          <a href="#projects">Projects</a>
+          <a href="#resume">Resume</a>
+          <a href="#lab">Lab</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Olatade Obasan • Software Engineer • Product Builder • Applied AI Builder</p>
+            <h1>I build ambitious software systems and present them like real products.</h1>
+            <p class="hero-text">
+              My work spans product engineering, applied AI, backend architecture, mobile apps, and
+              polished frontend systems. This site is meant to feel like a hands-on case study,
+              not a static resume dump.
+            </p>
+
+            <div class="cta-row">
+              <a class="button button-primary" href="#projects">Explore Projects</a>
+              <a class="button button-secondary" href="#resume">View Resume</a>
+            </div>
+
+            <dl class="hero-stats">
+              <div>
+                <dt>Focus</dt>
+                <dd>Full-stack systems and applied AI</dd>
+              </div>
+              <div>
+                <dt>Strengths</dt>
+                <dd>Product UX, backend APIs, mobile, data pipelines</dd>
+              </div>
+              <div>
+                <dt>Style</dt>
+                <dd>Fast-moving, technical, and detail-driven</dd>
+              </div>
+            </dl>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="panel-header">
+              <span class="status-dot"></span>
+              <span>Live build snapshot</span>
+            </div>
+            <div class="code-window">
+              <pre><code><span class="token-comment">// current obsessions</span>
+<span class="token-keyword">const</span> stack = {
+  frontend: [<span class="token-string">"Next.js"</span>, <span class="token-string">"Flutter"</span>, <span class="token-string">"TypeScript"</span>],
+  backend: [<span class="token-string">"Node"</span>, <span class="token-string">"Supabase"</span>, <span class="token-string">"Postgres"</span>],
+  ai_and_data: [<span class="token-string">"Python"</span>, <span class="token-string">"YOLOv8"</span>, <span class="token-string">"Rust"</span>]
+};
+
+<span class="token-keyword">function</span> ship(value) {
+  <span class="token-keyword">return</span> value.idea + value.execution + value.polish;
+}</code></pre>
+            </div>
+            <div class="signal-grid">
+              <div>
+                <span>Product thinking</span>
+                <strong>Systems-first</strong>
+              </div>
+              <div>
+                <span>Implementation depth</span>
+                <strong>End to end</strong>
+              </div>
+              <div>
+                <span>Communication</span>
+                <strong>Clear + thoughtful</strong>
+              </div>
+              <div>
+                <span>Shipping energy</span>
+                <strong>Very high</strong>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" id="projects">
+          <div class="section-heading">
+            <p class="eyebrow">Selected Work</p>
+            <h2>Projects that show engineering depth, product judgment, and range.</h2>
+          </div>
+
+          <div class="project-grid">
+            <article class="project-card featured">
+              <div class="project-copy">
+                <p class="project-type">Applied AI + Product Systems</p>
+                <h3>Jumpshot Trainer</h3>
+                <p>
+                  A two-part biomechanics analysis system for basketball shooting form. I built a
+                  Python ingestion pipeline for raw clip processing and a Rust desktop app for shot
+                  stage detection, diagnostics, review, and training-readiness analysis.
+                </p>
+                <ul class="tag-row">
+                  <li>Python</li>
+                  <li>Rust</li>
+                  <li>MediaPipe</li>
+                  <li>YOLOv8</li>
+                  <li>Parquet</li>
+                </ul>
+              </div>
+              <div class="project-media">
+                <div class="analysis-board">
+                  <div class="analysis-top">
+                    <span>shot stage timeline</span>
+                    <strong>ready -> load -> set point -> release</strong>
+                  </div>
+                  <div class="analysis-grid">
+                    <div class="metric-card">
+                      <span>Release Timing</span>
+                      <strong>178 ms</strong>
+                    </div>
+                    <div class="metric-card">
+                      <span>Elbow Alignment</span>
+                      <strong>+4.2 deg</strong>
+                    </div>
+                    <div class="metric-card">
+                      <span>Readiness Score</span>
+                      <strong>81 / 100</strong>
+                    </div>
+                    <div class="metric-card">
+                      <span>Corpus Quality</span>
+                      <strong>Training Ready</strong>
+                    </div>
+                  </div>
+                  <div class="screen-mockup">
+                    <div class="mockup-top"></div>
+                    <div class="mockup-body">
+                      <div class="chart-bars">
+                        <span style="height: 54%"></span>
+                        <span style="height: 78%"></span>
+                        <span style="height: 61%"></span>
+                        <span style="height: 93%"></span>
+                        <span style="height: 72%"></span>
+                      </div>
+                      <div class="mockup-card"></div>
+                      <div class="mockup-card short"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card visual-project-card">
+              <div class="project-copy">
+                <p class="project-type">Operations SaaS</p>
+                <h3>Tadester Ops / TadesterFlow</h3>
+                <p>
+                  A field operations platform spanning a Next.js marketing site, a TypeScript
+                  backend API, Supabase data model, and a Flutter mobile app with role-aware
+                  dashboards, worker routing, assignments, and tracking.
+                </p>
+                <button class="button button-secondary project-toggle" type="button" data-target="demo-console">
+                  Toggle System Snapshot
+                </button>
+              </div>
+              <div class="image-stack">
+                <img src="./assets/tadester-hero-field-operations.jpg" alt="Tadester field operations hero visual" />
+                <img src="./assets/tadester-routing-map.png" alt="Tadester routing map interface" />
+              </div>
+              <div class="mini-console" id="demo-console" aria-live="polite">
+                <p>&gt; nextjs landing page + waitlist funnel online</p>
+                <p>&gt; node/typescript api with routing + geofence services</p>
+                <p>&gt; flutter workspace for admins, dispatchers, and workers</p>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-copy">
+                <p class="project-type">Engineering Notes</p>
+                <h3>Code You Can Poke At</h3>
+                <p>
+                  A live snippet viewer that mirrors the kinds of systems I actually write:
+                  backend orchestration, UI composition, and analysis logic.
+                </p>
+              </div>
+              <div class="snippet-tabs">
+                <div class="tab-row" role="tablist" aria-label="Code snippets">
+                  <button class="snippet-tab active" type="button" data-snippet="api">API</button>
+                  <button class="snippet-tab" type="button" data-snippet="ui">UI</button>
+                  <button class="snippet-tab" type="button" data-snippet="data">Data</button>
+                </div>
+                <pre class="snippet-viewer"><code id="snippet-content"></code></pre>
+              </div>
+            </article>
+
+            <article class="project-card media-card">
+              <div class="project-copy">
+                <p class="project-type">Project Clips</p>
+                <h3>Media Shelf</h3>
+                <p>
+                  We can replace these with real clips from TadesterFlow and Jumpshot Trainer, or
+                  add screenshots from your apps and dashboards for a richer case-study feel.
+                </p>
+              </div>
+              <div class="media-strip">
+                <div class="media-tile media-image-tile">
+                  <img src="./assets/tadester-operator-team.jpg" alt="Tadester operator team visual" />
+                  <div class="media-overlay">
+                    <span>Visual 01</span>
+                    <strong>operator-team.jpg</strong>
+                  </div>
+                </div>
+                <div class="media-tile media-image-tile">
+                  <img src="./assets/tadester-hero-field-operations.jpg" alt="Field operations hero scene" />
+                  <div class="media-overlay">
+                    <span>Visual 02</span>
+                    <strong>hero-field-operations.jpg</strong>
+                  </div>
+                </div>
+                <div class="media-tile media-image-tile">
+                  <img src="./assets/tadester-routing-map.png" alt="Routing map screenshot" />
+                  <div class="media-overlay">
+                    <span>Visual 03</span>
+                    <strong>routing-map.png</strong>
+                  </div>
+                </div>
+                <div class="media-tile">
+                  <span>Clip 01</span>
+                  <strong>jumpshot-shot-review.mp4</strong>
+                </div>
+                <div class="media-tile">
+                  <span>Clip 02</span>
+                  <strong>tadester-admin-dashboard.webm</strong>
+                </div>
+                <div class="media-tile">
+                  <span>Clip 03</span>
+                  <strong>worker-route-map.gif</strong>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section resume-section" id="resume">
+          <div class="section-heading">
+            <p class="eyebrow">Resume & Experience</p>
+            <h2>Everything a recruiter needs, without losing the personality.</h2>
+          </div>
+
+          <div class="resume-grid">
+            <article class="resume-card">
+              <h3>Professional Resume</h3>
+              <p>
+                Place your polished recruiter-facing PDF at
+                <code>/assets/resume-professional.pdf</code> to activate the download link.
+              </p>
+              <a
+                class="button button-primary resume-link"
+                href="./assets/resume-professional.pdf"
+                data-file-link="./assets/resume-professional.pdf"
+              >
+                Download PDF
+              </a>
+            </article>
+            <article class="resume-card">
+              <h3>Technical Resume</h3>
+              <p>
+                Keep a more engineering-heavy version at
+                <code>/assets/resume-technical.pdf</code> for technical screens.
+              </p>
+              <a
+                class="button button-secondary resume-link"
+                href="./assets/resume-technical.pdf"
+                data-file-link="./assets/resume-technical.pdf"
+              >
+                Open Technical Resume
+              </a>
+            </article>
+            <article class="resume-card timeline-card">
+              <h3>Snapshot</h3>
+              <ul class="timeline">
+                <li>Built applied-AI tooling, SaaS platforms, and cross-platform mobile apps</li>
+                <li>Comfortable across frontend polish, backend architecture, and data systems</li>
+                <li>Strong at shipping v1s that still feel technically intentional</li>
+                <li>Especially effective when products need both speed and technical depth</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section lab-section" id="lab">
+          <div class="section-heading">
+            <p class="eyebrow">Live Lab</p>
+            <h2>A playful little sandbox so the site feels built, not templated.</h2>
+          </div>
+
+          <div class="lab-grid">
+            <article class="lab-card">
+              <h3>Signal Tuner</h3>
+              <p>Drag the controls to tune the site atmosphere and make the interface feel more alive.</p>
+              <label for="glow-range">Glow intensity</label>
+              <input id="glow-range" type="range" min="0" max="100" value="64" />
+              <label for="grid-range">Grid opacity</label>
+              <input id="grid-range" type="range" min="0" max="100" value="28" />
+            </article>
+
+            <article class="lab-card terminal-card">
+              <h3>Terminal Feed</h3>
+              <div class="terminal-log" id="terminal-log" aria-live="polite"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section contact-section" id="contact">
+          <div class="section-heading">
+            <p class="eyebrow">Contact</p>
+            <h2>Ready for a serious team, interesting product, or ambitious build.</h2>
+          </div>
+
+          <div class="contact-card">
+            <p>
+              The structure is ready. Next step is dropping in your real contact details, repo links,
+              resume files, and project media.
+            </p>
+            <div class="contact-links">
+              <a href="./assets/resume-professional.pdf">Resume PDF</a>
+              <a href="https://github.com/tadester">GitHub Profile</a>
+              <a href="https://www.linkedin.com/in/tadeobasan/">LinkedIn</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+  </html>
