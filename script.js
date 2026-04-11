@@ -48,15 +48,19 @@ const terminalLog = document.querySelector("#terminal-log");
 const glowRange = document.querySelector("#glow-range");
 const gridRange = document.querySelector("#grid-range");
 const speedRange = document.querySelector("#speed-range");
-const revealTargets = document.querySelectorAll(".project-card, .resume-card, .lab-card, .contact-card, .proof-card, .gallery-card, .architecture-card");
+const revealTargets = document.querySelectorAll(".project-card, .contact-card, .proof-card, .gallery-card, .architecture-card, .game-showcase-card, .game-info-card, .game-controls-card, .resume-nav, .resume-stage");
 const resumeLinks = document.querySelectorAll(".resume-link");
 const snippetCaption = document.querySelector("#snippet-caption");
 const topbar = document.querySelector(".topbar");
 const headshotImage = document.querySelector(".headshot-image");
 const headshotFrame = document.querySelector(".headshot-frame");
+const galleryImages = document.querySelectorAll(".gallery-image");
+const resumeTabs = document.querySelectorAll(".resume-tab");
+const resumePanels = document.querySelectorAll(".resume-panel");
 const gameBoard = document.querySelector("#game-board");
 const playerDot = document.querySelector("#player-dot");
 const gameStart = document.querySelector("#game-start");
+const gameReset = document.querySelector("#game-reset");
 const gameScore = document.querySelector("#game-score");
 const gameBest = document.querySelector("#game-best");
 
@@ -74,6 +78,7 @@ const gameState = {
   score: 0,
   best: 0,
   obstacles: [],
+  pickups: [],
   frame: 0,
   rafId: null,
 };
@@ -137,6 +142,32 @@ function setupHeadshotFallback() {
 
   headshotImage.addEventListener("error", () => {
     headshotImage.remove();
+  });
+}
+
+function setupGalleryFallbacks() {
+  galleryImages.forEach((image) => {
+    image.addEventListener("error", () => {
+      image.classList.add("is-missing");
+      image.parentElement?.classList.add("is-empty");
+    });
+  });
+}
+
+function setupResumeWalkthrough() {
+  if (!resumeTabs.length || !resumePanels.length) return;
+
+  resumeTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const panelKey = tab.dataset.resumePanel;
+
+      resumeTabs.forEach((item) => item.classList.toggle("active", item === tab));
+      resumePanels.forEach((panel) => {
+        const isActive = panel.id === `resume-panel-${panelKey}`;
+        panel.hidden = !isActive;
+        panel.classList.toggle("active", isActive);
+      });
+    });
   });
 }
 
@@ -238,9 +269,12 @@ function resetGame() {
   gameState.score = 0;
   gameState.frame = 0;
   gameState.obstacles.forEach((obstacle) => obstacle.element.remove());
+  gameState.pickups.forEach((pickup) => pickup.element.remove());
   gameState.obstacles = [];
+  gameState.pickups = [];
   updateGameHud();
   setPlayerPosition();
+  if (gameStart) gameStart.textContent = "Start Game";
 }
 
 function endGame() {
@@ -271,6 +305,23 @@ function spawnObstacle() {
   gameState.obstacles.push(data);
 }
 
+function spawnPickup() {
+  if (!(gameBoard instanceof HTMLElement)) return;
+
+  const pickup = document.createElement("div");
+  pickup.className = "pickup-orb";
+  const data = {
+    x: gameState.boardWidth + 20,
+    y: Math.random() * Math.max(40, gameState.boardHeight - 30),
+    size: 14,
+    speed: 3.2,
+    element: pickup,
+  };
+
+  gameBoard.appendChild(pickup);
+  gameState.pickups.push(data);
+}
+
 function tickGame() {
   if (!gameState.running) return;
 
@@ -281,6 +332,9 @@ function tickGame() {
 
   if (gameState.frame % 45 === 0) {
     spawnObstacle();
+  }
+  if (gameState.frame % 120 === 0) {
+    spawnPickup();
   }
 
   gameState.obstacles = gameState.obstacles.filter((obstacle) => {
@@ -298,6 +352,29 @@ function tickGame() {
 
     if (obstacle.x < -40) {
       obstacle.element.remove();
+      return false;
+    }
+
+    return true;
+  });
+
+  gameState.pickups = gameState.pickups.filter((pickup) => {
+    pickup.x -= pickup.speed;
+    pickup.element.style.left = `${pickup.x}px`;
+    pickup.element.style.top = `${pickup.y}px`;
+
+    const dx = pickup.x - gameState.x;
+    const dy = pickup.y - gameState.y;
+    const distance = Math.hypot(dx, dy);
+
+    if (distance < pickup.size / 2 + 16) {
+      gameState.score += 45;
+      pickup.element.remove();
+      return false;
+    }
+
+    if (pickup.x < -30) {
+      pickup.element.remove();
       return false;
     }
 
@@ -346,6 +423,11 @@ function setupGame() {
     gameStart.textContent = "Running...";
     gameBoard.focus();
     tickGame();
+  });
+
+  gameReset?.addEventListener("click", () => {
+    endGame();
+    resetGame();
   });
 }
 
@@ -397,6 +479,8 @@ setupReveals();
 validateResumeLinks();
 syncScrollState();
 setupHeadshotFallback();
+setupGalleryFallbacks();
+setupResumeWalkthrough();
 setupBackgroundCanvas();
 setupGame();
 

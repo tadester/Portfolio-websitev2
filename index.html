@@ -25,7 +25,7 @@
           <a href="#projects">Projects</a>
           <a href="#gallery">Gallery</a>
           <a href="#resume">Resume</a>
-          <a href="#lab">Lab</a>
+          <a href="#games">Games</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
@@ -79,9 +79,9 @@
                   class="headshot-image"
                   data-fallback-hidden
                 />
-                <div class="headshot-placeholder" id="headshot-placeholder">
-                  <span>Headshot Slot</span>
-                  <strong>Upload to <code>assets/headshot/olatade-headshot.jpg</code></strong>
+                <div class="headshot-placeholder">
+                  <span>Olatade Obasan</span>
+                  <strong>Software Engineer • Product Builder • Applied AI</strong>
                 </div>
               </div>
             </div>
@@ -293,25 +293,25 @@
 
             <article class="project-card media-card">
               <div class="project-copy">
-                <p class="project-type">Project Assets</p>
-                <h3>Upload-Ready Galleries</h3>
+                <p class="project-type">Project Gallery</p>
+                <h3>Visual storytelling across web, mobile, and AI products.</h3>
                 <p>
-                  The portfolio is now wired for real images instead of filler placeholders. Drop
-                  your screenshots into the folders below and they can be surfaced immediately.
+                  Tadester Ops already has real visuals on the page, and the site is also prepared
+                  for Jumpshot Trainer captures and TadesterFlow mobile screenshots.
                 </p>
               </div>
               <div class="upload-grid">
                 <div class="upload-card">
-                  <span>Jumpshot AI Trainer Gallery</span>
-                  <strong><code>/assets/jumpshot-gallery/</code></strong>
+                  <span>Jumpshot Trainer</span>
+                  <strong>AI trainer analysis screens and biomechanics review moments</strong>
                 </div>
                 <div class="upload-card">
-                  <span>Flutter App Gallery</span>
-                  <strong><code>/assets/flutter-gallery/</code></strong>
+                  <span>TadesterFlow Mobile</span>
+                  <strong>Flutter app flows for admins, dispatchers, and field workers</strong>
                 </div>
                 <div class="upload-card">
-                  <span>Headshot</span>
-                  <strong><code>/assets/headshot/olatade-headshot.jpg</code></strong>
+                  <span>WorldSim</span>
+                  <strong>Simulation UI, dashboard states, and emergent world snapshots</strong>
                 </div>
               </div>
             </article>
@@ -321,7 +321,7 @@
         <section class="section gallery-section" id="gallery">
           <div class="section-heading">
             <p class="eyebrow">Visual Gallery</p>
-            <h2>Real product imagery for the AI trainer, Flutter app, and field operations platform.</h2>
+            <h2>Product visuals across Tadester Ops, TadesterFlow mobile, and Jumpshot Trainer.</h2>
           </div>
           <div class="gallery-grid">
             <article class="gallery-card">
@@ -334,19 +334,33 @@
               </div>
             </article>
             <article class="gallery-card">
-              <p class="project-type">Upload Jumpshot Screens</p>
-              <h3>Jumpshot AI Trainer gallery slot</h3>
-              <div class="gallery-dropzone">
-                <span>Add screenshots to</span>
-                <strong><code>/assets/jumpshot-gallery/</code></strong>
+              <p class="project-type">Jumpshot Trainer</p>
+              <h3>Biomechanics review gallery</h3>
+              <div class="gallery-slot-grid">
+                <div class="gallery-slot">
+                  <img src="./assets/jumpshot-gallery/shot-1.jpg" alt="Jumpshot Trainer screenshot one" class="gallery-image" />
+                </div>
+                <div class="gallery-slot">
+                  <img src="./assets/jumpshot-gallery/shot-2.jpg" alt="Jumpshot Trainer screenshot two" class="gallery-image" />
+                </div>
+                <div class="gallery-slot">
+                  <img src="./assets/jumpshot-gallery/shot-3.jpg" alt="Jumpshot Trainer screenshot three" class="gallery-image" />
+                </div>
               </div>
             </article>
             <article class="gallery-card">
-              <p class="project-type">Upload Flutter Screens</p>
-              <h3>Flutter app gallery slot</h3>
-              <div class="gallery-dropzone">
-                <span>Add screenshots to</span>
-                <strong><code>/assets/flutter-gallery/</code></strong>
+              <p class="project-type">TadesterFlow Mobile</p>
+              <h3>Flutter app gallery</h3>
+              <div class="gallery-slot-grid">
+                <div class="gallery-slot">
+                  <img src="./assets/flutter-gallery/mobile-1.jpg" alt="TadesterFlow mobile screenshot one" class="gallery-image" />
+                </div>
+                <div class="gallery-slot">
+                  <img src="./assets/flutter-gallery/mobile-2.jpg" alt="TadesterFlow mobile screenshot two" class="gallery-image" />
+                </div>
+                <div class="gallery-slot">
+                  <img src="./assets/flutter-gallery/mobile-3.jpg" alt="TadesterFlow mobile screenshot three" class="gallery-image" />
+                </div>
               </div>
             </article>
           </div>
@@ -377,12 +391,12 @@
               </ul>
             </article>
             <article class="architecture-card accent-card">
-              <p class="project-type">Portfolio Itself</p>
-              <h3>Interactive portfolio and project showcase</h3>
+              <p class="project-type">WorldSim</p>
+              <h3>Simulation sandbox built in Rust + Bevy</h3>
               <ul class="architecture-list">
-                <li><strong>What I built:</strong> a custom portfolio site that showcases projects through demos, code samples, project visuals, and resume access.</li>
-                <li><strong>How I built it:</strong> the site uses reusable sections, interactive snippet switching, reveal motion, media-driven project storytelling, and responsive layout systems.</li>
-                <li><strong>Languages and tools:</strong> HTML, CSS, JavaScript, responsive UI patterns, and custom interaction design.</li>
+                <li><strong>What I built:</strong> a simulation prototype with modular systems for agents, life cycles, world resources, magic, and UI dashboards.</li>
+                <li><strong>How I built it:</strong> the app is structured as Bevy plugins that separate simulation flow, world state, agent logic, and on-screen controls.</li>
+                <li><strong>Languages and tools:</strong> Rust, Bevy, ECS patterns, modular game systems, simulation clocks, and dashboard UI.</li>
               </ul>
             </article>
           </div>
@@ -390,76 +404,140 @@
 
         <section class="section resume-section" id="resume">
           <div class="section-heading">
-            <p class="eyebrow">Resume & Experience</p>
-            <h2>Everything a recruiter needs, without losing the personality.</h2>
+            <p class="eyebrow">Resume Walkthrough</p>
+            <h2>A guided view of my resume before you download the PDF.</h2>
           </div>
 
-          <div class="resume-grid">
-            <article class="resume-card">
-              <h3>Professional Resume</h3>
-              <p>
-                Your recruiter-facing resume is already wired into the site for quick access.
-              </p>
-              <a
-                class="button button-primary resume-link"
-                href="./assets/resume-professional.pdf"
-                data-file-link="./assets/resume-professional.pdf"
-              >
-                Download PDF
-              </a>
-            </article>
-            <article class="resume-card">
-              <h3>Core Links</h3>
-              <p>
-                The main portfolio links are now real and point to your current public presence.
-              </p>
-              <div class="link-list">
-                <a href="https://github.com/tadester">github.com/tadester</a>
-                <a href="https://www.linkedin.com/in/tadeobasan/">linkedin.com/in/tadeobasan</a>
-                <a href="https://tadester-ops.netlify.app/">tadester-ops.netlify.app</a>
-              </div>
-            </article>
-            <article class="resume-card timeline-card">
-              <h3>Snapshot</h3>
-              <ul class="timeline">
-                <li>Built applied-AI tooling, SaaS platforms, and cross-platform mobile apps</li>
-                <li>Comfortable across frontend polish, backend architecture, and data systems</li>
-                <li>Strong at shipping v1s that still feel technically intentional</li>
-                <li>Especially effective when products need both speed and technical depth</li>
-              </ul>
-            </article>
+          <div class="resume-walkthrough">
+            <aside class="resume-nav" role="tablist" aria-label="Resume walkthrough">
+              <button class="resume-tab active" type="button" data-resume-panel="overview">Overview</button>
+              <button class="resume-tab" type="button" data-resume-panel="builds">What I Build</button>
+              <button class="resume-tab" type="button" data-resume-panel="stack">Tech Stack</button>
+              <button class="resume-tab" type="button" data-resume-panel="links">Links</button>
+            </aside>
+
+            <div class="resume-stage">
+              <article class="resume-panel active" id="resume-panel-overview">
+                <p class="project-type">Overview</p>
+                <h3>Full-stack engineer with strong product taste and systems depth.</h3>
+                <p>
+                  I build across product surfaces and infrastructure: polished frontends, mobile
+                  apps, backend APIs, AI pipelines, and simulation-style systems. My best work
+                  usually sits at the intersection of technical depth and product clarity.
+                </p>
+                <ul class="timeline">
+                  <li>Applied AI tooling and computer-vision workflows</li>
+                  <li>TypeScript backend systems and role-aware product logic</li>
+                  <li>Flutter mobile experiences tied to real backend data</li>
+                  <li>Interactive frontend work with strong presentation quality</li>
+                </ul>
+              </article>
+
+              <article class="resume-panel" id="resume-panel-builds" hidden>
+                <p class="project-type">What I Build</p>
+                <h3>Products that combine architecture, UX, and implementation range.</h3>
+                <div class="resume-facts">
+                  <div class="resume-fact">
+                    <span>Jumpshot Trainer</span>
+                    <strong>Python + Rust system for basketball biomechanics analysis and review.</strong>
+                  </div>
+                  <div class="resume-fact">
+                    <span>Tadester Ops</span>
+                    <strong>Operations SaaS with Next.js, TypeScript backend, Supabase, and Flutter.</strong>
+                  </div>
+                  <div class="resume-fact">
+                    <span>WorldSim</span>
+                    <strong>Rust/Bevy simulation prototype with agents, systems, and dashboard UI.</strong>
+                  </div>
+                </div>
+              </article>
+
+              <article class="resume-panel" id="resume-panel-stack" hidden>
+                <p class="project-type">Tech Stack</p>
+                <h3>Languages and tools I actually use in shipped work.</h3>
+                <ul class="timeline">
+                  <li>Frontend: HTML, CSS, JavaScript, Next.js, TypeScript</li>
+                  <li>Mobile: Flutter, Dart, mobile auth and role-aware app flows</li>
+                  <li>Backend: Node.js, Supabase, PostgreSQL, Zod, API architecture</li>
+                  <li>AI and systems: Python, Rust, OpenCV, MediaPipe, YOLOv8, Parquet, Bevy</li>
+                </ul>
+              </article>
+
+              <article class="resume-panel" id="resume-panel-links" hidden>
+                <p class="project-type">Links</p>
+                <h3>Resume, GitHub, LinkedIn, and live product links.</h3>
+                <div class="link-list">
+                  <a
+                    class="button button-primary resume-link"
+                    href="./assets/resume-professional.pdf"
+                    data-file-link="./assets/resume-professional.pdf"
+                  >
+                    Download Resume PDF
+                  </a>
+                  <a href="https://github.com/tadester">github.com/tadester</a>
+                  <a href="https://www.linkedin.com/in/tadeobasan/">linkedin.com/in/tadeobasan</a>
+                  <a href="https://tadester-ops.netlify.app/">tadester-ops.netlify.app</a>
+                </div>
+              </article>
+            </div>
           </div>
         </section>
 
-        <section class="section lab-section" id="lab">
+        <section class="section games-section" id="games">
           <div class="section-heading">
-            <p class="eyebrow">Live Lab</p>
-            <h2>A playful JavaScript-heavy sandbox so the site feels built, not templated.</h2>
+            <p class="eyebrow">Games I've Made</p>
+            <h2>Playable experiments, simulation prototypes, and game-style systems work.</h2>
           </div>
 
-          <div class="lab-grid">
-            <article class="lab-card">
-              <h3>Signal Tuner</h3>
-              <p>Drag the controls to tune the glow, grid, and background motion in real time.</p>
+          <div class="games-grid">
+            <article class="game-showcase-card">
+              <p class="project-type">Playable Now</p>
+              <h3>Packet Runner</h3>
+              <p>Guide the courier ship through the network, dodge hostile drones, and keep the signal alive.</p>
+              <div class="game-hud">
+                <span id="game-score">Score: 0</span>
+                <span id="game-best">Best: 0</span>
+              </div>
+              <div class="game-board" id="game-board" tabindex="0" aria-label="Packet Runner minigame">
+                <div class="player-ship" id="player-dot">
+                  <span class="ship-core"></span>
+                  <span class="ship-wing ship-wing-left"></span>
+                  <span class="ship-wing ship-wing-right"></span>
+                </div>
+              </div>
+              <div class="cta-row compact-row">
+                <button class="button button-primary" type="button" id="game-start">Start Game</button>
+                <button class="button button-secondary" type="button" id="game-reset">Reset Run</button>
+              </div>
+            </article>
+
+            <article class="game-info-card">
+              <p class="project-type">Simulation Project</p>
+              <h3>WorldSim Prototype</h3>
+              <p>
+                A Rust + Bevy simulation build with agent systems, world resources, lifecycle logic,
+                magic mechanics, and an on-screen dashboard tracking trends over time.
+              </p>
+            </article>
+
+            <article class="game-info-card">
+              <p class="project-type">Playable Pipeline</p>
+              <h3>Future web-playable game builds</h3>
+              <p>
+                This section is designed to host browser-playable versions of my game projects
+                directly on the site as I add more directories and web-ready builds.
+              </p>
+            </article>
+
+            <article class="game-controls-card">
+              <h3>Visual Controls</h3>
+              <p>Tune the site's atmosphere and motion in real time.</p>
               <label for="glow-range">Glow intensity</label>
               <input id="glow-range" type="range" min="0" max="100" value="74" />
               <label for="grid-range">Grid opacity</label>
               <input id="grid-range" type="range" min="0" max="100" value="34" />
               <label for="speed-range">Background motion</label>
               <input id="speed-range" type="range" min="10" max="100" value="42" />
-            </article>
-
-            <article class="lab-card game-card">
-              <h3>Mini Game: Packet Runner</h3>
-              <p>Move the packet, dodge the blockers, and see how long you keep the signal alive.</p>
-              <div class="game-hud">
-                <span id="game-score">Score: 0</span>
-                <span id="game-best">Best: 0</span>
-              </div>
-              <div class="game-board" id="game-board" tabindex="0" aria-label="Packet Runner minigame">
-                <div class="player-dot" id="player-dot"></div>
-              </div>
-              <button class="button button-primary" type="button" id="game-start">Start Game</button>
             </article>
 
             <article class="lab-card terminal-card">
@@ -477,8 +555,8 @@
 
           <div class="contact-card">
             <p>
-              The structure is ready. Next step is dropping in your real contact details, repo links,
-              headshot, and project screenshots.
+              Open to ambitious product teams, interesting software problems, and roles where strong
+              engineering and product judgment both matter.
             </p>
             <div class="contact-links">
               <a href="./assets/resume-professional.pdf">Resume PDF</a>
