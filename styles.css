@@ -973,109 +973,30 @@ input[type="range"] {
   gap: 16px;
 }
 
-.spoons-status,
-.spoons-actions,
-.spoons-center,
-.spoons-opponents {
+.spoons-status {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.spoons-status,
-.spoons-actions {
+.spoons-status {
   justify-content: space-between;
 }
 
-.spoons-table {
-  display: grid;
-  gap: 16px;
-}
-
-.spoons-opponents {
-  justify-content: space-between;
-}
-
-.spoons-opponent,
-.spoons-pile,
-.spoons-race,
-.spoons-status,
-.spoons-actions {
+.spoons-status {
   padding: 16px;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.03);
 }
 
-.spoons-opponent {
-  min-width: 120px;
-}
-
-.spoons-opponent span,
-.spoons-pile span,
-.spoons-race span {
-  display: block;
-  color: var(--muted);
-  margin-bottom: 8px;
-  font-size: 0.82rem;
-}
-
-.spoons-center {
-  justify-content: space-between;
-  align-items: stretch;
-}
-
-.spoons-pile,
-.spoons-race {
-  flex: 1;
-}
-
-.spoons-hand {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.spoon-card {
-  min-height: 148px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04)),
-    rgba(8, 19, 34, 0.94);
-  color: var(--text);
-  padding: 16px;
-  text-align: left;
-  cursor: pointer;
-}
-
-.spoon-card .rank {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.spoon-card .suit {
-  display: block;
-  margin-top: 8px;
-  font-size: 1.1rem;
-  color: var(--accent-warm);
-}
-
-.spoon-card .hint {
-  display: block;
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: 0.76rem;
-}
-
-.spoon-card:hover {
-  transform: translateY(-2px);
-}
-
-.opponent-has-spoon {
-  color: var(--accent-2);
+.spoons-embed {
+  width: 100%;
+  min-height: 840px;
+  border: 1px solid rgba(119, 166, 255, 0.16);
+  border-radius: 24px;
+  background: rgba(5, 12, 22, 0.96);
 }
 
 .game-showcase-card {

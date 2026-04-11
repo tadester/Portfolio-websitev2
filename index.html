@@ -493,34 +493,22 @@
             <article class="spoons-card">
               <p class="project-type">Directly Playable</p>
               <h3>Spoons</h3>
-              <p>Collect four of a kind, grab a spoon before the bots do, and survive the round.</p>
+              <p>
+                The original JavaFX game is hosted here in-browser through a dedicated runtime
+                wrapper, without changing the source code in the sibling project.
+              </p>
               <div class="spoons-status">
-                <span id="spoons-status-text">Build your hand and race for the spoon.</span>
-                <button class="button button-primary" type="button" id="spoons-start">Start Round</button>
+                <span>Original JavaFX build, browser-hosted via CheerpJ.</span>
+                <a class="button button-primary" href="./spoons-cheerpj.html" target="_blank" rel="noreferrer">
+                  Open Full Game
+                </a>
               </div>
-              <div class="spoons-table">
-                <div class="spoons-opponents" id="spoons-opponents"></div>
-                <div class="spoons-center">
-                  <div class="spoons-pile">
-                    <span>Deck</span>
-                    <strong id="spoons-deck-count">52</strong>
-                  </div>
-                  <div class="spoons-pile discard-pile">
-                    <span>Discard</span>
-                    <strong id="spoons-discard-card">--</strong>
-                  </div>
-                  <div class="spoons-race">
-                    <span>Spoons Left</span>
-                    <strong id="spoons-left">3</strong>
-                    <button class="button button-secondary" type="button" id="spoons-grab" disabled>Grab Spoon</button>
-                  </div>
-                </div>
-                <div class="spoons-hand" id="spoons-hand"></div>
-              </div>
-              <div class="spoons-actions">
-                <button class="button button-secondary" type="button" id="spoons-draw">Draw Card</button>
-                <button class="button button-secondary" type="button" id="spoons-pass">Pass Turn</button>
-              </div>
+              <iframe
+                class="spoons-embed"
+                src="./spoons-cheerpj.html"
+                title="Spoons JavaFX browser host"
+                loading="lazy"
+              ></iframe>
             </article>
 
             <article class="game-showcase-card">
