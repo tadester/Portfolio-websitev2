@@ -490,8 +490,41 @@
           </div>
 
           <div class="games-grid">
+            <article class="spoons-card">
+              <p class="project-type">Directly Playable</p>
+              <h3>Spoons</h3>
+              <p>Collect four of a kind, grab a spoon before the bots do, and survive the round.</p>
+              <div class="spoons-status">
+                <span id="spoons-status-text">Build your hand and race for the spoon.</span>
+                <button class="button button-primary" type="button" id="spoons-start">Start Round</button>
+              </div>
+              <div class="spoons-table">
+                <div class="spoons-opponents" id="spoons-opponents"></div>
+                <div class="spoons-center">
+                  <div class="spoons-pile">
+                    <span>Deck</span>
+                    <strong id="spoons-deck-count">52</strong>
+                  </div>
+                  <div class="spoons-pile discard-pile">
+                    <span>Discard</span>
+                    <strong id="spoons-discard-card">--</strong>
+                  </div>
+                  <div class="spoons-race">
+                    <span>Spoons Left</span>
+                    <strong id="spoons-left">3</strong>
+                    <button class="button button-secondary" type="button" id="spoons-grab" disabled>Grab Spoon</button>
+                  </div>
+                </div>
+                <div class="spoons-hand" id="spoons-hand"></div>
+              </div>
+              <div class="spoons-actions">
+                <button class="button button-secondary" type="button" id="spoons-draw">Draw Card</button>
+                <button class="button button-secondary" type="button" id="spoons-pass">Pass Turn</button>
+              </div>
+            </article>
+
             <article class="game-showcase-card">
-              <p class="project-type">Playable Now</p>
+              <p class="project-type">Arcade Prototype</p>
               <h3>Packet Runner</h3>
               <p>Guide the courier ship through the network, dodge hostile drones, and keep the signal alive.</p>
               <div class="game-hud">
@@ -521,11 +554,11 @@
             </article>
 
             <article class="game-info-card">
-              <p class="project-type">Playable Pipeline</p>
-              <h3>Future web-playable game builds</h3>
+              <p class="project-type">Game Systems</p>
+              <h3>From Java and Rust projects to browser-playable versions</h3>
               <p>
-                This section is designed to host browser-playable versions of my game projects
-                directly on the site as I add more directories and web-ready builds.
+                This games area is where I can surface direct web versions of my game projects,
+                including ports or simplified browser adaptations of repos that started elsewhere.
               </p>
             </article>
 
