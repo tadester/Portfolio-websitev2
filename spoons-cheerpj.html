@@ -69,13 +69,21 @@
 
     <script>
       (async function () {
+        const display = document.getElementById("cheerpj-display");
+
+        if (window.location.protocol === "file:") {
+          display.innerHTML =
+            '<div style="padding:24px;color:#eef4ff;font-family:monospace;line-height:1.6;">CheerpJ needs a real local server. Open this portfolio with <strong>python3 -m http.server</strong> and visit it over <strong>http://localhost</strong> instead of double-clicking the HTML file.</div>';
+          return;
+        }
+
         try {
           await cheerpjInit();
-          cheerpjCreateDisplay(960, 720, document.getElementById("cheerpj-display"));
-          await cheerpjRunMain("game.Main", "/app/spoons-game.jar");
+          cheerpjCreateDisplay(960, 720, display);
+          await cheerpjRunJar("/app/spoons-game.jar");
         } catch (error) {
-          document.getElementById("cheerpj-display").innerHTML =
-            '<div style="padding:24px;color:#eef4ff;font-family:monospace;">CheerpJ failed to start the original Spoons build in this browser session.</div>';
+          display.innerHTML =
+            '<div style="padding:24px;color:#eef4ff;font-family:monospace;line-height:1.6;">CheerpJ failed to start the original Spoons build in this browser session. This can happen if the page is opened without a server or if the browser blocks the runtime/CDN request.</div>';
           console.error(error);
         }
       })();
