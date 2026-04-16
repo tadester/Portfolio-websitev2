@@ -792,6 +792,7 @@ h3 {
     rgba(255, 255, 255, 0.03);
   aspect-ratio: 16 / 10;
   min-height: 250px;
+  cursor: zoom-in;
 }
 
 .gallery-nav {
@@ -837,6 +838,73 @@ h3 {
   display: block;
   aspect-ratio: 16 / 10;
   object-fit: cover;
+}
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+}
+
+.gallery-lightbox[hidden] {
+  display: none;
+}
+
+.gallery-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 10, 18, 0.84);
+  backdrop-filter: blur(8px);
+}
+
+.gallery-lightbox-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100vw - 48px));
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+}
+
+.gallery-lightbox-figure {
+  margin: 0;
+  min-height: 70vh;
+  max-height: 86vh;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(5, 12, 22, 0.92);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.gallery-lightbox-figure img {
+  width: 100%;
+  max-height: calc(86vh - 48px);
+  object-fit: contain;
+}
+
+.gallery-lightbox-close,
+.gallery-lightbox-nav {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 12, 22, 0.9);
+  color: var(--text);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.gallery-lightbox-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 2;
 }
 
 .gallery-image {
@@ -1026,7 +1094,7 @@ input[type="range"] {
 }
 
 .spoons-card {
-  grid-column: span 2;
+  grid-column: 1 / -1;
   display: grid;
   gap: 16px;
 }
@@ -1077,7 +1145,7 @@ input[type="range"] {
 
 .spoons-table {
   position: relative;
-  min-height: 760px;
+  min-height: 700px;
   border-radius: 34px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1107,10 +1175,10 @@ input[type="range"] {
   position: absolute;
   inset: 50% auto auto 50%;
   transform: translate(-50%, -50%);
-  width: min(360px, calc(100% - 64px));
+  width: min(280px, calc(100% - 64px));
   display: grid;
   justify-items: center;
-  gap: 14px;
+  gap: 10px;
   z-index: 5;
 }
 
@@ -1126,8 +1194,8 @@ input[type="range"] {
 }
 
 .spoons-spoon-ring {
-  width: 240px;
-  min-height: 184px;
+  width: 196px;
+  min-height: 148px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
@@ -1151,8 +1219,8 @@ input[type="range"] {
 }
 
 .spoons-spoon-chip img {
-  width: 52px;
-  height: 52px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.26));
 }
@@ -1164,7 +1232,7 @@ input[type="range"] {
 
 .spoons-center-stack {
   display: flex;
-  gap: 18px;
+  gap: 12px;
   align-items: end;
 }
 
@@ -1176,7 +1244,7 @@ input[type="range"] {
 }
 
 .spoons-stack-card {
-  width: 72px;
+  width: 58px;
   aspect-ratio: 0.72;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1192,11 +1260,12 @@ input[type="range"] {
 }
 
 .spoons-announcer {
-  max-width: 320px;
+  max-width: 240px;
   margin: 0;
   text-align: center;
   color: #f4fbff;
-  line-height: 1.55;
+  line-height: 1.35;
+  font-size: 0.9rem;
   text-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
 }
 
@@ -1207,9 +1276,9 @@ input[type="range"] {
 
 .spoons-seat {
   position: absolute;
-  width: 198px;
-  padding: 14px;
-  border-radius: 24px;
+  width: 172px;
+  padding: 12px;
+  border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
     linear-gradient(135deg, rgba(12, 31, 28, 0.82), rgba(8, 18, 31, 0.76)),
@@ -1229,25 +1298,25 @@ input[type="range"] {
 }
 
 .spoons-seat-top {
-  top: 22px;
+  top: 18px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .spoons-seat-left {
   top: 50%;
-  left: 18px;
+  left: 14px;
   transform: translateY(-50%);
 }
 
 .spoons-seat-right {
   top: 50%;
-  right: 18px;
+  right: 14px;
   transform: translateY(-50%);
 }
 
 .spoons-seat-bottom {
-  bottom: 18px;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -1259,9 +1328,9 @@ input[type="range"] {
 }
 
 .spoons-avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
   object-fit: cover;
   border: 2px solid rgba(255, 255, 255, 0.14);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -1276,11 +1345,11 @@ input[type="range"] {
 }
 
 .spoons-player-name-row strong {
-  font-size: 1rem;
+  font-size: 0.94rem;
 }
 
 .spoons-player-badge {
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 999px;
   font-size: 0.72rem;
   letter-spacing: 0.04em;
@@ -1313,21 +1382,21 @@ input[type="range"] {
 }
 
 .spoons-seat-note {
-  margin: 12px 0 10px;
+  margin: 10px 0 8px;
 }
 
 .spoons-bot-hand {
   display: flex;
   gap: 0;
-  min-height: 84px;
+  min-height: 70px;
   align-items: center;
 }
 
 .spoons-mini-card {
-  width: 48px;
+  width: 40px;
   aspect-ratio: 0.72;
-  margin-left: -18px;
-  border-radius: 12px;
+  margin-left: -16px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background-image: url("./src/images/card_back.png");
   background-position: center;
@@ -1688,14 +1757,29 @@ input[type="range"] {
     border-radius: 14px;
   }
 
+  .gallery-lightbox-dialog {
+    width: min(100vw - 24px, 900px);
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-lightbox-close {
+    top: 10px;
+    right: 10px;
+  }
+
+  .gallery-lightbox-nav {
+    width: 100%;
+    border-radius: 14px;
+  }
+
   .spoons-table {
-    min-height: 1000px;
+    min-height: 920px;
   }
 
   .spoons-center {
-    inset: 500px auto auto 50%;
+    inset: 448px auto auto 50%;
     transform: translateX(-50%);
-    width: min(320px, calc(100% - 42px));
+    width: min(260px, calc(100% - 42px));
   }
 
   .spoons-seat-top,
@@ -1705,7 +1789,7 @@ input[type="range"] {
     left: 50%;
     right: auto;
     transform: translateX(-50%);
-    width: min(280px, calc(100% - 30px));
+    width: min(240px, calc(100% - 30px));
   }
 
   .spoons-seat-top {
@@ -1782,12 +1866,12 @@ input[type="range"] {
   }
 
   .spoons-table {
-    min-height: 1080px;
+    min-height: 980px;
   }
 
   .spoons-spoon-ring {
-    width: 200px;
-    min-height: 160px;
+    width: 180px;
+    min-height: 144px;
   }
 
   .gallery-thumbs {

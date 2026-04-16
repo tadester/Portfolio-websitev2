@@ -80,6 +80,11 @@ const spoonsSeatTop = document.querySelector("#spoons-seat-top");
 const spoonsSeatLeft = document.querySelector("#spoons-seat-left");
 const spoonsSeatRight = document.querySelector("#spoons-seat-right");
 const spoonsSeatBottom = document.querySelector("#spoons-seat-bottom");
+const galleryLightbox = document.querySelector("#gallery-lightbox");
+const galleryLightboxImage = document.querySelector("#gallery-lightbox-image");
+const galleryLightboxClose = document.querySelector("#gallery-lightbox-close");
+const galleryLightboxPrev = document.querySelector("#gallery-lightbox-prev");
+const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
 
 const backgroundState = {
   particles: [],
@@ -161,6 +166,11 @@ const spoonsState = {
   announcer: "Press Start Match to deal four cards and race for the spoons.",
   helper: "Start a match to begin passing cards around the table.",
   timers: [],
+};
+
+const galleryLightboxState = {
+  items: [],
+  index: 0,
 };
 
 function createAvatarDataUri(label, startColor, endColor) {
@@ -621,8 +631,11 @@ function resolveSpoonsDiscard(player, discardedCard) {
   }
 
   const destinationLabel = nextPlayer ? nextPlayer.label : "the discard pile";
+  const announcer = nextPlayer
+    ? `${player.label} passed a face-down card to ${destinationLabel}.`
+    : `${player.label} discarded ${discardedCard.label}.`;
   setSpoonsMessage(
-    `${player.label} passed ${discardedCard.label} to ${destinationLabel}.`,
+    announcer,
     player.isHuman
       ? "Nice. Stay on the same rank cluster and look for four of a kind."
       : "The table is still moving. Wait for your next decision or the grab signal."
@@ -757,6 +770,11 @@ function setupGalleryCarousels() {
 
     if (!(mainImage instanceof HTMLImageElement) || !thumbs.length) return;
 
+    const items = thumbs.map((thumb) => ({
+      image: thumb.dataset.image || "",
+      alt: thumb.dataset.alt || "",
+    }));
+
     const setActive = (index) => {
       const thumb = thumbs[index];
       if (!(thumb instanceof HTMLButtonElement)) return;
@@ -770,6 +788,10 @@ function setupGalleryCarousels() {
 
       gallery.dataset.activeIndex = String(index);
     };
+
+    mainImage.addEventListener("click", () => {
+      openGalleryLightbox(items, Number(gallery.dataset.activeIndex || 0));
+    });
 
     thumbs.forEach((thumb, index) => {
       thumb.addEventListener("click", () => setActive(index));
@@ -788,6 +810,62 @@ function setupGalleryCarousels() {
     });
 
     setActive(0);
+  });
+}
+
+function renderGalleryLightbox() {
+  if (!(galleryLightbox instanceof HTMLElement) || !(galleryLightboxImage instanceof HTMLImageElement)) return;
+  const currentItem = galleryLightboxState.items[galleryLightboxState.index];
+  if (!currentItem) return;
+
+  galleryLightboxImage.src = currentItem.image;
+  galleryLightboxImage.alt = currentItem.alt;
+}
+
+function openGalleryLightbox(items, startIndex) {
+  if (!(galleryLightbox instanceof HTMLElement) || !items.length) return;
+
+  galleryLightboxState.items = items;
+  galleryLightboxState.index = startIndex;
+  renderGalleryLightbox();
+  galleryLightbox.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+
+function closeGalleryLightbox() {
+  if (!(galleryLightbox instanceof HTMLElement)) return;
+  galleryLightbox.hidden = true;
+  document.body.style.overflow = "";
+}
+
+function stepGalleryLightbox(direction) {
+  if (!galleryLightboxState.items.length) return;
+  galleryLightboxState.index =
+    (galleryLightboxState.index + direction + galleryLightboxState.items.length) %
+    galleryLightboxState.items.length;
+  renderGalleryLightbox();
+}
+
+function setupGalleryLightbox() {
+  if (!(galleryLightbox instanceof HTMLElement)) return;
+
+  galleryLightboxClose?.addEventListener("click", closeGalleryLightbox);
+  galleryLightboxPrev?.addEventListener("click", () => stepGalleryLightbox(-1));
+  galleryLightboxNext?.addEventListener("click", () => stepGalleryLightbox(1));
+
+  galleryLightbox.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (target.hasAttribute("data-lightbox-close")) {
+      closeGalleryLightbox();
+    }
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (galleryLightbox.hidden) return;
+    if (event.key === "Escape") closeGalleryLightbox();
+    if (event.key === "ArrowLeft") stepGalleryLightbox(-1);
+    if (event.key === "ArrowRight") stepGalleryLightbox(1);
   });
 }
 
@@ -1203,6 +1281,7 @@ syncScrollState();
 setupHeadshotFallback();
 setupGalleryFallbacks();
 setupGalleryCarousels();
+setupGalleryLightbox();
 setupResumeWalkthrough();
 setupBackgroundCanvas();
 setupSpoonsGame();
