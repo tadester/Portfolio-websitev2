@@ -72,6 +72,22 @@ test("player with four matching cards can claim spoon during play", () => {
   assert.equal(canPlayerClaimSpoon(player, "playing", 3), true);
 });
 
+test("player with four matching cards out of five can still claim immediately", () => {
+  const player = {
+    hand: [
+      makeCard("ace", "hearts"),
+      makeCard("ace", "diamonds"),
+      makeCard("ace", "clubs"),
+      makeCard("ace", "spades"),
+      makeCard("king", "hearts"),
+    ],
+    out: false,
+    hasSpoon: false,
+  };
+
+  assert.equal(canPlayerClaimSpoon(player, "playing", 3), true);
+});
+
 test("player can still grab during spoon race when spoons remain", () => {
   const player = {
     hand: [makeCard("2"), makeCard("3"), makeCard("4"), makeCard("5")],

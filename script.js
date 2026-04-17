@@ -295,6 +295,44 @@ function canHumanGrabWithCurrentHand() {
     : false;
 }
 
+function getHumanGrabState() {
+  const human = getSpoonsPlayerById("human");
+  if (!human || human.out || human.hasSpoon) {
+    return {
+      canGrab: false,
+      label: "Grab Spoon",
+      helper:
+        human?.out
+          ? "You are out for this match."
+          : human?.hasSpoon
+            ? "You already grabbed a spoon."
+            : "Start a round to play.",
+    };
+  }
+
+  if (spoonsState.phase === "spoon-race" && spoonsState.spoonsRemaining > 0) {
+    return {
+      canGrab: true,
+      label: "Grab Spoon",
+      helper: "The race is live. Grab now.",
+    };
+  }
+
+  if (spoonsState.phase === "playing" && canHumanGrabWithCurrentHand()) {
+    return {
+      canGrab: true,
+      label: "Claim Spoon",
+      helper: "You already have four of a kind. Claim the first spoon now.",
+    };
+  }
+
+  return {
+    canGrab: false,
+    label: "Grab Spoon",
+    helper: "You need four matching cards before you can claim a spoon.",
+  };
+}
+
 function chooseBotDiscardIndex(player) {
   return spoonsEngine.chooseBotDiscardIndex ? spoonsEngine.chooseBotDiscardIndex(player) : 0;
 }
@@ -459,11 +497,10 @@ function renderSpoonsCenter() {
   if (spoonsHelper) spoonsHelper.textContent = spoonsState.helper;
 
   if (spoonsGrab instanceof HTMLButtonElement) {
-    const canGrab =
-      !!human &&
-      ((spoonsState.phase === "spoon-race" && spoonsState.spoonsRemaining > 0) ||
-        (spoonsState.phase === "playing" && canHumanGrabWithCurrentHand()));
-    spoonsGrab.disabled = !canGrab;
+    const grabState = getHumanGrabState();
+    spoonsGrab.textContent = grabState.label;
+    spoonsGrab.classList.toggle("is-disabled", !grabState.canGrab);
+    spoonsGrab.setAttribute("aria-disabled", String(!grabState.canGrab));
   }
 
   if (spoonsNext instanceof HTMLButtonElement) {
@@ -728,7 +765,14 @@ function triggerSpoonsRace(triggerPlayerId) {
 
 function handleHumanGrab() {
   const human = getSpoonsPlayerById("human");
+  const grabState = getHumanGrabState();
   if (!human || human.out || human.hasSpoon) return;
+
+  if (!grabState.canGrab) {
+    setSpoonsMessage("You can't grab a spoon yet.", grabState.helper);
+    renderSpoonsGame();
+    return;
+  }
 
   if (spoonsState.phase === "playing" && canHumanGrabWithCurrentHand()) {
     triggerSpoonsRace(human.id);
@@ -944,6 +988,26 @@ function setupSpoonsGame() {
   if (!(spoonsRoot instanceof HTMLElement)) return;
 
   spoonsState.players = createSpoonsPlayers();
+  globalThis.__spoonsDebug = {
+    getState: () => spoonsState,
+    getHumanGrabState,
+    canHumanGrabWithCurrentHand,
+    triggerHumanGrab: handleHumanGrab,
+    render: renderSpoonsGame,
+    setScenario: ({ hand, phase = "playing", spoonsRemaining = 3 }) => {
+      if (!spoonsState.players.length) {
+        spoonsState.players = createSpoonsPlayers();
+      }
+      const human = getSpoonsPlayerById("human");
+      if (!human) return;
+      human.out = false;
+      human.hasSpoon = false;
+      human.hand = hand;
+      spoonsState.phase = phase;
+      spoonsState.spoonsRemaining = spoonsRemaining;
+      renderSpoonsGame();
+    },
+  };
   renderSpoonsGame();
 
   spoonsStart?.addEventListener("click", startSpoonsMatch);

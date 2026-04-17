@@ -14,6 +14,7 @@ test("desktop only has one active grab spoon button in the hand panel", () => {
     html,
     /<div class="spoons-hand-actions">[\s\S]*id="spoons-grab"/
   );
+  assert.doesNotMatch(html, /id="spoons-grab"[^>]*\sdisabled(?!=)/);
 });
 
 test("desktop keeps mobile section navigation hidden", () => {
