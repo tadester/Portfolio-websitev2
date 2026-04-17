@@ -507,27 +507,26 @@ function renderSpoonsCenter() {
     const grabState = getHumanGrabState();
     spoonsRing.classList.toggle("is-disabled", !grabState.canGrab);
     spoonsRing.setAttribute("aria-disabled", String(!grabState.canGrab));
-  }
-
-  if (spoonsNext instanceof HTMLButtonElement) {
-    const showNext = spoonsState.phase === "round-over";
-    spoonsNext.hidden = !showNext;
-    spoonsNext.disabled = !showNext;
-  }
-
-  if (spoonsRing instanceof HTMLElement) {
     const activeCount = getSpoonsActivePlayers().length;
     const totalSpoons = Math.max(activeCount - 1, 0);
     const claimedCount = Math.max(totalSpoons - spoonsState.spoonsRemaining, 0);
     spoonsRing.innerHTML = Array.from({ length: totalSpoons })
       .map(
         (_, index) => `
-          <div class="spoons-spoon-chip${index < claimedCount ? " is-claimed" : ""}">
+          <button type="button" class="spoons-spoon-chip${index < claimedCount ? " is-claimed" : ""}" ${
+            grabState.canGrab && index >= claimedCount ? "" : 'tabindex="-1"'
+          } aria-label="Pick up spoon">
             <img src="./src/images/spoon.png" alt="Spoon token" />
-          </div>
+          </button>
         `
       )
       .join("");
+  }
+
+  if (spoonsNext instanceof HTMLButtonElement) {
+    const showNext = spoonsState.phase === "round-over";
+    spoonsNext.hidden = !showNext;
+    spoonsNext.disabled = !showNext;
   }
 
   if (spoonsDiscardTop instanceof HTMLElement) {
@@ -639,6 +638,20 @@ function beginSpoonsTurn() {
   }
 
   if (currentPlayer.isHuman) {
+    if (hasFourOfKind(currentPlayer.hand)) {
+      setSpoonsMessage(
+        "Four of a kind ready. Grab now or the game will claim the spoon for you.",
+        "Click the spoon pile or the Grab Spoon button. The race starts immediately once you claim."
+      );
+      renderSpoonsGame();
+      scheduleSpoons(() => {
+        if (spoonsState.phase === "playing" && canHumanGrabWithCurrentHand()) {
+          handleHumanGrab();
+        }
+      }, 900);
+      return;
+    }
+
     setSpoonsMessage(
       "Your move. Choose the card you want to pass left.",
       "You always finish with four cards. Keep the strongest rank group and send the weakest card."

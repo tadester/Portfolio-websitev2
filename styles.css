@@ -1235,8 +1235,10 @@ input[type="range"] {
   place-items: center;
   aspect-ratio: 1;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+  padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.06);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+  cursor: pointer;
 }
 
 .spoons-spoon-chip img {
@@ -1249,6 +1251,7 @@ input[type="range"] {
 .spoons-spoon-chip.is-claimed {
   opacity: 0.25;
   transform: scale(0.94);
+  cursor: default;
 }
 
 .spoons-center-stack {

@@ -22,6 +22,13 @@ test("center spoon pile remains a clickable grab target", () => {
   assert.match(html, /id="spoons-ring"[^>]*tabindex="0"/);
 });
 
+test("spoon chips render as actual buttons in the game script", () => {
+  assert.match(
+    fs.readFileSync(path.join(projectRoot, "script.js"), "utf8"),
+    /<button type="button" class="spoons-spoon-chip/
+  );
+});
+
 test("desktop keeps mobile section navigation hidden", () => {
   assert.match(css, /\.mobile-section-nav\s*\{\s*display:\s*none;/);
   assert.match(
