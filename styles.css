@@ -99,6 +99,12 @@ pre {
   display: none;
 }
 
+@media (min-width: 761px) {
+  .mobile-section-nav {
+    display: none !important;
+  }
+}
+
 .brand {
   font-weight: 700;
   letter-spacing: 0.08em;

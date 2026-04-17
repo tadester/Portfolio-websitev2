@@ -89,6 +89,7 @@ const galleryLightboxPrev = document.querySelector("#gallery-lightbox-prev");
 const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
 const mobileSectionTabs = document.querySelectorAll(".mobile-section-tab");
 const mobileSectionTargets = document.querySelectorAll("[data-mobile-group]");
+const spoonsEngine = globalThis.SpoonsEngine || {};
 
 const backgroundState = {
   particles: [],
@@ -280,41 +281,22 @@ function shuffleCards(cards) {
 }
 
 function getSpoonsRankCounts(hand) {
-  return hand.reduce((counts, card) => {
-    counts[card.rank] = (counts[card.rank] || 0) + 1;
-    return counts;
-  }, {});
+  return spoonsEngine.getRankCounts ? spoonsEngine.getRankCounts(hand) : {};
 }
 
 function hasFourOfKind(hand) {
-  return Object.values(getSpoonsRankCounts(hand)).some((count) => count >= 4);
+  return spoonsEngine.hasFourOfKind ? spoonsEngine.hasFourOfKind(hand) : false;
 }
 
 function canHumanGrabWithCurrentHand() {
   const human = getSpoonsPlayerById("human");
-  if (!human || human.out || human.hasSpoon) return false;
-  return human.hand.length >= 4 && hasFourOfKind(human.hand);
+  return spoonsEngine.canPlayerClaimSpoon
+    ? spoonsEngine.canPlayerClaimSpoon(human, spoonsState.phase, spoonsState.spoonsRemaining)
+    : false;
 }
 
 function chooseBotDiscardIndex(player) {
-  let bestIndex = 0;
-  let bestScore = Number.NEGATIVE_INFINITY;
-
-  player.hand.forEach((candidate, index) => {
-    const nextHand = player.hand.filter((_, cardIndex) => cardIndex !== index);
-    const counts = Object.values(getSpoonsRankCounts(nextHand));
-    const maxCount = counts.length ? Math.max(...counts) : 0;
-    const comboScore = counts.reduce((total, value) => total + value * value, 0);
-    const discardPenalty = (getSpoonsRankCounts(player.hand)[candidate.rank] || 0) * 4;
-    const score = maxCount * 100 + comboScore - discardPenalty;
-
-    if (score > bestScore) {
-      bestScore = score;
-      bestIndex = index;
-    }
-  });
-
-  return bestIndex;
+  return spoonsEngine.chooseBotDiscardIndex ? spoonsEngine.chooseBotDiscardIndex(player) : 0;
 }
 
 function drawSpoonsCard() {
@@ -696,9 +678,7 @@ function resolveSpoonsDiscard(player, discardedCard) {
 }
 
 function getBotGrabDelay(player) {
-  const counts = Object.values(getSpoonsRankCounts(player.hand));
-  const bestCount = counts.length ? Math.max(...counts) : 1;
-  return Math.max(1200, 1900 - bestCount * 120 + Math.random() * 520);
+  return spoonsEngine.getBotGrabDelay ? spoonsEngine.getBotGrabDelay(player) : 1600;
 }
 
 function triggerSpoonsRace(triggerPlayerId) {
