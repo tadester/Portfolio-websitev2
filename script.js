@@ -503,6 +503,12 @@ function renderSpoonsCenter() {
     spoonsGrab.setAttribute("aria-disabled", String(!grabState.canGrab));
   }
 
+  if (spoonsRing instanceof HTMLElement) {
+    const grabState = getHumanGrabState();
+    spoonsRing.classList.toggle("is-disabled", !grabState.canGrab);
+    spoonsRing.setAttribute("aria-disabled", String(!grabState.canGrab));
+  }
+
   if (spoonsNext instanceof HTMLButtonElement) {
     const showNext = spoonsState.phase === "round-over";
     spoonsNext.hidden = !showNext;
@@ -1017,6 +1023,13 @@ function setupSpoonsGame() {
     }
   });
   spoonsGrab?.addEventListener("click", handleHumanGrab);
+  spoonsRing?.addEventListener("click", handleHumanGrab);
+  spoonsRing?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handleHumanGrab();
+    }
+  });
 }
 
 function setSnippet(key) {

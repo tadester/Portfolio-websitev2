@@ -17,6 +17,11 @@ test("desktop only has one active grab spoon button in the hand panel", () => {
   assert.doesNotMatch(html, /id="spoons-grab"[^>]*\sdisabled(?!=)/);
 });
 
+test("center spoon pile remains a clickable grab target", () => {
+  assert.match(html, /id="spoons-ring"[^>]*role="button"/);
+  assert.match(html, /id="spoons-ring"[^>]*tabindex="0"/);
+});
+
 test("desktop keeps mobile section navigation hidden", () => {
   assert.match(css, /\.mobile-section-nav\s*\{\s*display:\s*none;/);
   assert.match(
