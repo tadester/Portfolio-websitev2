@@ -30,8 +30,17 @@
         </nav>
       </header>
 
+      <nav class="mobile-section-nav" aria-label="Mobile section switcher">
+        <button type="button" class="mobile-section-tab is-active" data-mobile-target="home">Home</button>
+        <button type="button" class="mobile-section-tab" data-mobile-target="projects">Projects</button>
+        <button type="button" class="mobile-section-tab" data-mobile-target="gallery">Gallery</button>
+        <button type="button" class="mobile-section-tab" data-mobile-target="resume">Resume</button>
+        <button type="button" class="mobile-section-tab" data-mobile-target="games">Games</button>
+        <button type="button" class="mobile-section-tab" data-mobile-target="contact">Contact</button>
+      </nav>
+
       <main id="top">
-        <section class="hero">
+        <section class="hero" data-mobile-group="home">
           <div class="hero-copy">
             <p class="eyebrow">Olatade Obasan • Software Engineer • Product Builder • Applied AI Builder</p>
             <h1>I build ambitious software systems and present them like real products.</h1>
@@ -135,7 +144,7 @@
           </aside>
         </section>
 
-        <section class="section proof-strip" id="proof">
+        <section class="section proof-strip" id="proof" data-mobile-group="home">
           <div class="proof-card">
             <span>What this portfolio tries to prove</span>
             <strong>I can build serious systems, explain them clearly, and package the work like a product.</strong>
@@ -150,7 +159,7 @@
           </div>
         </section>
 
-        <section class="section" id="projects">
+        <section class="section" id="projects" data-mobile-group="projects">
           <div class="section-heading">
             <p class="eyebrow">Selected Work</p>
             <h2>Projects that show engineering depth, product judgment, and range.</h2>
@@ -321,7 +330,7 @@
           </div>
         </section>
 
-        <section class="section gallery-section" id="gallery">
+        <section class="section gallery-section" id="gallery" data-mobile-group="gallery">
           <div class="section-heading">
             <p class="eyebrow">Visual Gallery</p>
             <h2>Product visuals across Tadester Ops, TadesterFlow mobile, and Jumpshot Trainer.</h2>
@@ -414,7 +423,7 @@
           </div>
         </section>
 
-        <section class="section architecture-section" id="architecture">
+        <section class="section architecture-section" id="architecture" data-mobile-group="projects">
           <div class="section-heading">
             <p class="eyebrow">Build Breakdown</p>
             <h2>What I built, how I built it, and the technologies behind each project.</h2>
@@ -450,7 +459,7 @@
           </div>
         </section>
 
-        <section class="section resume-section" id="resume">
+        <section class="section resume-section" id="resume" data-mobile-group="resume">
           <div class="section-heading">
             <p class="eyebrow">Resume Walkthrough</p>
             <h2>A guided view of my resume before you download the PDF.</h2>
@@ -552,7 +561,7 @@
           </div>
         </section>
 
-        <section class="section games-section" id="games">
+        <section class="section games-section" id="games" data-mobile-group="games">
           <div class="section-heading">
             <p class="eyebrow">Games I've Made</p>
             <h2>Playable experiments, simulation prototypes, and game-style systems work.</h2>
@@ -715,7 +724,7 @@
           </div>
         </section>
 
-        <section class="section contact-section" id="contact">
+        <section class="section contact-section" id="contact" data-mobile-group="contact">
           <div class="section-heading">
             <p class="eyebrow">Contact</p>
             <h2>Ready for a serious team, interesting product, or ambitious build.</h2>

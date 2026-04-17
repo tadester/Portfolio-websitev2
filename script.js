@@ -87,6 +87,8 @@ const galleryLightboxImage = document.querySelector("#gallery-lightbox-image");
 const galleryLightboxClose = document.querySelector("#gallery-lightbox-close");
 const galleryLightboxPrev = document.querySelector("#gallery-lightbox-prev");
 const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
+const mobileSectionTabs = document.querySelectorAll(".mobile-section-tab");
+const mobileSectionTargets = document.querySelectorAll("[data-mobile-group]");
 
 const backgroundState = {
   particles: [],
@@ -164,6 +166,7 @@ const spoonsState = {
   deck: [],
   discardPile: [],
   lastDiscard: null,
+  discardFaceDown: false,
   spoonsRemaining: Math.max(SPOONS_PROFILES.length - 1, 0),
   announcer: "Press Start Match to deal four cards and race for the spoons.",
   helper: "Start a match to begin passing cards around the table.",
@@ -456,6 +459,7 @@ function renderSpoonsConsole() {
 }
 
 function renderSpoonsCenter() {
+  const human = getSpoonsPlayerById("human");
   if (spoonsRound) spoonsRound.textContent = String(spoonsState.round);
   if (spoonsDealer) {
     const dealer = getSpoonsPlayerById(spoonsState.dealerId);
@@ -468,9 +472,11 @@ function renderSpoonsCenter() {
 
   if (spoonsGrab instanceof HTMLButtonElement) {
     const canGrab =
-      spoonsState.phase === "spoon-race" &&
-      !getSpoonsPlayerById("human")?.hasSpoon &&
-      !getSpoonsPlayerById("human")?.out;
+      !!human &&
+      !human.out &&
+      !human.hasSpoon &&
+      ((spoonsState.phase === "spoon-race" && spoonsState.spoonsRemaining > 0) ||
+        (spoonsState.phase === "playing" && hasFourOfKind(human.hand)));
     spoonsGrab.disabled = !canGrab;
   }
 
@@ -497,7 +503,7 @@ function renderSpoonsCenter() {
 
   if (spoonsDiscardTop instanceof HTMLElement) {
     spoonsDiscardTop.style.backgroundImage = spoonsState.lastDiscard
-      ? `url("${spoonsState.lastDiscard.image}")`
+      ? `url("${spoonsState.discardFaceDown ? "./src/images/card_back.png" : spoonsState.lastDiscard.image}")`
       : "none";
   }
 }
@@ -519,6 +525,7 @@ function resetSpoonsRoundState() {
   spoonsState.deck = shuffleCards(buildSpoonsDeck());
   spoonsState.discardPile = [];
   spoonsState.lastDiscard = null;
+  spoonsState.discardFaceDown = false;
   spoonsState.spoonsRemaining = Math.max(getSpoonsActivePlayers().length - 1, 0);
   spoonsState.roundOrder = [];
   spoonsState.turnIndex = 0;
@@ -552,7 +559,7 @@ function startSpoonsRound() {
     spoonsState.phase = "match-over";
     setSpoonsMessage(
       winner ? `${winner.label} wins the table.` : "No players remain.",
-      "Restart the match to play another full SPOON ladder."
+      "Restart the match to play another full hearts ladder."
     );
     renderSpoonsGame();
     return;
@@ -655,9 +662,12 @@ function resolveSpoonsDiscard(player, discardedCard) {
 
   if (nextPlayer) {
     nextPlayer.inbound = discardedCard;
+    spoonsState.lastDiscard = discardedCard;
+    spoonsState.discardFaceDown = !player.isHuman;
   } else {
     spoonsState.discardPile.push(discardedCard);
     spoonsState.lastDiscard = discardedCard;
+    spoonsState.discardFaceDown = false;
   }
 
   const destinationLabel = nextPlayer ? nextPlayer.label : "the discard pile";
@@ -733,17 +743,22 @@ function triggerSpoonsRace(triggerPlayerId) {
 }
 
 function handleHumanGrab() {
-  if (spoonsState.phase !== "spoon-race") return;
-
   const human = getSpoonsPlayerById("human");
   if (!human || human.out || human.hasSpoon) return;
+
+  if (spoonsState.phase === "playing" && hasFourOfKind(human.hand)) {
+    triggerSpoonsRace(human.id);
+    return;
+  }
+
+  if (spoonsState.phase !== "spoon-race") return;
 
   if (spoonsState.spoonsRemaining > 0) {
     human.hasSpoon = true;
     spoonsState.spoonsRemaining -= 1;
     setSpoonsMessage(
       "You grabbed a spoon in time.",
-      "Now watch who gets stuck with the next letter."
+      "Now watch who gets stuck with the next heart loss."
     );
     renderSpoonsGame();
   }
@@ -897,6 +912,48 @@ function setupGalleryLightbox() {
     if (event.key === "ArrowLeft") stepGalleryLightbox(-1);
     if (event.key === "ArrowRight") stepGalleryLightbox(1);
   });
+}
+
+function setMobileSection(sectionKey) {
+  mobileSectionTabs.forEach((tab) => {
+    tab.classList.toggle("is-active", tab.dataset.mobileTarget === sectionKey);
+  });
+
+  mobileSectionTargets.forEach((section) => {
+    section.classList.toggle("mobile-section-hidden", section.dataset.mobileGroup !== sectionKey);
+  });
+}
+
+function setupMobileSections() {
+  if (!mobileSectionTabs.length || !mobileSectionTargets.length) return;
+
+  const mobileQuery = window.matchMedia("(max-width: 760px)");
+
+  const syncMode = () => {
+    if (mobileQuery.matches) {
+      const activeTab =
+        Array.from(mobileSectionTabs).find((tab) => tab.classList.contains("is-active")) ||
+        mobileSectionTabs[0];
+      setMobileSection(activeTab.dataset.mobileTarget || "home");
+    } else {
+      mobileSectionTargets.forEach((section) => section.classList.remove("mobile-section-hidden"));
+    }
+  };
+
+  mobileSectionTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      setMobileSection(tab.dataset.mobileTarget || "home");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  if (typeof mobileQuery.addEventListener === "function") {
+    mobileQuery.addEventListener("change", syncMode);
+  } else {
+    mobileQuery.addListener(syncMode);
+  }
+
+  syncMode();
 }
 
 function setupSpoonsGame() {
@@ -1312,6 +1369,7 @@ setupHeadshotFallback();
 setupGalleryFallbacks();
 setupGalleryCarousels();
 setupGalleryLightbox();
+setupMobileSections();
 setupResumeWalkthrough();
 setupBackgroundCanvas();
 setupSpoonsGame();
