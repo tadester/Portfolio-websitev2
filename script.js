@@ -290,6 +290,12 @@ function hasFourOfKind(hand) {
   return Object.values(getSpoonsRankCounts(hand)).some((count) => count >= 4);
 }
 
+function canHumanGrabWithCurrentHand() {
+  const human = getSpoonsPlayerById("human");
+  if (!human || human.out || human.hasSpoon) return false;
+  return human.hand.length >= 4 && hasFourOfKind(human.hand);
+}
+
 function chooseBotDiscardIndex(player) {
   let bestIndex = 0;
   let bestScore = Number.NEGATIVE_INFINITY;
@@ -473,10 +479,8 @@ function renderSpoonsCenter() {
   if (spoonsGrab instanceof HTMLButtonElement) {
     const canGrab =
       !!human &&
-      !human.out &&
-      !human.hasSpoon &&
       ((spoonsState.phase === "spoon-race" && spoonsState.spoonsRemaining > 0) ||
-        (spoonsState.phase === "playing" && hasFourOfKind(human.hand)));
+        (spoonsState.phase === "playing" && canHumanGrabWithCurrentHand()));
     spoonsGrab.disabled = !canGrab;
   }
 
@@ -746,7 +750,7 @@ function handleHumanGrab() {
   const human = getSpoonsPlayerById("human");
   if (!human || human.out || human.hasSpoon) return;
 
-  if (spoonsState.phase === "playing" && hasFourOfKind(human.hand)) {
+  if (spoonsState.phase === "playing" && canHumanGrabWithCurrentHand()) {
     triggerSpoonsRace(human.id);
     return;
   }
