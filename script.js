@@ -70,6 +70,8 @@ const spoonsDeckCount = document.querySelector("#spoons-deck-count");
 const spoonsLeftCount = document.querySelector("#spoons-left-count");
 const spoonsAnnouncer = document.querySelector("#spoons-announcer");
 const spoonsHelper = document.querySelector("#spoons-helper");
+const spoonsConsoleTitle = document.querySelector("#spoons-console-title");
+const spoonsConsoleHearts = document.querySelector("#spoons-console-hearts");
 const spoonsRing = document.querySelector("#spoons-ring");
 const spoonsDiscardTop = document.querySelector("#spoons-discard-top");
 const spoonsStart = document.querySelector("#spoons-start");
@@ -426,6 +428,33 @@ function renderSpoonsHand() {
   });
 }
 
+function renderSpoonsConsole() {
+  const human = getSpoonsPlayerById("human");
+  if (!human) return;
+
+  if (spoonsConsoleTitle) {
+    if (human.out) {
+      spoonsConsoleTitle.textContent = "You are out of hearts.";
+    } else if (spoonsState.phase === "spoon-race" && !human.hasSpoon) {
+      spoonsConsoleTitle.textContent = "Race to the spoon now.";
+    } else if (spoonsState.phase === "spoon-race" && human.hasSpoon) {
+      spoonsConsoleTitle.textContent = "You got a spoon.";
+    } else if (
+      spoonsState.phase === "playing" &&
+      getCurrentSpoonsPlayer()?.id === human.id &&
+      human.hand.length === 5
+    ) {
+      spoonsConsoleTitle.textContent = "Pick one card to pass left.";
+    } else {
+      spoonsConsoleTitle.textContent = "Hold your rank and watch the table.";
+    }
+  }
+
+  if (spoonsConsoleHearts) {
+    spoonsConsoleHearts.innerHTML = getSpoonsHealthTrack(human);
+  }
+}
+
 function renderSpoonsCenter() {
   if (spoonsRound) spoonsRound.textContent = String(spoonsState.round);
   if (spoonsDealer) {
@@ -478,6 +507,7 @@ function renderSpoonsGame() {
 
   spoonsState.players.forEach(renderSpoonsSeat);
   renderSpoonsHand();
+  renderSpoonsConsole();
   renderSpoonsCenter();
 
   if (spoonsStart instanceof HTMLButtonElement) {
@@ -654,7 +684,7 @@ function resolveSpoonsDiscard(player, discardedCard) {
 function getBotGrabDelay(player) {
   const counts = Object.values(getSpoonsRankCounts(player.hand));
   const bestCount = counts.length ? Math.max(...counts) : 1;
-  return Math.max(280, 1020 - bestCount * 140 + Math.random() * 420);
+  return Math.max(1200, 1900 - bestCount * 120 + Math.random() * 520);
 }
 
 function triggerSpoonsRace(triggerPlayerId) {
@@ -741,7 +771,7 @@ function resolveSpoonsRace() {
   if (remainingPlayers.length <= 1) {
     spoonsState.phase = "match-over";
     setSpoonsMessage(
-      `${loser.label} missed the last spoon and ${completedWord ? "spelled SPOON." : `picked up "${SPOONS_WORD[loser.misses - 1]}."`}`,
+      `${loser.label} missed the last spoon and ${completedWord ? "lost the final heart." : "took another heart loss."}`,
       `${remainingPlayers[0]?.label || "No one"} wins the match. Press Restart Match to run it again.`
     );
     renderSpoonsGame();

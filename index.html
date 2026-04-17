@@ -616,22 +616,28 @@
                     <p class="spoons-announcer" id="spoons-announcer">
                       Press Start Match to deal four cards and race for the spoons.
                     </p>
-                    <button class="button button-primary spoon-grab-button" type="button" id="spoons-grab" disabled>
-                      Grab Spoon
-                    </button>
                   </div>
                 </div>
 
                 <div class="spoons-bottom-row">
                   <div class="spoons-hand-panel">
                     <div class="spoons-hand-header">
-                      <div>
-                        <span class="project-type">Your Hand</span>
-                        <h4>Pick one card to pass left.</h4>
+                      <div class="spoons-player-console">
+                        <img class="spoons-console-avatar" src="./assets/headshot/olatade-headshot.jpg" alt="Tade profile picture" />
+                        <div class="spoons-console-copy">
+                          <span class="project-type">Your Hand</span>
+                          <h4 id="spoons-console-title">Pick one card to pass left.</h4>
+                          <div class="spoons-console-hearts" id="spoons-console-hearts"></div>
+                        </div>
                       </div>
-                      <p class="spoons-helper" id="spoons-helper">
-                        Start a match to begin passing cards around the table.
-                      </p>
+                      <div class="spoons-hand-actions">
+                        <p class="spoons-helper" id="spoons-helper">
+                          Start a match to begin passing cards around the table.
+                        </p>
+                        <button class="button button-primary spoon-grab-button" type="button" id="spoons-grab" disabled>
+                          Grab Spoon
+                        </button>
+                      </div>
                     </div>
                     <div class="spoons-player-hand" id="spoons-player-hand"></div>
                   </div>

@@ -1145,7 +1145,7 @@ input[type="range"] {
 
 .spoons-table {
   position: relative;
-  min-height: 700px;
+  min-height: 560px;
   border-radius: 34px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1173,33 +1173,33 @@ input[type="range"] {
 
 .spoons-center {
   position: absolute;
-  inset: 50% auto auto 50%;
+  inset: 52% auto auto 50%;
   transform: translate(-50%, -50%);
-  width: min(280px, calc(100% - 64px));
+  width: min(220px, calc(100% - 64px));
   display: grid;
   justify-items: center;
-  gap: 10px;
+  gap: 8px;
   z-index: 5;
 }
 
 .spoons-logo-badge {
-  padding: 10px 18px;
+  padding: 8px 14px;
   border-radius: 999px;
   border: 1px solid rgba(255, 212, 94, 0.4);
   background: linear-gradient(135deg, rgba(255, 190, 60, 0.24), rgba(255, 121, 66, 0.16));
   color: #fff5db;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .spoons-spoon-ring {
-  width: 196px;
-  min-height: 148px;
+  width: 138px;
+  min-height: 104px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  padding: 18px;
+  gap: 8px;
+  padding: 12px;
   border-radius: 999px;
   background:
     radial-gradient(circle, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02) 65%, transparent 72%),
@@ -1219,8 +1219,8 @@ input[type="range"] {
 }
 
 .spoons-spoon-chip img {
-  width: 40px;
-  height: 40px;
+  width: 26px;
+  height: 26px;
   object-fit: contain;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.26));
 }
@@ -1232,7 +1232,7 @@ input[type="range"] {
 
 .spoons-center-stack {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: end;
 }
 
@@ -1244,7 +1244,7 @@ input[type="range"] {
 }
 
 .spoons-stack-card {
-  width: 58px;
+  width: 46px;
   aspect-ratio: 0.72;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1260,12 +1260,12 @@ input[type="range"] {
 }
 
 .spoons-announcer {
-  max-width: 240px;
+  max-width: 200px;
   margin: 0;
   text-align: center;
   color: #f4fbff;
-  line-height: 1.35;
-  font-size: 0.9rem;
+  line-height: 1.25;
+  font-size: 0.82rem;
   text-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
 }
 
@@ -1276,8 +1276,8 @@ input[type="range"] {
 
 .spoons-seat {
   position: absolute;
-  width: 172px;
-  padding: 12px;
+  width: 154px;
+  padding: 10px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
@@ -1298,39 +1298,37 @@ input[type="range"] {
 }
 
 .spoons-seat-top {
-  top: 18px;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .spoons-seat-left {
-  top: 50%;
-  left: 14px;
+  top: 51%;
+  left: 12px;
   transform: translateY(-50%);
 }
 
 .spoons-seat-right {
-  top: 50%;
-  right: 14px;
+  top: 51%;
+  right: 12px;
   transform: translateY(-50%);
 }
 
 .spoons-seat-bottom {
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
+  display: none;
 }
 
 .spoons-seat-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .spoons-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   object-fit: cover;
   border: 2px solid rgba(255, 255, 255, 0.14);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -1345,13 +1343,13 @@ input[type="range"] {
 }
 
 .spoons-player-name-row strong {
-  font-size: 0.94rem;
+  font-size: 0.88rem;
 }
 
 .spoons-player-badge {
   padding: 3px 8px;
   border-radius: 999px;
-  font-size: 0.72rem;
+  font-size: 0.64rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1378,25 +1376,26 @@ input[type="range"] {
 
 .spoons-player-meta {
   display: grid;
-  gap: 6px;
+  gap: 4px;
 }
 
 .spoons-seat-note {
-  margin: 10px 0 8px;
+  margin: 8px 0 6px;
+  font-size: 0.74rem;
 }
 
 .spoons-bot-hand {
   display: flex;
   gap: 0;
-  min-height: 70px;
+  min-height: 56px;
   align-items: center;
 }
 
 .spoons-mini-card {
-  width: 40px;
+  width: 32px;
   aspect-ratio: 0.72;
-  margin-left: -16px;
-  border-radius: 10px;
+  margin-left: -12px;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background-image: url("./src/images/card_back.png");
   background-position: center;
@@ -1412,7 +1411,8 @@ input[type="range"] {
 .spoons-bottom-row {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 18px;
+  gap: 14px;
+  margin-top: -2px;
 }
 
 .spoons-hand-panel,
@@ -1429,8 +1429,8 @@ input[type="range"] {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  align-items: end;
-  margin-bottom: 16px;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
 .spoons-hand-header h4,
@@ -1438,15 +1438,54 @@ input[type="range"] {
   margin: 8px 0 0;
 }
 
+.spoons-player-console {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.spoons-console-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.spoons-console-copy {
+  display: grid;
+  gap: 6px;
+}
+
+.spoons-console-copy h4 {
+  margin: 0;
+}
+
+.spoons-console-hearts {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.spoons-hand-actions {
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+}
+
+.spoon-grab-button {
+  min-width: 168px;
+}
+
 .spoons-player-hand {
   display: flex;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .spoons-card-button {
   position: relative;
-  width: 120px;
+  width: 102px;
   aspect-ratio: 0.72;
   padding: 0;
   border: none;
@@ -1521,14 +1560,14 @@ input[type="range"] {
 }
 
 .spoons-heart-chip {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   display: grid;
   place-items: center;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.92rem;
+  font-size: 0.8rem;
   filter: grayscale(1);
   opacity: 0.42;
 }
@@ -1773,13 +1812,13 @@ input[type="range"] {
   }
 
   .spoons-table {
-    min-height: 920px;
+    min-height: 760px;
   }
 
   .spoons-center {
-    inset: 448px auto auto 50%;
+    inset: 372px auto auto 50%;
     transform: translateX(-50%);
-    width: min(260px, calc(100% - 42px));
+    width: min(220px, calc(100% - 42px));
   }
 
   .spoons-seat-top,
@@ -1789,7 +1828,7 @@ input[type="range"] {
     left: 50%;
     right: auto;
     transform: translateX(-50%);
-    width: min(240px, calc(100% - 30px));
+    width: min(214px, calc(100% - 30px));
   }
 
   .spoons-seat-top {
@@ -1797,15 +1836,11 @@ input[type="range"] {
   }
 
   .spoons-seat-left {
-    top: 170px;
+    top: 144px;
   }
 
   .spoons-seat-right {
-    top: 340px;
-  }
-
-  .spoons-seat-bottom {
-    bottom: 24px;
+    top: 274px;
   }
 
   .terminal-card {
@@ -1866,15 +1901,23 @@ input[type="range"] {
   }
 
   .spoons-table {
-    min-height: 980px;
+    min-height: 780px;
   }
 
   .spoons-spoon-ring {
-    width: 180px;
-    min-height: 144px;
+    width: 132px;
+    min-height: 100px;
   }
 
   .gallery-thumbs {
     grid-template-columns: 1fr;
+  }
+
+  .spoons-player-console {
+    align-items: start;
+  }
+
+  .spoons-hand-actions {
+    justify-items: stretch;
   }
 }
