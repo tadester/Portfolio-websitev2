@@ -134,13 +134,10 @@ Everything here is built to communicate:
 
 ## 🚢 Deployment
 
-GitHub Actions deploys this site through `SamKirkland/FTP-Deploy-Action`.
+This site is deployed through Hostinger's GitHub webhook integration.
 
-Add these repository secrets in GitHub before pushing to `main`:
-- `HOSTINGER_HOST` or `FTP_SERVER`
-- `HOSTINGER_USERNAME` or `FTP_USERNAME`
-- `HOSTINGER_PASSWORD` or `FTP_PASSWORD`
+When changes are pushed to GitHub, Hostinger receives the webhook event and pulls the latest version of the repository automatically.
 
-The workflow uploads the project root to `/public_html/` on Hostinger.
+Because deployment is handled by the webhook, this repo does not need a separate FTP-based GitHub Actions deploy job or FTP secrets.
 
 ---
