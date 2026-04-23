@@ -131,3 +131,16 @@ Everything here is built to communicate:
 - how I ship
 
 ---
+
+## 🚢 Deployment
+
+GitHub Actions deploys this site through `SamKirkland/FTP-Deploy-Action`.
+
+Add these repository secrets in GitHub before pushing to `main`:
+- `HOSTINGER_HOST` or `FTP_SERVER`
+- `HOSTINGER_USERNAME` or `FTP_USERNAME`
+- `HOSTINGER_PASSWORD` or `FTP_PASSWORD`
+
+The workflow uploads the project root to `/public_html/` on Hostinger.
+
+---

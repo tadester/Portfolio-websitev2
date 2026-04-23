@@ -9,16 +9,26 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.HOSTINGER_HOST || secrets.FTP_SERVER }}
+      FTP_USERNAME: ${{ secrets.HOSTINGER_USERNAME || secrets.FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD || secrets.FTP_PASSWORD }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Validate FTP secrets
+        run: |
+          test -n "$FTP_SERVER" || { echo "Missing FTP server secret. Set HOSTINGER_HOST or FTP_SERVER in GitHub Actions secrets."; exit 1; }
+          test -n "$FTP_USERNAME" || { echo "Missing FTP username secret. Set HOSTINGER_USERNAME or FTP_USERNAME in GitHub Actions secrets."; exit 1; }
+          test -n "$FTP_PASSWORD" || { echo "Missing FTP password secret. Set HOSTINGER_PASSWORD or FTP_PASSWORD in GitHub Actions secrets."; exit 1; }
+
       - name: Deploy static site to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.HOSTINGER_HOST }}
-          username: ${{ secrets.HOSTINGER_USERNAME }}
-          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          server: ${{ env.FTP_SERVER }}
+          username: ${{ env.FTP_USERNAME }}
+          password: ${{ env.FTP_PASSWORD }}
           port: 21
           protocol: ftp
           local-dir: ./
