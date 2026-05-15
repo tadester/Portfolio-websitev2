@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume | Olatade Obasan</title>
+    <meta
+      name="description"
+      content="A guided resume walkthrough and professional PDF resume for Olatade Obasan."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas class="bg-canvas" id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html">Olatade Obasan</a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="./index.html">Home</a>
+          <a href="./projects.html">Projects</a>
+          <a href="./resume.html">Resume</a>
+          <a href="./games.html">Games</a>
+          <a href="./contact.html">Contact</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="section resume-section" id="resume" data-mobile-group="resume">
+          <div class="section-heading">
+            <p class="eyebrow">Resume Walkthrough</p>
+            <h2>A guided view of my resume before you download the PDF.</h2>
+          </div>
+
+          <div class="resume-walkthrough">
+            <aside class="resume-nav" role="tablist" aria-label="Resume walkthrough">
+              <button class="resume-tab active" type="button" data-resume-panel="overview">Overview</button>
+              <button class="resume-tab" type="button" data-resume-panel="builds">What I Build</button>
+              <button class="resume-tab" type="button" data-resume-panel="experience">Experience</button>
+              <button class="resume-tab" type="button" data-resume-panel="education">Education</button>
+              <button class="resume-tab" type="button" data-resume-panel="stack">Tech Stack</button>
+              <button class="resume-tab" type="button" data-resume-panel="links">Links</button>
+            </aside>
+
+            <div class="resume-stage">
+              <article class="resume-panel active" id="resume-panel-overview">
+                <p class="project-type">Overview</p>
+                <h3>Full-stack engineer with strong product taste and systems depth.</h3>
+                <p>
+                  I build across product surfaces and infrastructure: polished frontends, mobile
+                  apps, backend APIs, AI pipelines, and simulation-style systems. My best work
+                  usually sits at the intersection of technical depth and product clarity.
+                </p>
+                <ul class="timeline">
+                  <li>Applied AI tooling and computer-vision workflows</li>
+                  <li>TypeScript backend systems and role-aware product logic</li>
+                  <li>Flutter mobile experiences tied to real backend data</li>
+                  <li>Interactive frontend work with strong presentation quality</li>
+                </ul>
+              </article>
+
+              <article class="resume-panel" id="resume-panel-builds" hidden>
+                <p class="project-type">What I Build</p>
+                <h3>Products that combine architecture, UX, and implementation range.</h3>
+                <div class="resume-facts">
+                  <div class="resume-fact">
+                    <span>Jumpshot Trainer</span>
+                    <strong>Python + Rust system for basketball biomechanics analysis and review.</strong>
+                  </div>
+                  <div class="resume-fact">
+                    <span>Tadester Ops</span>
+                    <strong>Operations SaaS with Next.js, TypeScript backend, Supabase, and Flutter.</strong>
+                  </div>
+                  <div class="resume-fact">
+                    <span>WorldSim</span>
+                    <strong>Rust/Bevy simulation prototype with agents, systems, and dashboard UI.</strong>
+                  </div>
+                </div>
+              </article>
+
+              <article class="resume-panel" id="resume-panel-experience" hidden>
+                <p class="project-type">Experience</p>
+                <h3>Hands-on product building across web, mobile, AI, and systems.</h3>
+                <ul class="timeline">
+                  <li>Built product-facing software across frontend interfaces, mobile applications, backend APIs, and operational systems.</li>
+                  <li>Created applied-AI and computer-vision workflows that turn real-world input into structured feedback and analysis.</li>
+                  <li>Designed and shipped portfolio-quality experiences that present technical work clearly to recruiters, founders, and engineers.</li>
+                </ul>
+              </article>
+
+              <article class="resume-panel" id="resume-panel-education" hidden>
+                <p class="project-type">Education</p>
+                <h3>Education and learning foundation.</h3>
+                <ul class="timeline">
+                  <li>Bachelor of Science in Computing Science, Specialization: Software Development </li>
+                  <li>The King's University, EDMONTON AB, Canada : 2021-2026 </li>
+                </ul>
+              </article>
+
+              <article class="resume-panel" id="resume-panel-stack" hidden>
+                <p class="project-type">Tech Stack</p>
+                <h3>Languages and tools I actually use in shipped work.</h3>
+                <ul class="timeline">
+                  <li>Frontend: HTML, CSS, JavaScript, Next.js, TypeScript</li>
+                  <li>Mobile: Flutter, Dart, mobile auth and role-aware app flows</li>
+                  <li>Backend: Node.js, Supabase, PostgreSQL, Zod, API architecture</li>
+                  <li>AI and systems: Python, Rust, OpenCV, MediaPipe, YOLOv8, Parquet, Bevy</li>
+                </ul>
+              </article>
+
+              <article class="resume-panel" id="resume-panel-links" hidden>
+                <p class="project-type">Links</p>
+                <h3>Resume, GitHub, LinkedIn, and live product links.</h3>
+                <div class="link-list">
+                  <a
+                    
+                    href="./assets/resume-professional.pdf"
+                    data-file-link="./assets/resume-professional.pdf"
+                  >
+                    Download Resume PDF
+                  </a>
+                  <a href="https://github.com/tadester">github.com/tadester</a>
+                  <a href="https://www.linkedin.com/in/tadeobasan/">linkedin.com/in/tadeobasan</a>
+                  <a href="https://tadester-ops.netlify.app/">tadester-ops.netlify.app</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
