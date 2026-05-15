@@ -32,3 +32,16 @@ test("gallery cards constrain their columns to prevent cross-card overflow", () 
   assert.match(css, /\.gallery-card\s*\{[\s\S]*min-width:\s*0;/);
   assert.match(css, /\.gallery-stage\s*\{[\s\S]*minmax\(0,\s*1fr\)/);
 });
+
+test("multipage layout exposes shared page hierarchy and active navigation hooks", () => {
+  assert.match(css, /\.page-shell\s*\{[\s\S]*display:\s*grid;[\s\S]*gap:\s*clamp\(/);
+  assert.match(css, /\.page-intro\s*\{[\s\S]*padding:\s*clamp\(/);
+  assert.match(css, /\.nav a\.is-active\s*\{[\s\S]*color:\s*var\(--text\);/);
+});
+
+test("shared cards use premium surfaces and responsive project spacing", () => {
+  assert.match(css, /--shadow-card:\s*0 18px 48px/);
+  assert.match(css, /\.project-card,\s*\.gallery-card,\s*\.architecture-card\s*\{[\s\S]*transition:/);
+  assert.match(css, /\.project-copy a\s*\{[\s\S]*display:\s*inline-flex;/);
+  assert.match(css, /@media \(max-width:\s*640px\)[\s\S]*\.project-grid\s*\{[\s\S]*gap:\s*16px;/);
+});
