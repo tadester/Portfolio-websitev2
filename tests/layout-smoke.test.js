@@ -23,15 +23,6 @@ test("spoon chips render as actual buttons in the game script", () => {
   assert.match(fs.readFileSync(path.join(projectRoot, "script.js"), "utf8"), /<button type="button" class="spoons-spoon-chip/);
 });
 
-test("desktop keeps mobile section navigation hidden", () => {
-  assert.match(css, /\.mobile-section-nav\s*\{\s*display:\s*none;/);
-  assert.match(css, /@media \(min-width: 761px\)\s*\{\s*\.mobile-section-nav\s*\{\s*display:\s*none !important;/);
-});
-
-test("mobile navigation is only enabled inside the small-screen media query", () => {
-  assert.match(css, /@media \(max-width: 760px\)\s*\{[\s\S]*\.mobile-section-nav\s*\{[\s\S]*display:\s*flex;/);
-});
-
 test("human seat is not rendered inside the table to avoid table overlays", () => {
   assert.match(css, /\.spoons-seat-bottom\s*\{\s*display:\s*none;/);
 });

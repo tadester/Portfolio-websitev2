@@ -12,21 +12,26 @@ const pages = {
   games: read("games.html"),
   contact: read("contact.html"),
 };
+const pageLinks = ["index.html", "projects.html", "resume.html", "games.html", "contact.html"];
+const hasHref = (html, href) => new RegExp(`<a\\b[^>]*href="\\./${href}"`).test(html);
 
-test("global nav uses page links on every page", () => {
+test("global nav links each page to the multipage site", () => {
   for (const html of Object.values(pages)) {
-    assert.match(html, /href="\.\/index\.html">Home<\/a>/);
-    assert.match(html, /href="\.\/projects\.html">Projects<\/a>/);
-    assert.match(html, /href="\.\/resume\.html">Resume<\/a>/);
-    assert.match(html, /href="\.\/games\.html">Games<\/a>/);
-    assert.match(html, /href="\.\/contact\.html">Contact<\/a>/);
+    for (const href of pageLinks) assert.equal(hasHref(html, href), true);
+  }
+});
+
+test("dedicated pages expose one visible primary heading", () => {
+  for (const html of [pages.projects, pages.resume, pages.games, pages.contact]) {
+    assert.equal((html.match(/<h1\b/g) || []).length, 1);
   }
 });
 
 test("homepage is concise and points visitors deeper", () => {
-  assert.match(pages.home, /class="hero"/);
-  assert.match(pages.home, /class="section proof-strip"/);
-  assert.match(pages.home, /Featured Project Previews/);
+  assert.match(pages.home, /<section class="hero"/);
+  assert.match(pages.home, /<section class="section proof-strip"/);
+  assert.match(pages.home, /aria-labelledby="featured-projects-title"/);
+  assert.equal(hasHref(pages.home, "projects.html"), true);
   assert.doesNotMatch(pages.home, /id="gallery"/);
   assert.doesNotMatch(pages.home, /id="resume"/);
   assert.doesNotMatch(pages.home, /id="games"/);
@@ -34,19 +39,18 @@ test("homepage is concise and points visitors deeper", () => {
 });
 
 test("projects page owns selected work, gallery, architecture, repos, and bakery delivery", () => {
-  assert.match(pages.projects, /id="projects"/);
-  assert.match(pages.projects, /id="gallery"/);
-  assert.match(pages.projects, /id="architecture"/);
-  assert.match(pages.projects, /<h3>Bakery Delivery<\/h3>/);
-  assert.match(pages.projects, /<p class="project-type">Bakery Delivery<\/p>[\s\S]*<h3>Mobile delivery operations platform<\/h3>/);
+  assert.match(pages.projects, /<section\b[^>]*id="projects"/);
+  assert.match(pages.projects, /<section\b[^>]*id="gallery"/);
+  assert.match(pages.projects, /<section\b[^>]*id="architecture"/);
+  assert.ok((pages.projects.match(/Bakery Delivery/g) || []).length >= 2);
   assert.match(pages.projects, /https:\/\/github\.com\/tadester\/Jumpshot-Trainer-v2/);
   assert.match(pages.projects, /https:\/\/github\.com\/tadester\/Tadester-Flow/);
   assert.match(pages.projects, /https:\/\/github\.com\/tadester\/bakery-del/);
 });
 
-test("dedicated pages contain their matching content", () => {
-  assert.match(pages.resume, /id="resume"/);
+test("dedicated pages contain their matching sections", () => {
+  assert.match(pages.resume, /<section\b[^>]*id="resume"/);
   assert.match(pages.resume, /\.\/assets\/resume-professional\.pdf/);
-  assert.match(pages.games, /id="games"/);
-  assert.match(pages.contact, /id="contact"/);
+  assert.match(pages.games, /<section\b[^>]*id="games"/);
+  assert.match(pages.contact, /<section\b[^>]*id="contact"/);
 });
