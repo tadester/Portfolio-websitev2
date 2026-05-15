@@ -54,3 +54,16 @@ test("dedicated pages contain their matching sections", () => {
   assert.match(pages.games, /<section\b[^>]*id="games"/);
   assert.match(pages.contact, /<section\b[^>]*id="contact"/);
 });
+
+test("dedicated pages wire the shared multipage hierarchy and active navigation hooks", () => {
+  const expectedActiveLinks = { home: "index.html", projects: "projects.html", resume: "resume.html", games: "games.html", contact: "contact.html" };
+
+  for (const [page, href] of Object.entries(expectedActiveLinks)) {
+    assert.match(pages[page], new RegExp(`<a class="is-active" href="\\./${href}"`));
+  }
+
+  for (const page of ["projects", "resume", "games", "contact"]) {
+    assert.match(pages[page], /<main id="top" class="page-shell">/);
+    assert.match(pages[page], /<div class="section-heading page-intro">/);
+  }
+});

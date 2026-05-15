@@ -41,7 +41,8 @@ test("multipage layout exposes shared page hierarchy and active navigation hooks
 
 test("shared cards use premium surfaces and responsive project spacing", () => {
   assert.match(css, /--shadow-card:\s*0 18px 48px/);
-  assert.match(css, /\.project-card,\s*\.gallery-card,\s*\.architecture-card\s*\{[\s\S]*transition:/);
+  assert.match(css, /\.premium-surface\s*\{[\s\S]*transition:/);
+  assert.match(css, /\.project-card,[\s\S]*\.proof-card,[\s\S]*\.contact-card\s*\{[\s\S]*box-shadow:\s*var\(--shadow-card\);/);
   assert.match(css, /\.project-copy a\s*\{[\s\S]*display:\s*inline-flex;/);
   assert.match(css, /@media \(max-width:\s*640px\)[\s\S]*\.project-grid\s*\{[\s\S]*gap:\s*16px;/);
 });

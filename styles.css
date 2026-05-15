@@ -609,16 +609,36 @@ h3 {
   padding: 24px;
 }
 
-.project-card,
-.gallery-card,
-.architecture-card {
+.premium-surface {
   box-shadow: var(--shadow-card);
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
 }
 
+.project-card,
+.gallery-card,
+.architecture-card,
+.proof-card,
+.resume-card,
+.game-showcase-card,
+.game-info-card,
+.game-controls-card,
+.spoons-card,
+.contact-card {
+  box-shadow: var(--shadow-card);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+
+.premium-surface:hover,
 .project-card:hover,
 .gallery-card:hover,
-.architecture-card:hover {
+.architecture-card:hover,
+.proof-card:hover,
+.resume-card:hover,
+.game-showcase-card:hover,
+.game-info-card:hover,
+.game-controls-card:hover,
+.spoons-card:hover,
+.contact-card:hover {
   transform: translateY(-3px);
   border-color: rgba(119, 166, 255, 0.28);
   box-shadow: var(--shadow-card-hover);
