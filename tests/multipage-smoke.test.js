@@ -12,6 +12,7 @@ const pages = {
   games: read("games.html"),
   contact: read("contact.html"),
 };
+const script = read("script.js");
 const pageLinks = ["index.html", "projects.html", "resume.html", "games.html", "contact.html"];
 const hasHref = (html, href) => new RegExp(`<a\\b[^>]*href="\\./${href}"`).test(html);
 
@@ -70,4 +71,18 @@ test("dedicated pages wire the shared multipage hierarchy and active navigation 
     assert.match(pages[page], /<main id="top" class="page-shell">/);
     assert.match(pages[page], /<div class="section-heading page-intro">/);
   }
+});
+
+test("shared script derives active navigation from page URLs without overriding authored states", () => {
+  assert.match(script, /function setupActiveNavigation\(\)/);
+  assert.match(script, /window\.location\.pathname/);
+  assert.match(script, /navLinks\.some\(\(link\) => link\.classList\.contains\("is-active"\)\)/);
+  assert.match(script, /setupActiveNavigation\(\);/);
+});
+
+test("page-specific script setup functions exit cleanly when their DOM is absent", () => {
+  assert.match(script, /function setupGalleryCarousels\(\)\s*\{\s*const galleries = document\.querySelectorAll\("\.gallery-carousel"\);\s*if \(!galleries\.length\) return;/);
+  assert.match(script, /function setupResumeWalkthrough\(\)\s*\{\s*if \(!resumeTabs\.length \|\| !resumePanels\.length\) return;/);
+  assert.match(script, /function setupGame\(\)\s*\{\s*if \(!\(gameBoard instanceof HTMLElement\) \|\| !\(playerDot instanceof HTMLElement\) \|\| !\(gameStart instanceof HTMLElement\)\)/);
+  assert.match(script, /function setupTerminal\(\)\s*\{\s*if \(!terminalLog\) return;/);
 });

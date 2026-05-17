@@ -905,6 +905,28 @@ function setupGalleryCarousels() {
   });
 }
 
+function getPageName(pathname) {
+  const parts = decodeURIComponent(pathname).split("/").filter(Boolean);
+  return parts.at(-1) || "index.html";
+}
+
+function setupActiveNavigation() {
+  const navLinks = Array.from(document.querySelectorAll(".nav a"));
+  if (!navLinks.length || navLinks.some((link) => link.classList.contains("is-active"))) return;
+
+  const currentPage = getPageName(window.location.pathname);
+
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    const linkPage = getPageName(new URL(href, window.location.href).pathname);
+    if (linkPage === currentPage) {
+      link.classList.add("is-active");
+    }
+  });
+}
+
 function renderGalleryLightbox() {
   if (!(galleryLightbox instanceof HTMLElement) || !(galleryLightboxImage instanceof HTMLImageElement)) return;
   const currentItem = galleryLightboxState.items[galleryLightboxState.index];
@@ -1046,7 +1068,7 @@ function setupSpoonsGame() {
 }
 
 function setSnippet(key) {
-  if (!snippetContent) return;
+  if (!snippetContent || !snippets[key]) return;
   const snippet = snippets[key];
   snippetContent.textContent = snippet.code;
 
@@ -1082,6 +1104,14 @@ function appendTerminalLine(message, delay) {
     line.innerHTML = `<span>ktr@portfolio</span>:~$ ${message}`;
     terminalLog.appendChild(line);
   }, delay);
+}
+
+function setupTerminal() {
+  if (!terminalLog) return;
+
+  terminalMessages.forEach((message, index) => {
+    appendTerminalLine(message, 350 * index);
+  });
 }
 
 function bindRangeControl(input, variable, divisor = 100) {
@@ -1394,7 +1424,7 @@ function setupGame() {
 }
 
 function setupReveals() {
-  if (!("IntersectionObserver" in window)) return;
+  if (!revealTargets.length || !("IntersectionObserver" in window)) return;
 
   revealTargets.forEach((element) => {
     element.setAttribute("data-reveal", "");
@@ -1415,6 +1445,8 @@ function setupReveals() {
 }
 
 async function validateResumeLinks() {
+  if (!resumeLinks.length) return;
+
   const isHttp = window.location.protocol.startsWith("http");
 
   if (!isHttp) {
@@ -1444,14 +1476,12 @@ setupGalleryFallbacks();
 setupGalleryCarousels();
 setupGalleryLightbox();
 setupMobileSections();
+setupActiveNavigation();
 setupResumeWalkthrough();
 setupBackgroundCanvas();
 setupSpoonsGame();
 setupGame();
-
-terminalMessages.forEach((message, index) => {
-  appendTerminalLine(message, 350 * index);
-});
+setupTerminal();
 
 bindRangeControl(glowRange, "--glow-strength");
 bindRangeControl(gridRange, "--grid-strength");
