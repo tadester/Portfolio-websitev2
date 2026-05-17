@@ -40,9 +40,17 @@ test("multipage layout exposes shared page hierarchy and active navigation hooks
 });
 
 test("shared cards use premium surfaces and responsive project spacing", () => {
-  assert.match(css, /--shadow-card:\s*0 18px 48px/);
+  assert.match(css, /--shadow-card:\s*0 14px 42px/);
   assert.match(css, /\.premium-surface\s*\{[\s\S]*transition:/);
   assert.match(css, /\.project-card,[\s\S]*\.proof-card,[\s\S]*\.contact-card\s*\{[\s\S]*box-shadow:\s*var\(--shadow-card\);/);
   assert.match(css, /\.project-copy a\s*\{[\s\S]*display:\s*inline-flex;/);
   assert.match(css, /@media \(max-width:\s*640px\)[\s\S]*\.project-grid\s*\{[\s\S]*gap:\s*16px;/);
+});
+
+test("homepage visual rhythm favors a calmer centered premium composition", () => {
+  assert.match(css, /\.hero\s*\{[\s\S]*grid-template-columns:\s*minmax\(0,\s*820px\);[\s\S]*justify-content:\s*center;/);
+  assert.match(css, /\.hero-copy\s*\{[\s\S]*text-align:\s*center;/);
+  assert.match(css, /\.hero-copy h1\s*\{[\s\S]*background-clip:\s*text;/);
+  assert.match(css, /\.nav a\.is-active\s*\{[\s\S]*border-radius:\s*999px;/);
+  assert.match(css, /\.home-feature-grid\s*\{[\s\S]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\);/);
 });

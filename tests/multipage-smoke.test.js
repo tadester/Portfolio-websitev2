@@ -38,6 +38,10 @@ test("homepage is concise and points visitors deeper", () => {
   assert.doesNotMatch(pages.home, /id="contact"/);
 });
 
+test("homepage uses a dedicated feature-card rhythm hook", () => {
+  assert.match(pages.home, /<div class="project-grid home-feature-grid">/);
+});
+
 test("projects page owns selected work, gallery, architecture, repos, and bakery delivery", () => {
   assert.match(pages.projects, /<section\b[^>]*id="projects"/);
   assert.match(pages.projects, /<section\b[^>]*id="gallery"/);

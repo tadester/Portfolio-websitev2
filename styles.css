@@ -10,7 +10,7 @@
   --accent-2: #f05a6b;
   --accent-warm: #ff9e7a;
   --shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
-  --shadow-card: 0 18px 48px rgba(0, 0, 0, 0.28);
+  --shadow-card: 0 14px 42px rgba(0, 0, 0, 0.2);
   --shadow-card-hover: 0 24px 64px rgba(0, 0, 0, 0.42);
   --radius-lg: 28px;
   --radius-md: 18px;
@@ -136,8 +136,9 @@ pre {
 
 .nav a.is-active {
   color: var(--text);
+  border-radius: 999px;
   border-color: rgba(119, 166, 255, 0.28);
-  background: linear-gradient(135deg, rgba(119, 166, 255, 0.18), rgba(240, 90, 107, 0.1));
+  background: rgba(119, 166, 255, 0.12);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
@@ -171,9 +172,11 @@ pre {
 
 .hero {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 28px;
-  min-height: 92vh;
+  grid-template-columns: minmax(0, 820px);
+  justify-content: center;
+  gap: clamp(24px, 4vw, 40px);
+  min-height: auto;
+  padding: clamp(48px, 8vw, 92px) 0 clamp(18px, 3vw, 34px);
   align-items: center;
 }
 
@@ -194,7 +197,11 @@ pre {
 }
 
 .hero-copy {
-  padding: 48px;
+  padding: clamp(30px, 5vw, 54px);
+  text-align: center;
+  background:
+    radial-gradient(circle at top center, rgba(119, 166, 255, 0.13), transparent 48%),
+    rgba(10, 18, 34, 0.62);
 }
 
 .hero-copy,
@@ -225,6 +232,15 @@ h1 {
   margin-bottom: 20px;
 }
 
+.hero-copy h1 {
+  max-width: 12ch;
+  margin-inline: auto;
+  background: linear-gradient(135deg, #f5f8ff 18%, #c6d8ff 62%, #f5d5d8);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 h2 {
   font-size: clamp(2rem, 4vw, 3.25rem);
   max-width: 14ch;
@@ -247,11 +263,20 @@ h3 {
   max-width: 62ch;
 }
 
+.hero-copy .hero-text {
+  margin-inline: auto;
+}
+
 .cta-row {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
   margin: 28px 0 32px;
+}
+
+.hero-copy .cta-row,
+.hero-copy .hero-marquee {
+  justify-content: center;
 }
 
 .hero-marquee {
@@ -330,6 +355,8 @@ h3 {
 
 .hero-panel {
   padding: 20px;
+  justify-self: center;
+  width: min(100%, 760px);
 }
 
 .headshot-card {
@@ -537,14 +564,14 @@ h3 {
 }
 
 .section {
-  padding: 80px 0 0;
+  padding: clamp(72px, 8vw, 108px) 0 0;
 }
 
 .proof-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  padding-top: 16px;
+  gap: 20px;
+  padding-top: clamp(34px, 5vw, 56px);
 }
 
 .proof-card,
@@ -605,6 +632,11 @@ h3 {
   grid-template-columns: 1.2fr 0.8fr;
 }
 
+.home-feature-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+
 .project-card {
   padding: 24px;
 }
@@ -624,6 +656,8 @@ h3 {
 .game-controls-card,
 .spoons-card,
 .contact-card {
+  background: rgba(10, 18, 34, 0.58);
+  border-color: rgba(155, 181, 236, 0.14);
   box-shadow: var(--shadow-card);
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
 }
