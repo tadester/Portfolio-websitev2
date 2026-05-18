@@ -48,7 +48,7 @@ const terminalLog = document.querySelector("#terminal-log");
 const glowRange = document.querySelector("#glow-range");
 const gridRange = document.querySelector("#grid-range");
 const speedRange = document.querySelector("#speed-range");
-const revealTargets = document.querySelectorAll(".project-card, .contact-card, .proof-card, .gallery-card, .architecture-card, .spoons-card, .game-showcase-card, .game-info-card, .game-controls-card, .resume-nav, .resume-stage");
+const revealTargets = document.querySelectorAll(".project-card, .contact-card, .proof-card, .gallery-card, .architecture-card, .game-showcase-card, .game-info-card, .game-controls-card, .resume-nav, .resume-stage");
 const resumeLinks = document.querySelectorAll(".resume-link");
 const snippetCaption = document.querySelector("#snippet-caption");
 const topbar = document.querySelector(".topbar");
@@ -63,25 +63,6 @@ const gameStart = document.querySelector("#game-start");
 const gameReset = document.querySelector("#game-reset");
 const gameScore = document.querySelector("#game-score");
 const gameBest = document.querySelector("#game-best");
-const spoonsRoot = document.querySelector("#spoons-game");
-const spoonsRound = document.querySelector("#spoons-round");
-const spoonsDealer = document.querySelector("#spoons-dealer");
-const spoonsDeckCount = document.querySelector("#spoons-deck-count");
-const spoonsLeftCount = document.querySelector("#spoons-left-count");
-const spoonsAnnouncer = document.querySelector("#spoons-announcer");
-const spoonsHelper = document.querySelector("#spoons-helper");
-const spoonsConsoleTitle = document.querySelector("#spoons-console-title");
-const spoonsConsoleHearts = document.querySelector("#spoons-console-hearts");
-const spoonsRing = document.querySelector("#spoons-ring");
-const spoonsDiscardTop = document.querySelector("#spoons-discard-top");
-const spoonsStart = document.querySelector("#spoons-start");
-const spoonsNext = document.querySelector("#spoons-next");
-const spoonsGrab = document.querySelector("#spoons-grab");
-const spoonsPlayerHand = document.querySelector("#spoons-player-hand");
-const spoonsSeatTop = document.querySelector("#spoons-seat-top");
-const spoonsSeatLeft = document.querySelector("#spoons-seat-left");
-const spoonsSeatRight = document.querySelector("#spoons-seat-right");
-const spoonsSeatBottom = document.querySelector("#spoons-seat-bottom");
 const galleryLightbox = document.querySelector("#gallery-lightbox");
 const galleryLightboxImage = document.querySelector("#gallery-lightbox-image");
 const galleryLightboxClose = document.querySelector("#gallery-lightbox-close");
@@ -89,91 +70,48 @@ const galleryLightboxPrev = document.querySelector("#gallery-lightbox-prev");
 const galleryLightboxNext = document.querySelector("#gallery-lightbox-next");
 const mobileSectionTabs = document.querySelectorAll(".mobile-section-tab");
 const mobileSectionTargets = document.querySelectorAll("[data-mobile-group]");
-const spoonsEngine = globalThis.SpoonsEngine || {};
-
+const worldScene = document.querySelector("#world-scene");
+const worldNodes = document.querySelectorAll("[data-world-destination]");
+const solarStage = document.querySelector("#solar-stage");
+const planets = document.querySelectorAll("[data-planet]");
+const cardRoom = document.querySelector("#card-room");
+const cardRoomMenu = document.querySelector("#card-room-menu");
+const cardRoomTable = document.querySelector("#card-room-table");
+const cardRoomMode = document.querySelector("#card-room-mode");
+const cardRoomMessage = document.querySelector("#card-room-message");
+const cardRoomChips = document.querySelector("#card-room-chips");
+const dealerHand = document.querySelector("#dealer-hand");
+const communityHand = document.querySelector("#community-hand");
+const playerHand = document.querySelector("#player-hand");
+const cardRoomDeal = document.querySelector("#card-room-deal");
+const cardRoomHit = document.querySelector("#card-room-hit");
+const cardRoomStand = document.querySelector("#card-room-stand");
+const cardRoomDraw = document.querySelector("#card-room-draw");
+const cardRoomMenuButton = document.querySelector("#card-room-menu-button");
+const orbitalBoard = document.querySelector("#orbital-drift");
+const driftProbe = document.querySelector("#drift-probe");
+const driftPickup = document.querySelector("#drift-pickup");
+const orbitalScore = document.querySelector("#orbital-score");
+const orbitalBest = document.querySelector("#orbital-best");
+const orbitalStart = document.querySelector("#orbital-start");
+const orbitalReset = document.querySelector("#orbital-reset");
 const backgroundState = {
   particles: [],
-  speed: 0.42,
+  speed: speedRange ? Number(speedRange.value) / 100 : 0.42,
 };
-
 const gameState = {
   running: false,
   x: 40,
-  y: 120,
-  boardWidth: 320,
-  boardHeight: 260,
+  y: 0,
   score: 0,
   best: 0,
+  frame: 0,
+  boardWidth: 0,
+  boardHeight: 0,
   obstacles: [],
   pickups: [],
-  frame: 0,
   rafId: null,
 };
-
-const SPOONS_WORD = "SPOON";
-const SPOONS_SEAT_FLOW = ["human", "left", "top", "right"];
-const SPOONS_CARD_RANKS = ["ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"];
-const SPOONS_CARD_SUITS = ["clubs", "diamonds", "hearts", "spades"];
-const SPOONS_PROFILES = [
-  {
-    id: "human",
-    seat: "bottom",
-    name: "Tade",
-    label: "You",
-    isHuman: true,
-    avatar: "./assets/headshot/olatade-headshot.jpg",
-    accent: ["#77a6ff", "#f0b35a"],
-  },
-  {
-    id: "left",
-    seat: "left",
-    name: "Laura",
-    label: "Laura",
-    isHuman: false,
-    accent: ["#ff8c6e", "#ffd66b"],
-  },
-  {
-    id: "top",
-    seat: "top",
-    name: "Nic",
-    label: "Nic",
-    isHuman: false,
-    accent: ["#4fd8c7", "#77a6ff"],
-  },
-  {
-    id: "right",
-    seat: "right",
-    name: "Juju",
-    label: "Juju",
-    isHuman: false,
-    accent: ["#ff7aa2", "#ffc971"],
-  },
-];
-
-const spoonsSeats = {
-  top: spoonsSeatTop,
-  left: spoonsSeatLeft,
-  right: spoonsSeatRight,
-  bottom: spoonsSeatBottom,
-};
-
-const spoonsState = {
-  players: [],
-  round: 0,
-  phase: "idle",
-  dealerId: "human",
-  roundOrder: [],
-  turnIndex: 0,
-  deck: [],
-  discardPile: [],
-  lastDiscard: null,
-  discardFaceDown: false,
-  spoonsRemaining: Math.max(SPOONS_PROFILES.length - 1, 0),
-  announcer: "Press Start Match to deal four cards and race for the spoons.",
-  helper: "Start a match to begin passing cards around the table.",
-  timers: [],
-};
-
 const galleryLightboxState = {
   items: [],
   index: 0,
@@ -203,651 +141,6 @@ function createAvatarDataUri(label, startColor, endColor) {
     </svg>
   `;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-
-function createSpoonsPlayers() {
-  return SPOONS_PROFILES.map((profile) => ({
-    ...profile,
-    avatar:
-      profile.avatar ||
-      createAvatarDataUri(profile.name, profile.accent[0], profile.accent[1]),
-    hand: [],
-    inbound: null,
-    misses: 0,
-    hasSpoon: false,
-    out: false,
-    lastDrawnId: null,
-  }));
-}
-
-function clearSpoonsTimers() {
-  spoonsState.timers.forEach((timerId) => window.clearTimeout(timerId));
-  spoonsState.timers = [];
-}
-
-function scheduleSpoons(callback, delay) {
-  const timerId = window.setTimeout(() => {
-    spoonsState.timers = spoonsState.timers.filter((entry) => entry !== timerId);
-    callback();
-  }, delay);
-  spoonsState.timers.push(timerId);
-}
-
-function getSpoonsPlayerById(playerId) {
-  return spoonsState.players.find((player) => player.id === playerId) || null;
-}
-
-function getSpoonsActivePlayers() {
-  return spoonsState.players.filter((player) => !player.out);
-}
-
-function getNextSeatId(currentId) {
-  const startIndex = SPOONS_SEAT_FLOW.indexOf(currentId);
-  for (let offset = 1; offset <= SPOONS_SEAT_FLOW.length; offset += 1) {
-    const candidate = SPOONS_SEAT_FLOW[(startIndex + offset) % SPOONS_SEAT_FLOW.length];
-    const player = getSpoonsPlayerById(candidate);
-    if (player && !player.out) return candidate;
-  }
-  return currentId;
-}
-
-function getCurrentSpoonsPlayer() {
-  return spoonsState.roundOrder[spoonsState.turnIndex] || null;
-}
-
-function buildSpoonsDeck() {
-  const deck = [];
-  SPOONS_CARD_SUITS.forEach((suit) => {
-    SPOONS_CARD_RANKS.forEach((rank) => {
-      deck.push({
-        id: `${rank}-${suit}`,
-        rank,
-        suit,
-        label: `${rank.replace(/^./, (char) => char.toUpperCase())} of ${suit.replace(/^./, (char) => char.toUpperCase())}`,
-        image: `./src/images/cards/${rank}_of_${suit}.png`,
-      });
-    });
-  });
-  return deck;
-}
-
-function shuffleCards(cards) {
-  const copy = [...cards];
-  for (let index = copy.length - 1; index > 0; index -= 1) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
-  }
-  return copy;
-}
-
-function getSpoonsRankCounts(hand) {
-  return spoonsEngine.getRankCounts ? spoonsEngine.getRankCounts(hand) : {};
-}
-
-function hasFourOfKind(hand) {
-  return spoonsEngine.hasFourOfKind ? spoonsEngine.hasFourOfKind(hand) : false;
-}
-
-function canHumanGrabWithCurrentHand() {
-  const human = getSpoonsPlayerById("human");
-  return spoonsEngine.canPlayerClaimSpoon
-    ? spoonsEngine.canPlayerClaimSpoon(human, spoonsState.phase, spoonsState.spoonsRemaining)
-    : false;
-}
-
-function getHumanGrabState() {
-  const human = getSpoonsPlayerById("human");
-  if (!human || human.out || human.hasSpoon) {
-    return {
-      canGrab: false,
-      label: "Grab Spoon",
-      helper:
-        human?.out
-          ? "You are out for this match."
-          : human?.hasSpoon
-            ? "You already grabbed a spoon."
-            : "Start a round to play.",
-    };
-  }
-
-  if (spoonsState.phase === "spoon-race" && spoonsState.spoonsRemaining > 0) {
-    return {
-      canGrab: true,
-      label: "Grab Spoon",
-      helper: "The race is live. Grab now.",
-    };
-  }
-
-  if (spoonsState.phase === "playing" && canHumanGrabWithCurrentHand()) {
-    return {
-      canGrab: true,
-      label: "Claim Spoon",
-      helper: "You already have four of a kind. Claim the first spoon now.",
-    };
-  }
-
-  return {
-    canGrab: false,
-    label: "Grab Spoon",
-    helper: "You need four matching cards before you can claim a spoon.",
-  };
-}
-
-function chooseBotDiscardIndex(player) {
-  return spoonsEngine.chooseBotDiscardIndex ? spoonsEngine.chooseBotDiscardIndex(player) : 0;
-}
-
-function drawSpoonsCard() {
-  if (!spoonsState.deck.length && spoonsState.discardPile.length) {
-    spoonsState.deck = shuffleCards(spoonsState.discardPile);
-    spoonsState.discardPile = [];
-    spoonsState.lastDiscard = null;
-  }
-
-  if (!spoonsState.deck.length) {
-    spoonsState.deck = shuffleCards(buildSpoonsDeck());
-  }
-
-  return spoonsState.deck.pop() || null;
-}
-
-function setSpoonsMessage(announcer, helper) {
-  spoonsState.announcer = announcer;
-  spoonsState.helper = helper;
-}
-
-function getSpoonsHealthTrack(player) {
-  return Array.from({ length: SPOONS_WORD.length })
-    .map(
-      (_, index) =>
-        `<span class="spoons-heart-chip${index < player.misses ? " is-lost" : ""}" aria-label="${
-          index < player.misses ? "Heart lost" : "Heart remaining"
-        }">♥</span>`
-    )
-    .join("");
-}
-
-function getSpoonsSeatNote(player) {
-  if (player.out) return `${player.label} is out of the match.`;
-  if (spoonsState.phase === "spoon-race" && !player.hasSpoon) return "Race to the center.";
-  if (player.hasSpoon) return "Already holding a spoon.";
-  if (player.id === spoonsState.dealerId) return "Dealer seat.";
-  if (player.inbound) return "Card waiting from the right.";
-  if (getCurrentSpoonsPlayer()?.id === player.id) return "Choosing a pass.";
-  return "Watching for the next card.";
-}
-
-function renderSpoonsSeat(player) {
-  const seat = spoonsSeats[player.seat];
-  if (!(seat instanceof HTMLElement)) return;
-
-  const cardCount = player.isHuman || player.out ? 0 : player.hand.length + (player.inbound ? 1 : 0);
-  const badgeMarkup = [
-    getCurrentSpoonsPlayer()?.id === player.id && !player.out
-      ? '<span class="spoons-player-badge is-live">Turn</span>'
-      : "",
-    player.id === spoonsState.dealerId && !player.out
-      ? '<span class="spoons-player-badge">Dealer</span>'
-      : "",
-    player.hasSpoon ? '<span class="spoons-player-badge is-spoon">Spoon</span>' : "",
-    player.out ? '<span class="spoons-player-badge is-out">Out</span>' : "",
-  ]
-    .filter(Boolean)
-    .join("");
-
-  seat.classList.toggle("is-turn", getCurrentSpoonsPlayer()?.id === player.id && !player.out);
-  seat.classList.toggle("is-out", player.out);
-
-  seat.innerHTML = `
-    <div class="spoons-seat-header">
-      <img class="spoons-avatar" src="${player.avatar}" alt="${player.label} profile picture" />
-      <div class="spoons-player-meta">
-        <div class="spoons-player-name-row">
-          <strong>${player.label}</strong>
-          ${badgeMarkup}
-        </div>
-        <span>${player.name}</span>
-      </div>
-    </div>
-    <p class="spoons-seat-note">${getSpoonsSeatNote(player)}</p>
-    ${
-      player.isHuman
-        ? ""
-        : `<div class="spoons-bot-hand">${Array.from({ length: Math.max(cardCount, spoonsState.phase === "idle" ? 4 : 0) })
-            .map(() => '<div class="spoons-mini-card"></div>')
-            .join("")}</div>`
-    }
-    <div class="spoons-health-track" aria-label="${player.label} remaining hearts">
-      ${getSpoonsHealthTrack(player)}
-    </div>
-  `;
-}
-
-function renderSpoonsHand() {
-  if (!(spoonsPlayerHand instanceof HTMLElement)) return;
-
-  const human = getSpoonsPlayerById("human");
-  if (!human || human.out) {
-    spoonsPlayerHand.innerHTML = '<div class="spoons-empty-hand">You are out this match. Restart to jump back in.</div>';
-    return;
-  }
-
-  if (!human.hand.length) {
-    spoonsPlayerHand.innerHTML = '<div class="spoons-empty-hand">Cards will appear here when the round starts.</div>';
-    return;
-  }
-
-  const canDiscard =
-    spoonsState.phase === "playing" &&
-    getCurrentSpoonsPlayer()?.id === human.id &&
-    human.hand.length === 5;
-
-  spoonsPlayerHand.innerHTML = "";
-  human.hand.forEach((card, index) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `spoons-card-button${card.id === human.lastDrawnId ? " is-pick" : ""}`;
-    button.disabled = !canDiscard;
-    button.innerHTML = `
-      <img src="${card.image}" alt="${card.label}" />
-      <span>${canDiscard ? "Pass Left" : card.label}</span>
-    `;
-    button.addEventListener("click", () => handleHumanDiscard(index));
-    spoonsPlayerHand.appendChild(button);
-  });
-}
-
-function renderSpoonsConsole() {
-  const human = getSpoonsPlayerById("human");
-  if (!human) return;
-
-  if (spoonsConsoleTitle) {
-    if (human.out) {
-      spoonsConsoleTitle.textContent = "You are out of hearts.";
-    } else if (spoonsState.phase === "spoon-race" && !human.hasSpoon) {
-      spoonsConsoleTitle.textContent = "Race to the spoon now.";
-    } else if (spoonsState.phase === "spoon-race" && human.hasSpoon) {
-      spoonsConsoleTitle.textContent = "You got a spoon.";
-    } else if (
-      spoonsState.phase === "playing" &&
-      getCurrentSpoonsPlayer()?.id === human.id &&
-      human.hand.length === 5
-    ) {
-      spoonsConsoleTitle.textContent = "Pick one card to pass left.";
-    } else {
-      spoonsConsoleTitle.textContent = "Hold your rank and watch the table.";
-    }
-  }
-
-  if (spoonsConsoleHearts) {
-    spoonsConsoleHearts.innerHTML = getSpoonsHealthTrack(human);
-  }
-}
-
-function renderSpoonsCenter() {
-  const human = getSpoonsPlayerById("human");
-  if (spoonsRound) spoonsRound.textContent = String(spoonsState.round);
-  if (spoonsDealer) {
-    const dealer = getSpoonsPlayerById(spoonsState.dealerId);
-    spoonsDealer.textContent = dealer ? dealer.label : "-";
-  }
-  if (spoonsDeckCount) spoonsDeckCount.textContent = String(spoonsState.deck.length);
-  if (spoonsLeftCount) spoonsLeftCount.textContent = String(spoonsState.spoonsRemaining);
-  if (spoonsAnnouncer) spoonsAnnouncer.textContent = spoonsState.announcer;
-  if (spoonsHelper) spoonsHelper.textContent = spoonsState.helper;
-
-  if (spoonsGrab instanceof HTMLButtonElement) {
-    const grabState = getHumanGrabState();
-    spoonsGrab.textContent = grabState.label;
-    spoonsGrab.classList.toggle("is-disabled", !grabState.canGrab);
-    spoonsGrab.setAttribute("aria-disabled", String(!grabState.canGrab));
-  }
-
-  if (spoonsRing instanceof HTMLElement) {
-    const grabState = getHumanGrabState();
-    spoonsRing.classList.toggle("is-disabled", !grabState.canGrab);
-    spoonsRing.setAttribute("aria-disabled", String(!grabState.canGrab));
-    const activeCount = getSpoonsActivePlayers().length;
-    const totalSpoons = Math.max(activeCount - 1, 0);
-    const claimedCount = Math.max(totalSpoons - spoonsState.spoonsRemaining, 0);
-    spoonsRing.innerHTML = Array.from({ length: totalSpoons })
-      .map(
-        (_, index) => `
-          <button type="button" class="spoons-spoon-chip${index < claimedCount ? " is-claimed" : ""}" ${
-            grabState.canGrab && index >= claimedCount ? "" : 'tabindex="-1"'
-          } aria-label="Pick up spoon">
-            <img src="./src/images/spoon.png" alt="Spoon token" />
-          </button>
-        `
-      )
-      .join("");
-  }
-
-  if (spoonsNext instanceof HTMLButtonElement) {
-    const showNext = spoonsState.phase === "round-over";
-    spoonsNext.hidden = !showNext;
-    spoonsNext.disabled = !showNext;
-  }
-
-  if (spoonsDiscardTop instanceof HTMLElement) {
-    spoonsDiscardTop.style.backgroundImage = spoonsState.lastDiscard
-      ? `url("${spoonsState.discardFaceDown ? "./src/images/card_back.png" : spoonsState.lastDiscard.image}")`
-      : "none";
-  }
-}
-
-function renderSpoonsGame() {
-  if (!(spoonsRoot instanceof HTMLElement)) return;
-
-  spoonsState.players.forEach(renderSpoonsSeat);
-  renderSpoonsHand();
-  renderSpoonsConsole();
-  renderSpoonsCenter();
-
-  if (spoonsStart instanceof HTMLButtonElement) {
-    spoonsStart.textContent = spoonsState.phase === "idle" ? "Start Match" : "Restart Match";
-  }
-}
-
-function resetSpoonsRoundState() {
-  spoonsState.deck = shuffleCards(buildSpoonsDeck());
-  spoonsState.discardPile = [];
-  spoonsState.lastDiscard = null;
-  spoonsState.discardFaceDown = false;
-  spoonsState.spoonsRemaining = Math.max(getSpoonsActivePlayers().length - 1, 0);
-  spoonsState.roundOrder = [];
-  spoonsState.turnIndex = 0;
-
-  spoonsState.players.forEach((player) => {
-    player.hand = [];
-    player.inbound = null;
-    player.hasSpoon = false;
-    player.lastDrawnId = null;
-  });
-}
-
-function startSpoonsMatch() {
-  clearSpoonsTimers();
-  spoonsState.players = createSpoonsPlayers();
-  spoonsState.round = 0;
-  spoonsState.dealerId = "human";
-  spoonsState.phase = "idle";
-  spoonsState.spoonsRemaining = Math.max(spoonsState.players.length - 1, 0);
-  setSpoonsMessage(
-    "Fresh match ready. Four cards each, one spoon fewer than players, and no mercy on the reaction race.",
-    "Match reset. Press Start Match again any time to restart from zero."
-  );
-  startSpoonsRound();
-}
-
-function startSpoonsRound() {
-  clearSpoonsTimers();
-  if (getSpoonsActivePlayers().length <= 1) {
-    const winner = getSpoonsActivePlayers()[0];
-    spoonsState.phase = "match-over";
-    setSpoonsMessage(
-      winner ? `${winner.label} wins the table.` : "No players remain.",
-      "Restart the match to play another full hearts ladder."
-    );
-    renderSpoonsGame();
-    return;
-  }
-
-  spoonsState.round += 1;
-  spoonsState.phase = "playing";
-  resetSpoonsRoundState();
-
-  const dealerStart = SPOONS_SEAT_FLOW.indexOf(spoonsState.dealerId);
-  spoonsState.roundOrder = Array.from({ length: SPOONS_SEAT_FLOW.length }, (_, offset) =>
-    SPOONS_SEAT_FLOW[(dealerStart + offset) % SPOONS_SEAT_FLOW.length]
-  )
-    .map((playerId) => getSpoonsPlayerById(playerId))
-    .filter((player) => player && !player.out);
-
-  spoonsState.roundOrder.forEach((player) => {
-    for (let dealCount = 0; dealCount < 4; dealCount += 1) {
-      const dealtCard = drawSpoonsCard();
-      if (dealtCard) player.hand.push(dealtCard);
-    }
-  });
-
-  const dealer = getSpoonsPlayerById(spoonsState.dealerId);
-  setSpoonsMessage(
-    `Round ${spoonsState.round} is live. ${dealer ? dealer.label : "Dealer"} starts the passing lane.`,
-    "Collect four of a kind, then hammer the Grab Spoon button before the bots do."
-  );
-  renderSpoonsGame();
-  scheduleSpoons(beginSpoonsTurn, 260);
-}
-
-function beginSpoonsTurn() {
-  if (spoonsState.phase !== "playing") return;
-
-  const currentPlayer = getCurrentSpoonsPlayer();
-  if (!currentPlayer || currentPlayer.out) return;
-
-  if (currentPlayer.hand.length === 4) {
-    const incomingCard =
-      currentPlayer.id === spoonsState.dealerId ? drawSpoonsCard() : currentPlayer.inbound;
-    currentPlayer.inbound = null;
-
-    if (incomingCard) {
-      currentPlayer.hand.push(incomingCard);
-      currentPlayer.lastDrawnId = incomingCard.id;
-    }
-  }
-
-  if (currentPlayer.isHuman) {
-    if (hasFourOfKind(currentPlayer.hand)) {
-      setSpoonsMessage(
-        "Four of a kind ready. Grab now or the game will claim the spoon for you.",
-        "Click the spoon pile or the Grab Spoon button. The race starts immediately once you claim."
-      );
-      renderSpoonsGame();
-      scheduleSpoons(() => {
-        if (spoonsState.phase === "playing" && canHumanGrabWithCurrentHand()) {
-          handleHumanGrab();
-        }
-      }, 900);
-      return;
-    }
-
-    setSpoonsMessage(
-      "Your move. Choose the card you want to pass left.",
-      "You always finish with four cards. Keep the strongest rank group and send the weakest card."
-    );
-    renderSpoonsGame();
-    return;
-  }
-
-  setSpoonsMessage(
-    `${currentPlayer.label} is deciding what to pass.`,
-    "Watch the table and be ready for the spoon race."
-  );
-  renderSpoonsGame();
-  scheduleSpoons(() => handleBotDiscard(currentPlayer.id), 600 + Math.random() * 360);
-}
-
-function advanceSpoonsTurn() {
-  spoonsState.turnIndex = (spoonsState.turnIndex + 1) % spoonsState.roundOrder.length;
-  renderSpoonsGame();
-  scheduleSpoons(beginSpoonsTurn, 200);
-}
-
-function handleHumanDiscard(cardIndex) {
-  if (spoonsState.phase !== "playing") return;
-
-  const player = getCurrentSpoonsPlayer();
-  if (!player || !player.isHuman || player.hand.length !== 5) return;
-
-  const discardedCard = player.hand.splice(cardIndex, 1)[0];
-  player.lastDrawnId = null;
-  resolveSpoonsDiscard(player, discardedCard);
-}
-
-function handleBotDiscard(playerId) {
-  if (spoonsState.phase !== "playing") return;
-
-  const player = getCurrentSpoonsPlayer();
-  if (!player || player.id !== playerId || player.hand.length !== 5) return;
-
-  const discardIndex = chooseBotDiscardIndex(player);
-  const discardedCard = player.hand.splice(discardIndex, 1)[0];
-  player.lastDrawnId = null;
-  resolveSpoonsDiscard(player, discardedCard);
-}
-
-function resolveSpoonsDiscard(player, discardedCard) {
-  const currentIndex = spoonsState.turnIndex;
-  const nextPlayer = spoonsState.roundOrder[currentIndex + 1] || null;
-  const nextTurnIndex = (spoonsState.turnIndex + 1) % spoonsState.roundOrder.length;
-
-  if (nextPlayer) {
-    nextPlayer.inbound = discardedCard;
-    spoonsState.lastDiscard = discardedCard;
-    spoonsState.discardFaceDown = !player.isHuman;
-  } else {
-    spoonsState.discardPile.push(discardedCard);
-    spoonsState.lastDiscard = discardedCard;
-    spoonsState.discardFaceDown = false;
-  }
-
-  const destinationLabel = nextPlayer ? nextPlayer.label : "the discard pile";
-  const announcer = nextPlayer
-    ? `${player.label} passed a face-down card to ${destinationLabel}.`
-    : `${player.label} discarded ${discardedCard.label}.`;
-  setSpoonsMessage(
-    announcer,
-    player.isHuman
-      ? "Nice. Stay on the same rank cluster and look for four of a kind."
-      : "The table is still moving. Wait for your next decision or the grab signal."
-  );
-  spoonsState.turnIndex = nextTurnIndex;
-  renderSpoonsGame();
-
-  if (hasFourOfKind(player.hand)) {
-    scheduleSpoons(() => triggerSpoonsRace(player.id), 220);
-    return;
-  }
-
-  scheduleSpoons(beginSpoonsTurn, 200);
-}
-
-function getBotGrabDelay(player) {
-  return spoonsEngine.getBotGrabDelay ? spoonsEngine.getBotGrabDelay(player) : 1600;
-}
-
-function triggerSpoonsRace(triggerPlayerId) {
-  if (spoonsState.phase !== "playing") return;
-
-  clearSpoonsTimers();
-  spoonsState.phase = "spoon-race";
-  spoonsState.turnIndex = -1;
-  const triggerPlayer = getSpoonsPlayerById(triggerPlayerId);
-  if (!triggerPlayer) return;
-
-  triggerPlayer.hasSpoon = true;
-  spoonsState.spoonsRemaining = Math.max(spoonsState.spoonsRemaining - 1, 0);
-  setSpoonsMessage(
-    `${triggerPlayer.label} found four of a kind and grabbed first. Everyone else, grab now.`,
-    triggerPlayer.isHuman
-      ? "You started the race. The bots are lunging for the middle."
-      : "Hit Grab Spoon before the remaining seats take the last spoons."
-  );
-  renderSpoonsGame();
-
-  if (spoonsState.spoonsRemaining === 0) {
-    resolveSpoonsRace();
-    return;
-  }
-
-  getSpoonsActivePlayers()
-    .filter((player) => !player.isHuman && !player.hasSpoon)
-    .forEach((player) => {
-      scheduleSpoons(() => {
-        if (spoonsState.phase !== "spoon-race" || player.out || player.hasSpoon) return;
-        if (spoonsState.spoonsRemaining > 0) {
-          player.hasSpoon = true;
-          spoonsState.spoonsRemaining -= 1;
-          setSpoonsMessage(
-            `${player.label} got to a spoon.`,
-            "If a spoon is still available, grab it before the table closes out the round."
-          );
-          renderSpoonsGame();
-        }
-        if (spoonsState.spoonsRemaining === 0) {
-          resolveSpoonsRace();
-        }
-      }, getBotGrabDelay(player));
-    });
-}
-
-function handleHumanGrab() {
-  const human = getSpoonsPlayerById("human");
-  const grabState = getHumanGrabState();
-  if (!human || human.out || human.hasSpoon) return;
-
-  if (!grabState.canGrab) {
-    setSpoonsMessage("You can't grab a spoon yet.", grabState.helper);
-    renderSpoonsGame();
-    return;
-  }
-
-  if (spoonsState.phase === "playing" && canHumanGrabWithCurrentHand()) {
-    triggerSpoonsRace(human.id);
-    return;
-  }
-
-  if (spoonsState.phase !== "spoon-race") return;
-
-  if (spoonsState.spoonsRemaining > 0) {
-    human.hasSpoon = true;
-    spoonsState.spoonsRemaining -= 1;
-    setSpoonsMessage(
-      "You grabbed a spoon in time.",
-      "Now watch who gets stuck with the next heart loss."
-    );
-    renderSpoonsGame();
-  }
-
-  if (spoonsState.spoonsRemaining === 0) {
-    resolveSpoonsRace();
-  }
-}
-
-function resolveSpoonsRace() {
-  clearSpoonsTimers();
-  spoonsState.turnIndex = -1;
-  const loser = getSpoonsActivePlayers().find((player) => !player.hasSpoon) || null;
-  if (!loser) return;
-
-  loser.misses += 1;
-  const completedWord = loser.misses >= SPOONS_WORD.length;
-  if (completedWord) loser.out = true;
-
-  const remainingPlayers = spoonsState.players.filter((player) => !player.out);
-  spoonsState.dealerId = remainingPlayers.length
-    ? getNextSeatId(spoonsState.dealerId)
-    : spoonsState.dealerId;
-
-  if (remainingPlayers.length <= 1) {
-    spoonsState.phase = "match-over";
-    setSpoonsMessage(
-      `${loser.label} missed the last spoon and ${completedWord ? "lost the final heart." : "took another heart loss."}`,
-      `${remainingPlayers[0]?.label || "No one"} wins the match. Press Restart Match to run it again.`
-    );
-    renderSpoonsGame();
-    return;
-  }
-
-  spoonsState.phase = "round-over";
-  setSpoonsMessage(
-    `${loser.label} missed the spoon and lost ${loser.misses} ${loser.misses === 1 ? "heart" : "hearts"}.`,
-    completedWord
-      ? `${loser.label} is out. Press Next Round to continue with one fewer spoon.`
-      : "Press Next Round to redeal and keep the elimination ladder going."
-  );
-  renderSpoonsGame();
 }
 
 function setupGalleryCarousels() {
@@ -902,6 +195,28 @@ function setupGalleryCarousels() {
     });
 
     setActive(0);
+  });
+}
+
+function getPageName(pathname) {
+  const parts = decodeURIComponent(pathname).split("/").filter(Boolean);
+  return parts.at(-1) || "index.html";
+}
+
+function setupActiveNavigation() {
+  const navLinks = Array.from(document.querySelectorAll(".nav a"));
+  if (!navLinks.length || navLinks.some((link) => link.classList.contains("is-active"))) return;
+
+  const currentPage = getPageName(window.location.pathname);
+
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    const linkPage = getPageName(new URL(href, window.location.href).pathname);
+    if (linkPage === currentPage) {
+      link.classList.add("is-active");
+    }
   });
 }
 
@@ -1003,50 +318,8 @@ function setupMobileSections() {
   syncMode();
 }
 
-function setupSpoonsGame() {
-  if (!(spoonsRoot instanceof HTMLElement)) return;
-
-  spoonsState.players = createSpoonsPlayers();
-  globalThis.__spoonsDebug = {
-    getState: () => spoonsState,
-    getHumanGrabState,
-    canHumanGrabWithCurrentHand,
-    triggerHumanGrab: handleHumanGrab,
-    render: renderSpoonsGame,
-    setScenario: ({ hand, phase = "playing", spoonsRemaining = 3 }) => {
-      if (!spoonsState.players.length) {
-        spoonsState.players = createSpoonsPlayers();
-      }
-      const human = getSpoonsPlayerById("human");
-      if (!human) return;
-      human.out = false;
-      human.hasSpoon = false;
-      human.hand = hand;
-      spoonsState.phase = phase;
-      spoonsState.spoonsRemaining = spoonsRemaining;
-      renderSpoonsGame();
-    },
-  };
-  renderSpoonsGame();
-
-  spoonsStart?.addEventListener("click", startSpoonsMatch);
-  spoonsNext?.addEventListener("click", () => {
-    if (spoonsState.phase === "round-over") {
-      startSpoonsRound();
-    }
-  });
-  spoonsGrab?.addEventListener("click", handleHumanGrab);
-  spoonsRing?.addEventListener("click", handleHumanGrab);
-  spoonsRing?.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      handleHumanGrab();
-    }
-  });
-}
-
 function setSnippet(key) {
-  if (!snippetContent) return;
+  if (!snippetContent || !snippets[key]) return;
   const snippet = snippets[key];
   snippetContent.textContent = snippet.code;
 
@@ -1082,6 +355,14 @@ function appendTerminalLine(message, delay) {
     line.innerHTML = `<span>ktr@portfolio</span>:~$ ${message}`;
     terminalLog.appendChild(line);
   }, delay);
+}
+
+function setupTerminal() {
+  if (!terminalLog) return;
+
+  terminalMessages.forEach((message, index) => {
+    appendTerminalLine(message, 350 * index);
+  });
 }
 
 function bindRangeControl(input, variable, divisor = 100) {
@@ -1394,7 +675,7 @@ function setupGame() {
 }
 
 function setupReveals() {
-  if (!("IntersectionObserver" in window)) return;
+  if (!revealTargets.length || !("IntersectionObserver" in window)) return;
 
   revealTargets.forEach((element) => {
     element.setAttribute("data-reveal", "");
@@ -1414,7 +695,294 @@ function setupReveals() {
   revealTargets.forEach((element) => observer.observe(element));
 }
 
+function setupWorldScene() {
+  if (!(worldScene instanceof HTMLElement) || !worldNodes.length) return;
+
+  worldNodes.forEach((node) => {
+    node.addEventListener("mouseenter", () => {
+      worldScene.dataset.activeDestination = node.dataset.worldDestination || "core";
+    });
+    node.addEventListener("focus", () => {
+      worldScene.dataset.activeDestination = node.dataset.worldDestination || "core";
+    });
+    node.addEventListener("mouseleave", () => {
+      worldScene.dataset.activeDestination = "core";
+    });
+    node.addEventListener("blur", () => {
+      worldScene.dataset.activeDestination = "core";
+    });
+  });
+}
+
+function setupSolarSystem() {
+  if (!(solarStage instanceof HTMLElement) || !planets.length) return;
+
+  planets.forEach((planet) => {
+    planet.addEventListener("mouseenter", () => {
+      solarStage.dataset.activePlanet = planet.dataset.planet || "core";
+    });
+    planet.addEventListener("focus", () => {
+      solarStage.dataset.activePlanet = planet.dataset.planet || "core";
+    });
+    planet.addEventListener("mouseleave", () => {
+      solarStage.dataset.activePlanet = "core";
+    });
+    planet.addEventListener("blur", () => {
+      solarStage.dataset.activePlanet = "core";
+    });
+  });
+}
+
+const cardRoomState = {
+  mode: "blackjack",
+  chips: 100,
+  deck: [],
+  player: [],
+  dealer: [],
+  community: [],
+};
+
+function buildCardDeck() {
+  const suits = ["clubs", "diamonds", "hearts", "spades"];
+  const ranks = ["ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"];
+  return suits.flatMap((suit) =>
+    ranks.map((rank) => ({
+      rank,
+      suit,
+      image: `./src/images/cards/${rank}_of_${suit}.png`,
+    }))
+  );
+}
+
+function shuffleDeck(cards) {
+  return [...cards].sort(() => Math.random() - 0.5);
+}
+
+function cardValue(card) {
+  if (["jack", "queen", "king"].includes(card.rank)) return 10;
+  if (card.rank === "ace") return 11;
+  return Number(card.rank);
+}
+
+function handValue(hand) {
+  let total = hand.reduce((sum, card) => sum + cardValue(card), 0);
+  let aces = hand.filter((card) => card.rank === "ace").length;
+  while (total > 21 && aces > 0) {
+    total -= 10;
+    aces -= 1;
+  }
+  return total;
+}
+
+function drawCard() {
+  return cardRoomState.deck.pop();
+}
+
+function renderCardRoom() {
+  if (!(dealerHand instanceof HTMLElement) || !(playerHand instanceof HTMLElement)) return;
+  dealerHand.innerHTML = cardRoomState.dealer.map((card) => `<img class="playing-card" src="${card.image}" alt="${card.rank} of ${card.suit}" />`).join("");
+  if (communityHand) {
+    communityHand.innerHTML = cardRoomState.community.map((card) => `<img class="playing-card" src="${card.image}" alt="${card.rank} of ${card.suit}" />`).join("");
+  }
+  playerHand.innerHTML = cardRoomState.player.map((card) => `<img class="playing-card" src="${card.image}" alt="${card.rank} of ${card.suit}" />`).join("");
+  if (cardRoomChips) cardRoomChips.textContent = String(cardRoomState.chips);
+}
+
+function startCardGame(mode) {
+  cardRoomState.mode = mode;
+  cardRoomState.deck = shuffleDeck(buildCardDeck());
+  cardRoomState.player = [];
+  cardRoomState.dealer = [];
+  cardRoomState.community = [];
+  cardRoomMenu.setAttribute("hidden", "");
+  cardRoomTable.removeAttribute("hidden");
+  if (cardRoomMode) cardRoomMode.textContent = mode === "blackjack" ? "Blackjack" : "Texas Hold'em";
+  if (cardRoomMessage) cardRoomMessage.textContent = mode === "blackjack" ? "Blackjack selected. Press Deal." : "Poker selected. Press Deal.";
+  cardRoomHit?.toggleAttribute("hidden", mode !== "blackjack");
+  cardRoomStand?.toggleAttribute("hidden", mode !== "blackjack");
+  cardRoomDraw?.toggleAttribute("hidden", mode !== "poker");
+  renderCardRoom();
+}
+
+function dealCardGame() {
+  cardRoomState.deck = shuffleDeck(buildCardDeck());
+  cardRoomState.player = [drawCard(), drawCard()];
+  cardRoomState.dealer = [drawCard(), drawCard()];
+  cardRoomState.community = cardRoomState.mode === "blackjack" ? [] : Array.from({ length: 5 }, drawCard);
+  if (cardRoomMessage) cardRoomMessage.textContent = cardRoomState.mode === "blackjack" ? "Hit or stand." : "Community dealt. Reveal the winner.";
+  renderCardRoom();
+}
+
+function resolveBlackjack() {
+  while (handValue(cardRoomState.dealer) < 17) cardRoomState.dealer.push(drawCard());
+  const player = handValue(cardRoomState.player);
+  const dealer = handValue(cardRoomState.dealer);
+  const won = player <= 21 && (dealer > 21 || player > dealer);
+  cardRoomState.chips += won ? 10 : -10;
+  if (cardRoomMessage) cardRoomMessage.textContent = won ? "You win the hand." : player === dealer ? "Push." : "Dealer wins.";
+  renderCardRoom();
+}
+
+function resolvePoker() {
+  if (!globalThis.PokerEngine) return;
+  const playerBest = globalThis.PokerEngine.bestPokerHand([...cardRoomState.player, ...cardRoomState.community]);
+  const dealerBest = globalThis.PokerEngine.bestPokerHand([...cardRoomState.dealer, ...cardRoomState.community]);
+  const result = globalThis.PokerEngine.comparePokerHands(playerBest, dealerBest);
+  cardRoomState.chips += result > 0 ? 10 : result < 0 ? -10 : 0;
+  if (cardRoomMessage) {
+    cardRoomMessage.textContent =
+      result > 0
+        ? `You win with ${playerBest.name}.`
+        : result < 0
+          ? `Dealer wins with ${dealerBest.name}.`
+          : `Push — both make ${playerBest.name}.`;
+  }
+  renderCardRoom();
+}
+
+function setupCardRoom() {
+  if (!(cardRoom instanceof HTMLElement)) return;
+  document.querySelectorAll("[data-card-game]").forEach((button) => {
+    button.addEventListener("click", () => startCardGame(button.dataset.cardGame));
+  });
+  cardRoomDeal?.addEventListener("click", dealCardGame);
+  cardRoomHit?.addEventListener("click", () => {
+    if (cardRoomState.mode !== "blackjack") return;
+    if (!cardRoomState.player.length) {
+      if (cardRoomMessage) cardRoomMessage.textContent = "Press Deal first.";
+      return;
+    }
+    cardRoomState.player.push(drawCard());
+    if (handValue(cardRoomState.player) > 21) {
+      cardRoomState.chips -= 10;
+      if (cardRoomMessage) cardRoomMessage.textContent = "Bust. Dealer wins.";
+    }
+    renderCardRoom();
+  });
+  cardRoomStand?.addEventListener("click", () => {
+    if (cardRoomState.mode === "blackjack") {
+      if (!cardRoomState.player.length) {
+        if (cardRoomMessage) cardRoomMessage.textContent = "Press Deal first.";
+        return;
+      }
+      resolveBlackjack();
+    }
+  });
+  cardRoomDraw?.addEventListener("click", () => {
+    if (cardRoomState.mode === "poker") {
+      if (!cardRoomState.player.length) {
+        if (cardRoomMessage) cardRoomMessage.textContent = "Press Deal first.";
+        return;
+      }
+      resolvePoker();
+    }
+  });
+  cardRoomMenuButton?.addEventListener("click", () => {
+    cardRoomMenu.removeAttribute("hidden");
+    cardRoomTable.setAttribute("hidden", "");
+  });
+}
+
+const driftState = {
+  running: false,
+  x: 110,
+  y: 120,
+  vx: 1.7,
+  vy: -1.2,
+  score: 0,
+  best: 0,
+  pickupX: 240,
+  pickupY: 110,
+  rafId: null,
+};
+
+function placePickup() {
+  if (!(orbitalBoard instanceof HTMLElement)) return;
+  driftState.pickupX = 36 + Math.random() * Math.max(orbitalBoard.clientWidth - 72, 1);
+  driftState.pickupY = 36 + Math.random() * Math.max(orbitalBoard.clientHeight - 72, 1);
+}
+
+function renderOrbitalDrift() {
+  if (!(driftProbe instanceof HTMLElement) || !(driftPickup instanceof HTMLElement)) return;
+  driftProbe.style.transform = `translate(${driftState.x}px, ${driftState.y}px)`;
+  driftPickup.style.transform = `translate(${driftState.pickupX}px, ${driftState.pickupY}px)`;
+  if (orbitalScore) orbitalScore.textContent = `Score: ${driftState.score}`;
+  if (orbitalBest) orbitalBest.textContent = `Best: ${driftState.best}`;
+}
+
+function resetOrbitalDrift() {
+  if (!(orbitalBoard instanceof HTMLElement)) return;
+  driftState.running = false;
+  driftState.x = orbitalBoard.clientWidth * 0.72;
+  driftState.y = orbitalBoard.clientHeight * 0.5;
+  driftState.vx = 0;
+  driftState.vy = -2.1;
+  driftState.score = 0;
+  placePickup();
+  renderOrbitalDrift();
+}
+
+function tickOrbitalDrift() {
+  if (!(orbitalBoard instanceof HTMLElement) || !driftState.running) return;
+  const cx = orbitalBoard.clientWidth / 2;
+  const cy = orbitalBoard.clientHeight / 2;
+  const dx = cx - driftState.x;
+  const dy = cy - driftState.y;
+  const distSq = Math.max(dx * dx + dy * dy, 2400);
+  const gravity = 180 / distSq;
+  driftState.vx += dx * gravity;
+  driftState.vy += dy * gravity;
+  driftState.x += driftState.vx;
+  driftState.y += driftState.vy;
+
+  const pdx = driftState.pickupX - driftState.x;
+  const pdy = driftState.pickupY - driftState.y;
+  if (Math.hypot(pdx, pdy) < 24) {
+    driftState.score += 1;
+    driftState.best = Math.max(driftState.best, driftState.score);
+    placePickup();
+  }
+
+  if (
+    driftState.x < -20 ||
+    driftState.y < -20 ||
+    driftState.x > orbitalBoard.clientWidth + 20 ||
+    driftState.y > orbitalBoard.clientHeight + 20 ||
+    Math.hypot(dx, dy) < 42
+  ) {
+    driftState.running = false;
+  }
+
+  renderOrbitalDrift();
+  driftState.rafId = requestAnimationFrame(tickOrbitalDrift);
+}
+
+function setupOrbitalDrift() {
+  if (!(orbitalBoard instanceof HTMLElement)) return;
+  resetOrbitalDrift();
+  orbitalBoard.addEventListener("click", (event) => {
+    const rect = orbitalBoard.getBoundingClientRect();
+    const tx = event.clientX - rect.left;
+    const ty = event.clientY - rect.top;
+    driftState.vx += (tx - driftState.x) * 0.01;
+    driftState.vy += (ty - driftState.y) * 0.01;
+  });
+  orbitalStart?.addEventListener("click", () => {
+    if (!driftState.running) {
+      driftState.running = true;
+      if (orbitalStart) orbitalStart.textContent = "Orbiting...";
+      tickOrbitalDrift();
+    }
+  });
+  orbitalReset?.addEventListener("click", () => {
+    resetOrbitalDrift();
+    if (orbitalStart) orbitalStart.textContent = "Start Orbit";
+  });
+}
+
 async function validateResumeLinks() {
+  if (!resumeLinks.length) return;
+
   const isHttp = window.location.protocol.startsWith("http");
 
   if (!isHttp) {
@@ -1444,14 +1012,15 @@ setupGalleryFallbacks();
 setupGalleryCarousels();
 setupGalleryLightbox();
 setupMobileSections();
+setupActiveNavigation();
 setupResumeWalkthrough();
 setupBackgroundCanvas();
-setupSpoonsGame();
 setupGame();
-
-terminalMessages.forEach((message, index) => {
-  appendTerminalLine(message, 350 * index);
-});
+setupTerminal();
+setupWorldScene();
+setupSolarSystem();
+setupCardRoom();
+setupOrbitalDrift();
 
 bindRangeControl(glowRange, "--glow-strength");
 bindRangeControl(gridRange, "--grid-strength");

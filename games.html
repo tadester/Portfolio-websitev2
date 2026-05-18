@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Games | Olatade Obasan</title>
+    <meta
+      name="description"
+      content="Playable experiments and game-style systems work by Olatade Obasan."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas class="bg-canvas" id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html">Olatade Obasan</a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="./index.html">Home</a>
+          <a href="./projects.html">Projects</a>
+          <a href="./resume.html">Resume</a>
+          <a class="is-active" href="./games.html">Games</a>
+          <a href="./contact.html">Contact</a>
+        </nav>
+      </header>
+
+      <main id="top" class="page-shell">
+        <section class="section games-section" id="games" data-mobile-group="games">
+          <div class="section-heading page-intro">
+            <p class="eyebrow">Arcade Floor</p>
+            <h1>Playable builds first, supporting experiments second.</h1>
+          </div>
+
+          <div class="section-heading games-subheading">
+            <p class="eyebrow">Playable Games</p>
+            <h2>Two polished browser games you can play here.</h2>
+          </div>
+
+          <div class="playable-games-grid">
+            <article class="card-room-card">
+              <p class="project-type">Card Room</p>
+              <h3>Poker / Blackjack</h3>
+              <p>Choose a table, place a small bet, and play against the dealer.</p>
+              <div class="card-room" id="card-room">
+                <div class="card-room-menu" id="card-room-menu">
+                  <button class="button button-primary" type="button" data-card-game="blackjack">Play Blackjack</button>
+                  <button class="button button-secondary" type="button" data-card-game="poker">Play Poker</button>
+                </div>
+                <div class="card-room-table" id="card-room-table" hidden>
+                  <div class="card-room-status">
+                    <span id="card-room-mode">Blackjack</span>
+                    <strong id="card-room-message">Choose a game to begin.</strong>
+                    <span>Chips: <b id="card-room-chips">100</b></span>
+                  </div>
+                  <div class="card-row">
+                    <div>
+                      <span>Dealer</span>
+                      <div class="playing-hand" id="dealer-hand"></div>
+                    </div>
+                    <div class="community-zone">
+                      <span>Community Cards</span>
+                      <div class="playing-hand community-hand" id="community-hand"></div>
+                    </div>
+                    <div>
+                      <span>You</span>
+                      <div class="playing-hand" id="player-hand"></div>
+                    </div>
+                  </div>
+                  <div class="cta-row compact-row">
+                    <button class="button button-primary" type="button" id="card-room-deal">Deal</button>
+                    <button class="button button-secondary" type="button" id="card-room-hit">Hit</button>
+                    <button class="button button-secondary" type="button" id="card-room-stand">Stand</button>
+                    <button class="button button-secondary" type="button" id="card-room-draw">Reveal Winner</button>
+                    <button class="button button-secondary" type="button" id="card-room-menu-button">Menu</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="game-showcase-card orbital-drift-card">
+              <p class="project-type">Orbital Prototype</p>
+              <h3>Orbital Drift</h3>
+              <p>Thread a probe through a gravity field, collect signals, and stay in orbit as long as you can.</p>
+              <div class="orbital-drift-hud">
+                <span id="orbital-score">Score: 0</span>
+                <span id="orbital-best">Best: 0</span>
+              </div>
+              <div class="orbital-drift-board" id="orbital-drift" tabindex="0" aria-label="Orbital Drift minigame">
+                <div class="drift-sun"></div>
+                <div class="drift-probe" id="drift-probe"></div>
+                <div class="drift-pickup" id="drift-pickup"></div>
+              </div>
+              <div class="cta-row compact-row">
+                <button class="button button-primary" type="button" id="orbital-start">Start Orbit</button>
+                <button class="button button-secondary" type="button" id="orbital-reset">Reset</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="section-heading games-subheading">
+            <p class="eyebrow">Other Game Work</p>
+            <h2>Smaller experiments and systems prototypes.</h2>
+          </div>
+
+          <div class="compact-experiments-grid">
+            <article class="game-showcase-card">
+              <p class="project-type">Arcade Prototype</p>
+              <h3>Packet Runner</h3>
+              <p>Guide the courier ship through the network, dodge hostile drones, and keep the signal alive.</p>
+              <div class="game-hud">
+                <span id="game-score">Score: 0</span>
+                <span id="game-best">Best: 0</span>
+              </div>
+              <div class="game-board" id="game-board" tabindex="0" aria-label="Packet Runner minigame">
+                <div class="player-ship" id="player-dot">
+                  <span class="ship-core"></span>
+                  <span class="ship-wing ship-wing-left"></span>
+                  <span class="ship-wing ship-wing-right"></span>
+                </div>
+              </div>
+              <div class="cta-row compact-row">
+                <button class="button button-primary" type="button" id="game-start">Start Game</button>
+                <button class="button button-secondary" type="button" id="game-reset">Reset Run</button>
+              </div>
+            </article>
+
+            <article class="game-info-card">
+              <p class="project-type">Simulation Project</p>
+              <h3>WorldSim Prototype</h3>
+              <p>
+                A Rust + Bevy simulation build with agent systems, world resources, lifecycle logic,
+                magic mechanics, and an on-screen dashboard tracking trends over time.
+              </p>
+            </article>
+          </div>
+        </section>
+
+
+      </main>
+    </div>
+
+    <script src="./src/game/poker-engine.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

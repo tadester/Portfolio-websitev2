@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects | Olatade Obasan</title>
+    <meta
+      name="description"
+      content="Selected software engineering work, visual galleries, and architecture breakdowns by Olatade Obasan."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas class="bg-canvas" id="bg-canvas" aria-hidden="true"></canvas>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html">Olatade Obasan</a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="./index.html">Home</a>
+          <a class="is-active" href="./projects.html">Projects</a>
+          <a href="./resume.html">Resume</a>
+          <a href="./games.html">Games</a>
+          <a href="./contact.html">Contact</a>
+        </nav>
+      </header>
+
+      <main id="top" class="page-shell">
+        <section class="section" id="projects" data-mobile-group="projects">
+          <div class="section-heading page-intro">
+            <p class="eyebrow">Selected Work</p>
+            <h1>Projects that show engineering depth, product judgment, and range.</h1>
+          </div>
+
+          <div class="project-grid" id="featured-projects">
+            <article class="project-card featured-project featured">
+              <div class="project-copy">
+                <p class="project-type">Applied AI + Product Systems</p>
+                <h3>Jumpshot Trainer</h3>
+                <p><a href="https://github.com/tadester/Jumpshot-Trainer-v2">View GitHub repository</a></p>
+                <p>
+                  A two-part biomechanics analysis system for basketball shooting form. I built a
+                  Python ingestion pipeline for raw clip processing and a Rust desktop app for shot
+                  stage detection, diagnostics, review, and training-readiness analysis.
+                </p>
+                <ul class="tag-row">
+                  <li>Python</li>
+                  <li>Rust</li>
+                  <li>MediaPipe</li>
+                  <li>YOLOv8</li>
+                  <li>Parquet</li>
+                </ul>
+                <div class="featured-meta">
+                  <div><span>Outcome</span><strong>Transforms raw video into actionable shooting diagnostics.</strong></div>
+                  <div><span>Stack</span><strong>Python • Rust • MediaPipe • YOLOv8</strong></div>
+                </div>
+                <div class="project-detail-grid">
+                  <div class="detail-box">
+                    <span>Hard Part</span>
+                    <strong>Turning raw video into structured shot-stage diagnostics</strong>
+                  </div>
+                  <div class="detail-box">
+                    <span>System Shape</span>
+                    <strong>Python ingestion pipeline plus Rust analysis and desktop review</strong>
+                  </div>
+                  <div class="detail-box">
+                    <span>Why It Matters</span>
+                    <strong>It bridges messy real-world input and a productized feedback loop</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="project-media">
+                <div class="analysis-board">
+                  <div class="analysis-top">
+                    <span>shot stage timeline</span>
+                    <strong>ready -> load -> set point -> release</strong>
+                  </div>
+                  <div class="analysis-grid">
+                    <div class="metric-card">
+                      <span>Release Timing</span>
+                      <strong>178 ms</strong>
+                    </div>
+                    <div class="metric-card">
+                      <span>Elbow Alignment</span>
+                      <strong>+4.2 deg</strong>
+                    </div>
+                    <div class="metric-card">
+                      <span>Readiness Score</span>
+                      <strong>81 / 100</strong>
+                    </div>
+                    <div class="metric-card">
+                      <span>Corpus Quality</span>
+                      <strong>Training Ready</strong>
+                    </div>
+                  </div>
+                  <div class="screen-mockup">
+                    <div class="mockup-top"></div>
+                    <div class="mockup-body">
+                      <div class="chart-bars">
+                        <span style="height: 54%"></span>
+                        <span style="height: 78%"></span>
+                        <span style="height: 61%"></span>
+                        <span style="height: 93%"></span>
+                        <span style="height: 72%"></span>
+                      </div>
+                      <div class="mockup-card"></div>
+                      <div class="mockup-card short"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card featured-project visual-project-card">
+              <div class="project-copy">
+                <p class="project-type">Operations SaaS</p>
+                <h3>Tadester Ops / TadesterFlow</h3>
+                <p><a href="https://github.com/tadester/Tadester-Flow">View GitHub repository</a></p>
+                <p>
+                  A field operations platform spanning a Next.js marketing site, a TypeScript
+                  backend API, Supabase data model, and a Flutter mobile app with role-aware
+                  dashboards, worker routing, assignments, and tracking.
+                </p>
+                <div class="cta-row compact-row">
+                  <a class="button button-primary" href="https://tadester-ops.netlify.app/">View Live Landing Page</a>
+                  <button class="button button-secondary project-toggle" type="button" data-target="demo-console">
+                    Hide System Snapshot
+                  </button>
+                </div>
+              </div>
+              <div class="system-pillars">
+                <div class="pillar">
+                  <span>Frontend</span>
+                  <strong>Next.js marketing and auth flows</strong>
+                </div>
+                <div class="pillar">
+                  <span>Backend</span>
+                  <strong>Typed API routes, routing, geofence, worker logic</strong>
+                </div>
+                <div class="pillar">
+                  <span>Mobile</span>
+                  <strong>Role-aware Flutter workspace for admins and field crews</strong>
+                </div>
+              </div>
+              <div class="featured-meta">
+                <div><span>Outcome</span><strong>Unifies dispatch, routing, and field execution in one product.</strong></div>
+                <div><span>Stack</span><strong>Next.js • TypeScript • Supabase • Flutter</strong></div>
+              </div>
+              <div class="image-stack">
+                <img src="./assets/Screenshot 2026-04-15 at 12.04.12 PM.png" alt="Tadester field operations  visual" />
+                <img src="./assets/Screenshot 2026-04-15 at 11.35.22 AM.png" alt="Tadester routing map interface" />
+              </div>
+              <div class="mini-console" id="demo-console" aria-live="polite">
+                <p>&gt; nextjs landing page + waitlist funnel online</p>
+                <p>&gt; node/typescript api with routing + geofence services</p>
+                <p>&gt; flutter workspace for admins, dispatchers, and workers</p>
+              </div>
+            </article>
+
+            <article class="project-card featured-project visual-project-card">
+              <div class="project-copy">
+                <p class="project-type">Delivery Operations</p>
+                <h3>Bakery Delivery</h3>
+                <p><a href="https://github.com/tadester/bakery-del">View GitHub repository</a></p>
+                <p>
+                  A Flutter + Supabase operations app for daily bakery distribution, with admin
+                  tooling for delivery plans, route assignment, and monitoring plus a driver flow
+                  for shift tracking, capacity-aware loading, optimized routes, and delivery confirmation.
+                  It is already used in the real world by a bakery team of 10 employees.
+                </p>
+                <ul class="tag-row">
+                  <li>Flutter</li>
+                  <li>Dart</li>
+                  <li>Supabase</li>
+                  <li>PostgreSQL</li>
+                  <li>Google Maps</li>
+                </ul>
+                <div class="featured-meta">
+                  <div><span>Outcome</span><strong>Used by a real bakery team of 10 employees.</strong></div>
+                  <div><span>Stack</span><strong>Flutter • Dart • Supabase • Google Maps</strong></div>
+                </div>
+                <div class="project-detail-grid">
+                  <div class="detail-box">
+                    <span>Hard Part</span>
+                    <strong>Coordinating route assignment, load batches, and real delivery state</strong>
+                  </div>
+                  <div class="detail-box">
+                    <span>System Shape</span>
+                    <strong>Role-aware mobile app backed by Supabase auth, data, and routing logic</strong>
+                  </div>
+                  <div class="detail-box">
+                    <span>Why It Matters</span>
+                    <strong>It turns a messy physical workflow into a usable operations product</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="image-stack bakery-stack">
+                <img src="./assets/bakery-gallery/01-deliveries.png" alt="Bakery Delivery plans screen" />
+                <img src="./assets/bakery-gallery/02-routes.png" alt="Bakery Delivery routes screen" />
+                <img src="./assets/bakery-gallery/03-route-detail.png" alt="Bakery Delivery route detail screen" />
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section class="section" id="project-directory">
+          <div class="section-heading">
+            <p class="eyebrow">Project Directory</p>
+            <h2>Everything currently in the workshop.</h2>
+          </div>
+          <div class="directory-grid">
+            <article class="directory-card"><p class="project-type">Applied AI</p><h3>Jumpshot Trainer</h3><a href="https://github.com/tadester/Jumpshot-Trainer-v2">GitHub</a></article>
+            <article class="directory-card"><p class="project-type">Operations SaaS</p><h3>Tadester Ops / TadesterFlow</h3><a href="https://github.com/tadester/Tadester-Flow">GitHub</a></article>
+            <article class="directory-card"><p class="project-type">Delivery Operations</p><h3>Bakery Delivery</h3><a href="https://github.com/tadester/bakery-del">GitHub</a></article>
+            <article class="directory-card"><p class="project-type">Simulation</p><h3>WorldSim</h3><a href="https://github.com/tadester/worldsim">GitHub</a></article>
+            <article class="directory-card"><p class="project-type">AI Learning Tool</p><h3>Study Application</h3><a href="https://github.com/tadester/study-app">GitHub</a></article>
+            <article class="directory-card"><p class="project-type">Portfolio</p><h3>Portfolio Website v2</h3><a href="https://github.com/tadester/Portfolio-websitev2">GitHub</a></article>
+          </div>
+        </section>
+
+        <section class="section gallery-section" id="gallery" data-mobile-group="gallery">
+          <div class="section-heading">
+            <p class="eyebrow">Visual Gallery</p>
+            <h2>Product visuals across Tadester Ops, TadesterFlow mobile, and Jumpshot Trainer.</h2>
+          </div>
+          <div class="gallery-grid">
+            <article class="gallery-card">
+              <p class="project-type">Bakery Delivery</p>
+              <h3>Live mobile operations screens</h3>
+              <div class="gallery-carousel" data-gallery="bakery-delivery">
+                <div class="gallery-stage">
+                  <button class="gallery-nav gallery-nav-prev" type="button" data-gallery-prev aria-label="Previous Bakery Delivery image">‹</button>
+                  <figure class="gallery-figure">
+                    <img src="./assets/bakery-gallery/01-deliveries.png" alt="Bakery Delivery plans screen" class="gallery-image" data-gallery-main />
+                  </figure>
+                  <button class="gallery-nav gallery-nav-next" type="button" data-gallery-next aria-label="Next Bakery Delivery image">›</button>
+                </div>
+                <div class="gallery-thumbs">
+                  <button class="gallery-thumb is-active" type="button" data-gallery-thumb data-image="./assets/bakery-gallery/01-deliveries.png" data-alt="Bakery Delivery plans screen">
+                    <img src="./assets/bakery-gallery/01-deliveries.png" alt="Bakery Delivery plans screen thumbnail" />
+                  </button>
+                  <button class="gallery-thumb" type="button" data-gallery-thumb data-image="./assets/bakery-gallery/02-routes.png" data-alt="Bakery Delivery routes screen">
+                    <img src="./assets/bakery-gallery/02-routes.png" alt="Bakery Delivery routes screen thumbnail" />
+                  </button>
+                  <button class="gallery-thumb" type="button" data-gallery-thumb data-image="./assets/bakery-gallery/03-route-detail.png" data-alt="Bakery Delivery route detail screen">
+                    <img src="./assets/bakery-gallery/03-route-detail.png" alt="Bakery Delivery route detail screen thumbnail" />
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <p class="project-type">Tadester Ops</p>
+              <h3>Current live visuals</h3>
+              <div class="gallery-carousel" data-gallery="tadester-ops">
+                <div class="gallery-stage">
+                  <button class="gallery-nav gallery-nav-prev" type="button" data-gallery-prev aria-label="Previous Tadester Ops image">
+                    ‹
+                  </button>
+                  <figure class="gallery-figure">
+                    <img src="./assets/flutter-gallery/Screenshot 2026-04-15 at 11.35.29 AM.png" alt="Tadester operator team visual" class="gallery-image" data-gallery-main />
+                  </figure>
+                  <button class="gallery-nav gallery-nav-next" type="button" data-gallery-next aria-label="Next Tadester Ops image">
+                    ›
+                  </button>
+                </div>
+                <div class="gallery-thumbs">
+                  <button class="gallery-thumb is-active" type="button" data-gallery-thumb data-image="./assets/flutter-gallery/Screenshot 2026-04-15 at 11.35.29 AM.png" data-alt="Tadester operator team visual">
+                    <img src="./assets/flutter-gallery/Screenshot 2026-04-15 at 11.35.29 AM.png" alt="Tadester operator team visual thumbnail" />
+                  </button>
+                  <button class="gallery-thumb" type="button" data-gallery-thumb data-image="./assets/flutter-gallery/Screenshot 2026-04-15 at 11.35.37 AM.png" data-alt="Field operations scene">
+                    <img src="./assets/flutter-gallery/Screenshot 2026-04-15 at 11.35.37 AM.png" alt="Field operations scene thumbnail" />
+                  </button>
+                  <button class="gallery-thumb" type="button" data-gallery-thumb data-image="./assets/flutter-gallery/Screenshot 2026-04-15 at 12.02.49 PM.png" data-alt="Routing map screenshot">
+                    <img src="./assets/flutter-gallery/Screenshot 2026-04-15 at 12.02.49 PM.png" alt="Routing map screenshot thumbnail" />
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <p class="project-type">Jumpshot Trainer</p>
+              <h3>Biomechanics review gallery</h3>
+              <div class="gallery-carousel" data-gallery="jumpshot">
+                <div class="gallery-stage">
+                  <button class="gallery-nav gallery-nav-prev" type="button" data-gallery-prev aria-label="Previous Jumpshot Trainer image">
+                    ‹
+                  </button>
+                  <figure class="gallery-figure">
+                    <img src="./assets/jumpshot-gallery/Screenshot 2026-04-16 at 12.29.43 PM.png" alt="Jumpshot Trainer screenshot one" class="gallery-image" data-gallery-main />
+                  </figure>
+                  <button class="gallery-nav gallery-nav-next" type="button" data-gallery-next aria-label="Next Jumpshot Trainer image">
+                    ›
+                  </button>
+                </div>
+                <div class="gallery-thumbs">
+                  <button class="gallery-thumb is-active" type="button" data-gallery-thumb data-image="./assets/jumpshot-gallery/Screenshot 2026-04-16 at 12.29.43 PM.png" data-alt="Jumpshot Trainer screenshot one">
+                    <img src="./assets/jumpshot-gallery/Screenshot 2026-04-16 at 12.29.43 PM.png" alt="Jumpshot Trainer screenshot one thumbnail" />
+                  </button>
+                  <button class="gallery-thumb" type="button" data-gallery-thumb data-image="./assets/jumpshot-gallery/Screenshot 2026-04-16 at 12.30.03 PM.png" data-alt="Jumpshot Trainer screenshot two">
+                    <img src="./assets/jumpshot-gallery/Screenshot 2026-04-16 at 12.30.03 PM.png" alt="Jumpshot Trainer screenshot two thumbnail" />
+                  </button>
+                  <button class="gallery-thumb" type="button" data-gallery-thumb data-image="./assets/jumpshot-gallery/Screenshot 2026-04-16 at 12.30.17 PM.png" data-alt="Jumpshot Trainer screenshot three">
+                    <img src="./assets/jumpshot-gallery/Screenshot 2026-04-16 at 12.30.17 PM.png" alt="Jumpshot Trainer screenshot three thumbnail" />
+                  </button>
+                </div>
+              </div>
+            </article>
+            <article class="gallery-card">
+              <p class="project-type">WorldSim app</p>
+              <h3>WorldSim app gallery</h3>
+              <div class="gallery-carousel" data-gallery="worldsim">
+                <div class="gallery-stage">
+                  <button class="gallery-nav gallery-nav-prev" type="button" data-gallery-prev aria-label="Previous WorldSim image">
+                    ‹
+                  </button>
+                  <figure class="gallery-figure">
+                    <img src="./assets/world-sim gallery/Screenshot 2026-04-16 at 12.39.32 PM.png" alt="WorldSim screenshot one" class="gallery-image" data-gallery-main />
+                  </figure>
+                  <button class="gallery-nav gallery-nav-next" type="button" data-gallery-next aria-label="Next WorldSim image">
+                    ›
+                  </button>
+                </div>
+                <div class="gallery-thumbs">
+                  <button class="gallery-thumb is-active" type="button" data-gallery-thumb data-image="./assets/world-sim gallery/Screenshot 2026-04-16 at 12.39.32 PM.png" data-alt="WorldSim screenshot one">
+                    <img src="./assets/world-sim gallery/Screenshot 2026-04-16 at 12.39.32 PM.png" alt="WorldSim screenshot one thumbnail" />
+                  </button>
+                  <button class="gallery-thumb" type="button" data-gallery-thumb data-image="./assets/world-sim gallery/Screenshot 2026-04-16 at 12.39.40 PM.png" data-alt="WorldSim screenshot two">
+                    <img src="./assets/world-sim gallery/Screenshot 2026-04-16 at 12.39.40 PM.png" alt="WorldSim screenshot two thumbnail" />
+                  </button>
+                  <button class="gallery-thumb" type="button" data-gallery-thumb data-image="./assets/world-sim gallery/Screenshot 2026-04-16 at 12.40.55 PM.png" data-alt="WorldSim screenshot three">
+                    <img src="./assets/world-sim gallery/Screenshot 2026-04-16 at 12.40.55 PM.png" alt="WorldSim screenshot three thumbnail" />
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section architecture-section" id="architecture" data-mobile-group="projects">
+          <div class="section-heading">
+            <p class="eyebrow">Build Breakdown</p>
+            <h2>What I built, how I built it, and the technologies behind each project.</h2>
+          </div>
+          <div class="architecture-grid">
+            <article class="architecture-card">
+              <p class="project-type">Jumpshot Trainer</p>
+              <h3>Applied AI biomechanics platform</h3>
+              <ul class="architecture-list">
+                <li><strong>What I built:</strong> a Python video-ingestion pipeline and a Rust desktop analysis app for basketball shooting diagnostics.</li>
+                <li><strong>How I built it:</strong> raw clips are processed into structured data, segmented into shots, scored through stage-based logic, and surfaced in a desktop review experience.</li>
+                <li><strong>Languages and tools:</strong> Python, Rust, MediaPipe, YOLOv8, OpenCV, Parquet, and custom state-machine logic.</li>
+              </ul>
+            </article>
+            <article class="architecture-card">
+              <p class="project-type">Tadester Ops</p>
+              <h3>Field operations SaaS platform</h3>
+              <ul class="architecture-list">
+                <li><strong>What I built:</strong> a full product stack with a marketing site, backend API, Supabase data model, and a Flutter app for admins, dispatchers, and field workers.</li>
+                <li><strong>How I built it:</strong> the system combines auth, organizations, jobs, assignments, routing, worker tracking, and role-aware dashboards across web and mobile.</li>
+                <li><strong>Languages and tools:</strong> TypeScript, Node.js, Next.js, Flutter, Supabase, PostgreSQL, Google Maps services, and Zod-based validation.</li>
+              </ul>
+            </article>
+            <article class="architecture-card">
+              <p class="project-type">Bakery Delivery</p>
+              <h3>Mobile delivery operations platform</h3>
+              <ul class="architecture-list">
+                <li><strong>What I built:</strong> a role-based mobile app for admins and drivers covering delivery planning, assignment, route execution, and completion tracking.</li>
+                <li><strong>How I built it:</strong> the system combines delivery plans, stop management, route assignment, capacity-aware load batches, Google Maps routing, and live status monitoring.</li>
+                <li><strong>Languages and tools:</strong> Flutter, Dart, Riverpod, GoRouter, Supabase Auth, PostgreSQL, Row Level Security, Google Directions API, and Google Places API.</li>
+              </ul>
+            </article>
+            <article class="architecture-card accent-card">
+              <p class="project-type">WorldSim</p>
+              <h3>Simulation sandbox built in Rust + Bevy</h3>
+              <ul class="architecture-list">
+                <li><strong>What I built:</strong> a simulation prototype with modular systems for agents, life cycles, world resources, magic, and UI dashboards.</li>
+                <li><strong>How I built it:</strong> the app is structured as Bevy plugins that separate simulation flow, world state, agent logic, and on-screen controls.</li>
+                <li><strong>Languages and tools:</strong> Rust, Bevy, ECS patterns, modular game systems, simulation clocks, and dashboard UI.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+
+      </main>
+    </div>
+
+    <div class="gallery-lightbox" id="gallery-lightbox" hidden>
+      <div class="gallery-lightbox-backdrop" data-lightbox-close></div>
+      <div class="gallery-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Expanded gallery viewer">
+        <button class="gallery-lightbox-close" type="button" id="gallery-lightbox-close" aria-label="Close image viewer">×</button>
+        <button class="gallery-lightbox-nav" type="button" id="gallery-lightbox-prev" aria-label="Previous image">‹</button>
+        <figure class="gallery-lightbox-figure"><img id="gallery-lightbox-image" src="" alt="" /></figure>
+        <button class="gallery-lightbox-nav" type="button" id="gallery-lightbox-next" aria-label="Next image">›</button>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
