@@ -1860,6 +1860,27 @@ input[type="range"] {
   }
 }
 
+
+.not-found-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.not-found-card {
+  align-self: center;
+  max-width: 760px;
+  padding: clamp(28px, 6vw, 64px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at top left, rgba(119, 166, 255, 0.18), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(240, 90, 107, 0.12), transparent 34%),
+    rgba(8, 19, 34, 0.74);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
 @media (max-width: 980px) {
   .hero-support,
   .project-grid,
@@ -1872,15 +1893,12 @@ input[type="range"] {
   .gallery-grid,
   .directory-grid,
   .playable-games-grid,
-      .compact-experiments-grid,
+  .compact-experiments-grid,
   .upload-grid,
   .games-grid,
   .resume-walkthrough {
     grid-template-columns: 1fr;
     display: grid;
-  }
-
-    grid-column: auto;
   }
 
   .topbar {
@@ -1902,28 +1920,26 @@ input[type="range"] {
     padding: 30px;
   }
 
-  .hero-stats {
-    grid-template-columns: 1fr;
-  }
-
+  .hero-stats,
   .analysis-grid,
   .image-stack,
-  .system-pillars,
+  .system-pillars {
     grid-template-columns: 1fr;
   }
 
-  .gallery-stage {
+  .gallery-stage,
+  .gallery-lightbox-dialog {
     grid-template-columns: 1fr;
   }
 
-  .gallery-nav {
+  .gallery-nav,
+  .gallery-lightbox-nav {
     width: 100%;
     border-radius: 14px;
   }
 
   .gallery-lightbox-dialog {
     width: min(100vw - 24px, 900px);
-    grid-template-columns: 1fr;
   }
 
   .gallery-lightbox-close {
@@ -1931,117 +1947,8 @@ input[type="range"] {
     right: 10px;
   }
 
-  .gallery-lightbox-nav {
-    width: 100%;
-    border-radius: 14px;
-  }
-
-    min-height: 760px;
-  }
-
-    inset: 404px auto auto 50%;
-    transform: translateX(-50%);
-    width: min(220px, calc(100% - 42px));
-  }
-
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    width: min(214px, calc(100% - 30px));
-  }
-
-    top: 24px;
-  }
-
-    top: 144px;
-  }
-
-    top: 274px;
-  }
-
   .terminal-card {
     grid-column: auto;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .site-shell {
-    width: min(100vw - 20px, 1200px);
-  }
-
-  h1 {
-    max-width: 100%;
-  }
-
-  .hero-copy,
-  .hero-panel,
-  .project-card,
-  .gallery-card,
-  .architecture-card,
-  .resume-card,
-  .lab-card,
-  .contact-card {
-    padding: 20px;
-    border-radius: 22px;
-  }
-
-  .project-grid {
-    gap: 16px;
-  }
-
-  .hero-radar {
-    height: 180px;
-  }
-
-  .cta-row,
-  .contact-links {
-    flex-direction: column;
-  }
-
-  .button,
-  .contact-links a {
-    width: 100%;
-  }
-
-    align-items: stretch;
-  }
-
-    width: 100%;
-  }
-
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-    max-width: none;
-  }
-
-    min-height: 780px;
-  }
-
-    width: 132px;
-    min-height: 100px;
-  }
-
-  .gallery-thumbs {
-    grid-template-columns: 1fr;
-  }
-
-    align-items: start;
-  }
-
-    justify-items: stretch;
   }
 }
 
@@ -2050,9 +1957,14 @@ input[type="range"] {
     display: none;
   }
 
+  .topbar {
+    position: relative;
+    top: auto;
+  }
+
   .mobile-section-nav {
     position: sticky;
-    top: 78px;
+    top: 0;
     z-index: 30;
     display: flex;
     gap: 8px;
@@ -2081,21 +1993,127 @@ input[type="range"] {
     display: none !important;
   }
 
-  .world-scene {
-    min-height: 360px;
-  }
-
-  .node-projects { transform: translate(60px, -50%) translateZ(80px); }
-  .node-games { transform: translate(-185px, -50%) translateZ(30px); }
-  .node-resume { transform: translate(-50%, -145px) translateZ(110px); }
-  .node-contact { transform: translate(-50%, 95px) translateZ(40px); }
-
-  .hero {
-    min-height: auto;
-  }
-
   .section {
     padding-top: 18px;
     padding-bottom: 18px;
+  }
+
+  .orbital-header {
+    inset: 18px 18px auto;
+    display: grid;
+    gap: 6px;
+  }
+
+  .orbital-status {
+    font-size: 0.78rem;
+  }
+
+  .planet-legend {
+    right: 18px;
+    bottom: 18px;
+  }
+
+  .planet-legend a {
+    min-width: 132px;
+    padding: 11px 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell {
+    width: min(100vw - 20px, 1200px);
+  }
+
+  h1 {
+    max-width: 100%;
+  }
+
+  .hero-copy,
+  .hero-panel,
+  .project-card,
+  .gallery-card,
+  .architecture-card,
+  .resume-card,
+  .lab-card,
+  .contact-card,
+  .card-room-card,
+  .game-showcase-card,
+  .game-info-card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .project-grid {
+    gap: 16px;
+  }
+
+  .cta-row,
+  .contact-links {
+    flex-direction: column;
+  }
+
+  .button,
+  .contact-links a {
+    width: 100%;
+  }
+
+  .gallery-thumbs {
+    grid-template-columns: 1fr;
+  }
+
+  .card-row {
+    grid-template-columns: 1fr;
+  }
+
+  .playing-card {
+    width: 68px;
+    height: 98px;
+  }
+
+  .orbital-drift-board,
+  .game-board {
+    min-height: 240px;
+  }
+
+  .solar-intro {
+    left: 18px;
+    top: 112px;
+    width: min(320px, calc(100vw - 36px));
+    transform: none;
+  }
+
+  .solar-profile {
+    width: 68px;
+    height: 68px;
+  }
+
+  .solar-intro h1 {
+    font-size: clamp(2rem, 12vw, 3.1rem);
+    max-width: 9ch;
+  }
+
+  .solar-bio {
+    max-width: 24ch;
+    font-size: 0.95rem;
+  }
+
+  .planet-label {
+    font-size: 0.72rem;
+    padding: 5px 9px;
+  }
+
+  .not-found-card {
+    padding: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

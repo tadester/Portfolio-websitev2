@@ -1,143 +1,64 @@
-# Olatade Obasan — Software Engineer Portfolio
+# Olatade Obasan — Orbital Portfolio
 
-A modern, product-focused portfolio showcasing full-stack systems, applied AI projects, and interactive demos.
+A cinematic, multi-page software engineering portfolio for Olatade Obasan. The site uses a real Three.js solar-system homepage, polished project case studies, playable browser games, a resume page, and a focused contact page.
 
-Built to present real engineering work as polished, end-to-end products — not just code, but complete systems.
+## What is included
 
----
+- **Home:** interactive 3D orbital navigation powered by Three.js.
+- **Projects:** three featured case studies plus a compact project directory.
+- **Games:** Card Room with Blackjack and Hold'em-lite poker, plus Orbital Drift and smaller experiments.
+- **Resume:** downloadable resume and structured experience walkthrough.
+- **Contact:** direct links for email, phone, GitHub, LinkedIn, and resume.
 
-## 🚀 Live Site
-👉 [View Portfolio](https://your-live-link.com)
+## Run locally
 
----
+From the repository root:
 
-## 🧠 What This Portfolio Demonstrates
+```bash
+python3 -m http.server 4174
+```
 
-- Full-stack engineering across web, mobile, and backend systems
-- Applied AI and computer vision workflows
-- Product thinking and UX-driven development
-- Ability to turn complex systems into clear, usable products
-- Strong focus on execution, not just ideas
+Then open:
 
----
+```text
+http://127.0.0.1:4174/index.html
+```
 
-## 🧩 Featured Projects
+The local server is recommended because the 3D homepage uses browser module imports.
 
-### 🏀 Jumpshot Trainer (Applied AI)
-A biomechanics analysis system for basketball shooting form.
+## Test
 
-**Highlights:**
-- Video ingestion pipeline (Python)
-- Shot detection + stage classification
-- Desktop analysis tool (Rust)
-- Real-world data → structured feedback system
+Run the full smoke and game test suite:
 
-**Tech:**
-`Python` `Rust` `YOLOv8` `MediaPipe` `OpenCV`
+```bash
+node --test tests/poker-engine.test.js tests/card-room.test.js tests/layout-smoke.test.js tests/multipage-smoke.test.js
+```
 
----
+## Project structure
 
-### ⚙️ Tadester Ops (SaaS Platform)
-A full field-operations platform with web + mobile systems.
+```text
+assets/                 Image assets, project screenshots, resume PDF
+src/game/               Small browser game logic modules
+src/images/cards/       Playing-card image assets for Card Room
+index.html              3D orbital homepage
+projects.html           Featured projects and project directory
+resume.html             Resume and experience page
+games.html              Playable games / arcade page
+contact.html            Contact page
+404.html                Space-themed fallback page
+script.js               Shared page interactions and canvas background
+solar-system.js         Three.js orbital homepage scene
+styles.css              Shared visual system and responsive layout
+tests/                  Static and game logic smoke tests
+```
 
-**Highlights:**
-- Role-based dashboards (admin, dispatcher, workers)
-- Job assignment + routing logic
-- Mobile app for field teams
-- Backend API with structured data model
+## Deployment notes
 
-**Tech:**
-`Next.js` `TypeScript` `Node.js` `Supabase` `PostgreSQL` `Flutter`
+This is a static website. It can be deployed by any static host that serves HTML, CSS, JS, and assets from the repository root. The current workflow expects changes to be committed and pushed to GitHub, then pulled by the connected host.
 
----
+## Contact
 
-### 🌍 WorldSim (Simulation System)
-A modular simulation environment built using ECS architecture.
-
-**Highlights:**
-- Agent-based simulation systems
-- Resource + lifecycle management
-- Modular architecture using plugins
-- Real-time dashboard UI
-
-**Tech:**
-`Rust` `Bevy` `ECS`
-
----
-
-## 🎮 Interactive Features
-
-- Playable browser game (Grab Spoon)
-- Live UI components and system demos
-- Code snippet viewer (API / UI / Data)
-- Dynamic gallery of real product visuals
-
----
-
-## 🏗️ Tech Stack
-
-**Frontend**
-- HTML, CSS, JavaScript
-- TypeScript, Next.js
-
-**Backend**
-- Node.js
-- Supabase
-- PostgreSQL
-
-**Mobile**
-- Flutter (Dart)
-
-**AI / Systems**
-- Python
-- OpenCV
-- MediaPipe
-- YOLOv8
-- Rust
-
----
-
-## 🎯 Philosophy
-
-> Build real systems.  
-> Explain them clearly.  
-> Present them like products.
-
----
-
-## 📂 Project Structure
-/assets        → images, screenshots, resume
-/styles.css    → styling
-/script.js     → interactivity and logic
-/index.html    → main portfolio site
----
-
-## 📬 Contact
-
-- Email: Obasantade@gmail.com  
-- Phone: 825-440-6380  
-- GitHub: https://github.com/tadester  
-- LinkedIn: https://linkedin.com/in/tadeobasan  
-
----
-
-## ⚡ Notes
-
-This portfolio is intentionally designed to feel like a product demo, not a static resume.
-
-Everything here is built to communicate:
-- how I think
-- how I build
-- how I ship
-
----
-
-## 🚢 Deployment
-
-This site is deployed through Hostinger's GitHub webhook integration.
-
-When changes are pushed to GitHub, Hostinger receives the webhook event and pulls the latest version of the repository automatically.
-
-Because deployment is handled by the webhook, this repo does not need a separate FTP-based GitHub Actions deploy job or FTP secrets.
-
----
+- Email: Obasantade@gmail.com
+- Phone: 825-440-6380
+- GitHub: https://github.com/tadester
+- LinkedIn: https://www.linkedin.com/in/tadeobasan/

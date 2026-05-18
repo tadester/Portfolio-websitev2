@@ -11,7 +11,9 @@ const pages = {
   resume: read("resume.html"),
   games: read("games.html"),
   contact: read("contact.html"),
+  notFound: fs.existsSync(path.join(root, "404.html")) ? read("404.html") : "",
 };
+const readme = read("README.md");
 const script = read("script.js");
 const solarScript = fs.existsSync(path.join(root, "solar-system.js")) ? read("solar-system.js") : "";
 const pageLinks = ["index.html", "projects.html", "resume.html", "games.html", "contact.html"];
@@ -157,4 +159,25 @@ test("shared styles favor restrained motion", () => {
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /--motion-fast:/);
   assert.match(css, /--motion-slow:/);
+});
+
+test("repository polish includes run instructions and a themed 404", () => {
+  assert.match(readme, /python3 -m http\.server 4174/);
+  assert.match(readme, /node --test tests\/poker-engine\.test\.js tests\/card-room\.test\.js tests\/layout-smoke\.test\.js tests\/multipage-smoke\.test\.js/);
+  assert.match(pages.notFound, /Lost in orbit/);
+  assert.match(pages.notFound, /href="\.\/index\.html"/);
+});
+
+test("project visuals use clean branded asset names", () => {
+  assert.doesNotMatch(pages.projects, /Screenshot 2026/);
+  assert.doesNotMatch(pages.projects, /world-sim gallery/);
+  for (const asset of [
+    "tadester-field-operations.png",
+    "tadester-routing-map-screenshot.png",
+    "flutter-operator-team.png",
+    "jumpshot-analysis-dashboard.png",
+    "worldsim-dashboard.png",
+  ]) {
+    assert.match(pages.projects, new RegExp(asset.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
 });
